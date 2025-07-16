@@ -4,6 +4,7 @@ import "./globals.css";
 import Sidebar from "@/components/sidebar";
 import Navbar from "@/components/navbar";
 import Providers from "./providers";
+import BottomNavBar from "@/components/bottom-navbar";
 
 const inter = Inter({
   weight: ["100", "300", "400", "500", "700"],
@@ -29,7 +30,8 @@ export default function RootLayout({
             <Sidebar />
             <div className="w-full">
               <Navbar />
-              <div className="pt-14 px-1">{children}</div>
+              <div className="pt-14 mx-auto overflow-hidden">{children}</div>
+              <BottomNavBar />
             </div>
           </main>
         </Providers>
