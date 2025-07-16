@@ -1,9 +1,12 @@
-import React from 'react'
+import PostsCard from "@/components/home/post";
+import React from "react";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <PostsCard type="text" />
+    </div>
+  );
+};
 
-export default page
+export default page;

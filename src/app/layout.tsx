@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/sidebar";
+import Navbar from "@/components/navbar";
+import Providers from "./providers";
 
 const inter = Inter({
   weight: ["100", "300", "400", "500", "700"],
@@ -21,11 +23,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <main className="flex min-h-screen items-center">
-          <Sidebar />
-          {children}
-        </main>
+      <body className={`${inter.className} antialiased bg-background`}>
+        <Providers>
+          <main className="flex min-h-screen">
+            <Sidebar />
+            <div className="w-full">
+              <Navbar />
+              <div className="pt-14 px-1">{children}</div>
+            </div>
+          </main>
+        </Providers>
       </body>
     </html>
   );
