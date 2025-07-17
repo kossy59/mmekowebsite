@@ -63,7 +63,7 @@ export default function MobileSidebar() {
       icon: <FaUsersCog size={25} />,
     },
   ];
-  const { isOpen } = useAuth();
+  const { isOpen, toggle } = useAuth();
   return (
     <section
       className={`h-screen transform transition-transform duration-300 ease-in-out ${
@@ -72,7 +72,7 @@ export default function MobileSidebar() {
     >
       <ul className="px-4 py-6">
         {sideBarItems.map((item) => (
-          <li key={item.name} className="grid mb-4 gap-y-5">
+          <li key={item.name} onClick={toggle} className="grid mb-4 gap-y-5">
             <Link
               className="flex items-center text-white space-x-2"
               href={item.route}
