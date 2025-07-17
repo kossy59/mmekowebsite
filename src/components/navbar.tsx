@@ -7,7 +7,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 export default function Navbar() {
   const { isOpen, toggle } = useAuth();
   return (
-    <div className="flex w-full fixed top-0 p-2 items-center justify-between">
+    <div className="flex w-full z-[999] fixed top-0 p-2 items-center justify-between">
       <button onClick={toggle}>
         {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
       </button>

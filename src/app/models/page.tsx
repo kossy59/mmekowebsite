@@ -5,25 +5,10 @@ import React, { useState, useEffect } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Modal from "@/components/modals";
-
-import { FaAngleLeft } from "react-icons/fa";
 import CategoryButtonComponent from "../models/_components/CategoryButton";
-// import CategoryButtonComponent from "@/app/models/_components/CategoryButton";
-import SearchInput from "../models/_components/SearchInput";
-// import SearchInput from "@/app/models/_components/SearchInput";
-import features from "@/icons/features.svg";
-import transIcon from "@/icons/transIcon.svg";
-import CoupleIcon from "@/icons/usersIcon.svg";
-import maleIcon from "@/icons/man.png";
-import femaleIcon from "@/icons/woman.png";
 import { useAuth } from "@/lib/context/auth-context";
 import { countryList } from "@/components/CountrySelect/countryList";
 import { ListofModels } from "@/components/models/ListofModels";
-// import {
-//   getmymodel,
-//   changemodelstatus,
-//   getverifyhost,
-// } from "../../features/model/modelSlice";
 
 export default function ModelPage() {
   // const login = useSelector((state: any) => state.register.logedin);

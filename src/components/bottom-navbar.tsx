@@ -44,7 +44,7 @@ export default function BottomNavBar() {
     <div className="flex items-center justify-center">
       <div className="fixed p-3 rounded-full bg-gray-800 flex justify-around w-[95%] mx-2 items-center bottom-4">
         {routes.map((item, i) => (
-          <Link href={item.route}>
+          <Link key={i} href={item.route}>
             {item.icon || (
               <Image
                 src={item.imgUrl || ""}

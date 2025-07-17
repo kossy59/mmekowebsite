@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import DummyModelImage from "@/icons/mmekoDummy.png";
-import onlineIcon from "@/icons/onlineIcon.svg";
-import offlineIcon from "@/icons/offlineIcon.svg";
-import femaleIcon from "@/icons/femaleIcon.svg";
-import maleIcon from "@/icons/maleIcon.svg";
-import transIcon from "@/icons/transIcon.svg";
+import DummyModelImage from "../../../public/icons/mmekoDummy.png";
+import onlineIcon from "../../../public/icons/onlineIcon.svg";
+import offlineIcon from "../../../public/icons/offlineIcon.svg";
+import femaleIcon from "../../../public/icons/femaleIcon.svg";
+import maleIcon from "../../../public/icons/maleIcon.svg";
+import transIcon from "../../../public/icons/transIcon.svg";
 import { getCountryData } from "@/api/getCountries";
 
 // Props interface

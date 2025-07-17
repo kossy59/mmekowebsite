@@ -22,7 +22,7 @@ export default function MobileSidebar() {
       icon: <FaHeart size={25} />,
     },
     {
-      route: "/",
+      route: "/models",
       name: "Models",
       icon: <FaCamera size={25} />,
     },
