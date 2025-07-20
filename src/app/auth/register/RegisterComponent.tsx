@@ -5,12 +5,12 @@ import React, { useState } from "react";
 // import Confirmemail from "../confirm-email/page";
 // import HeaderBackNav from "../../_components/navs/HeaderBackNav";
 // import { ToastContainer, toast } from "react-toastify";
-// import CountrySelect from "../../_components/CountrySelect/CountrySelect";
 // import "react-toastify/dist/ReactToastify.css";
 // import { useDispatch, useSelector } from "react-redux";
 import "./styles.css";
 import Image from "next/image";
 import Link from "next/link";
+import CountrySelect from "@/components/CountrySelect/CountrySelect";
 // import { Action, Dispatch, UnknownAction } from "@reduxjs/toolkit";
 // import {
 //   registernewUser,
@@ -30,10 +30,10 @@ export const Register = () => {
   const [password, setpassword] = useState<string>("");
   const [compas, setcompas] = useState<string>("");
   const [nickname, setnickname] = useState<string>("");
+  const [country, setcountry] = useState<string>("");
   
   // const [lastname, setlastname] = useState<string>("");
   // const [dob, setdob] = useState<string>("");
-  // const [country, setcountry] = useState<string>("");
   // const stats = useSelector(status);
   // const errs = useSelector(error);
   // const dispatch = useDispatch<AppDispatch>();
@@ -138,11 +138,11 @@ export const Register = () => {
   //   }
   // }, [stats, errs, email, dispatch]);
 
-  // const getLocation = (country: string) => {
-  //   setcountry(`${country}`);
-  // };
+  const getLocation = (country: string) => {
+    setcountry(`${country}`);
+  };
 
-  console.log({nickname, compas, password}) // use to avoid lint errors 
+  console.log({nickname, compas, password, country}) // use to avoid lint errors 
   return (
     <div className="body w-full">
       {/* <ToastContainer position="top-center" theme="dark" /> */}
@@ -291,7 +291,7 @@ export const Register = () => {
               </div>
 
               <div className="floating-label-group">
-                {/* <CountrySelect onSelectCountry={getLocation} /> */}
+                <CountrySelect onSelectCountry={getLocation} />
               </div>
 
               <button type="button" onClick={() => setStep("3")}>
@@ -373,7 +373,7 @@ export const Register = () => {
             </div>
           </div>
           <p>
-            I already have an account <Link href="/auth/login">Login</Link>
+            I already have an account <Link href="/">Login</Link>
           </p>
         </form>
       </div>
