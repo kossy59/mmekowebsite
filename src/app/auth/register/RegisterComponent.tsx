@@ -1,7 +1,7 @@
 "use client"
 // import Popup from "reactjs-popup";
 // import locationIcon from "../../../public/icons/locationIcon.svg"
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import Confirmemail from "../confirm-email/page";
 // import HeaderBackNav from "../../_components/navs/HeaderBackNav";
 // import { ToastContainer, toast } from "react-toastify";
@@ -21,35 +21,28 @@ import Link from "next/link";
 // import { AppDispatch } from "@/app/store";
 // import { alert, dismissalert } from "@/utils/alert";
 
-
-type TYPES = {
-  message: string;
-  type: "success" | "error" | "info" | "warning" | "default";
-  close?: number | false | undefined;
-}
-
-
 export const Register = () => {
+  const [firstname, setfirstname] = useState<string>("");
+  const [gender, setgender] = useState<string>("");
+  const [agreedTerms, setAgreedTerms] = useState<boolean>(false);
+  const [agreedPrivacy, setAgreedPrivacy] = useState<boolean>(false);
+  const [step, setStep] = useState<"1" | "2" | "3">("1");
+  const [password, setpassword] = useState<string>("");
+  const [compas, setcompas] = useState<string>("");
+  const [nickname, setnickname] = useState<string>("");
+  
+  // const [lastname, setlastname] = useState<string>("");
+  // const [dob, setdob] = useState<string>("");
+  // const [country, setcountry] = useState<string>("");
   // const stats = useSelector(status);
   // const errs = useSelector(error);
   // const dispatch = useDispatch<AppDispatch>();
-  const [firstname, setfirstname] = useState<string>("");
-  const [lastname, setlastname] = useState<string>("");
-  const [dob, setdob] = useState<string>("");
-  const [gender, setgender] = useState<string>("");
-  const [nickname, setnickname] = useState<string>("");
-  const [country, setcountry] = useState<string>("");
-  const [email, setemail] = useState<string>("");
-  const [password, setpassword] = useState<string>("");
-  const [compas, setcompas] = useState<string>("");
-  const [dateofbirth, setdateofbirth] = useState<Date>(new Date());
-  const [agreedTerms, setAgreedTerms] = useState<boolean>(false);
-  const [agreedPrivacy, setAgreedPrivacy] = useState<boolean>(false);
+  // const [email, setemail] = useState<string>("");
+  // const [dateofbirth, setdateofbirth] = useState<Date>(new Date());
   // const dispatch = useDispatch();
-  const [step, setStep] = useState<"1" | "2" | "3">("1");
 
   let regex = /^[a-zA-Z0-9_@]+$/;
-  let firstLatter = /^@.*/;
+  // let firstLatter = /^@.*/;
 
   // const notify = (message: string) =>
     // toast.error(`${message}`, {
@@ -148,6 +141,8 @@ export const Register = () => {
   // const getLocation = (country: string) => {
   //   setcountry(`${country}`);
   // };
+
+  console.log({nickname, compas, password}) // use to avoid lint errors 
   return (
     <div className="body w-full">
       {/* <ToastContainer position="top-center" theme="dark" /> */}
