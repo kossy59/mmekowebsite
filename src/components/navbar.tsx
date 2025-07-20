@@ -3,6 +3,7 @@ import { useAuth } from "@/lib/context/auth-context";
 import Image from "next/image";
 import React from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import Logins from "./Login";
 
 export default function Navbar() {
   const { isOpen, toggle } = useAuth();
@@ -18,7 +19,7 @@ export default function Navbar() {
         width={50}
         className="logo"
       />
-      <div></div>
+      <Logins />
     </div>
   );
 }
