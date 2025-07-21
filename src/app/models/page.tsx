@@ -8,7 +8,7 @@ import Modal from "@/components/modals";
 import CategoryButtonComponent from "../models/_components/CategoryButton";
 import { useAuth } from "@/lib/context/auth-context";
 import { countryList } from "@/components/CountrySelect/countryList";
-import { ListofModels } from "@/components/models/ListofModels";
+import { ModelCard, ModelCardProps } from "./_components/card";
 
 export default function ModelPage() {
   // const login = useSelector((state: any) => state.register.logedin);
@@ -48,7 +48,7 @@ export default function ModelPage() {
   const [categoryButton, setCategoryButton] = useState(" ");
 
   const buttonData = [
-    { label: "Private Show", value: "Private Show" },
+    { label: "Fan Call", value: "Fan Call" },
     { label: "Fan meet", value: "Fan meet" },
     { label: "Fan date", value: "Fan date" },
   ];
@@ -147,27 +147,75 @@ export default function ModelPage() {
   //   if (Listofhoststatus === "failed") dispatch(changemodelstatus("idle"));
   // }, [mymodelstatus, Listofhoststatus]);
 
+  const dummyData: ModelCardProps[] = [
+    {
+      photolink:
+        "https://cloud.appwrite.io/v1/storage/buckets/model/files/68741ad10008207256ee/view?project=668f9f8c0011a761d118",
+      hosttype: "Fan Meet",
+      online: true,
+      name: "John",
+      age: 25,
+      gender: "Male",
+      location: "Nigeria",
+      interest: [],
+      amount: 25,
+      modelid: "fjl",
+      userid: "",
+      createdAt: "",
+    },
+    {
+      photolink:
+        "https://cloud.appwrite.io/v1/storage/buckets/model/files/6874269a00152815f29c/view?project=668f9f8c0011a761d118",
+      hosttype: "Fan Date",
+      online: true,
+      name: "Mary",
+      age: 25,
+      gender: "Male",
+      location: "PHI",
+      interest: [],
+      amount: 25,
+      modelid: "45w",
+      userid: "",
+      createdAt: "",
+    },
+    {
+      photolink:
+        "https://cloud.appwrite.io/v1/storage/buckets/model/files/68741fbc002780de7380/view?project=668f9f8c0011a761d118",
+      hosttype: "Fan Call",
+      online: false,
+      name: "Sarah",
+      age: 25,
+      gender: "Male",
+      location: "AFG",
+      interest: [],
+      amount: 25,
+      modelid: "5ff",
+      userid: "",
+      createdAt: "",
+    },
+  ];
+
   const renderModels = () => {
-    if (loading1) {
-      return (
-        <SkeletonTheme baseColor="#202020" highlightColor="#444">
-          <div className="w-full p-4 space-y-4">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
-              {Array(10)
-                .fill(0)
-                .map((_, index) => (
-                  <div
-                    key={index}
-                    className="relative flex flex-col items-center p-4 bg-[#121212] rounded-lg"
-                  >
-                    <Skeleton width={150} height={250} className="rounded-lg" />
-                  </div>
-                ))}
-            </div>
-          </div>
-        </SkeletonTheme>
-      );
-    }
+    // if (loading1) {
+    //   return (
+    //     <SkeletonTheme baseColor="#202020" highlightColor="#444">
+    //       <div className="w-full p-4 space-y-4">
+    //         <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+    //           {Array(10)
+    //             .fill(0)
+    //             .map((_, index) => (
+    //               <div
+    //                 key={index}
+    //                 className="relative flex flex-col items-center p-4 bg-[#121212] rounded-lg"
+    //               >
+    //                 <Skeleton width={150} height={250} className="rounded-lg" />
+    //               </div>
+    //             ))}
+    //         </div>
+    //       </div>
+    //     </SkeletonTheme>
+    //   );
+    // }
 
     // const sortedModels = [...filterModels].sort((a, b) => {
     //   if (a.online && !b.online) return -1;
@@ -181,19 +229,16 @@ export default function ModelPage() {
     // const offlineModels = sortedModels.filter((model) => !model.online);
 
     return (
-      <ul className="grid grid-cols-2 gap-2 mb-12 md:grid-cols-5">
-        {[].map(
-          (value: any) =>
-            value.verify === "live" && (
-              <ListofModels key={value.hostid} {...value} />
-            )
-        )}
+      <ul className="grid grid-cols-2 gap-2 mt-4 mb-12 md:grid-cols-3">
+        {dummyData.map((value) => (
+          <ModelCard key={value.modelid} {...value} />
+        ))}
       </ul>
     );
   };
 
   return (
-    <div className="px-4 mt-16 bg-black sm:mx-10">
+    <div className="px-4 mt-10 sm:mx-10">
       <div className="text-slate-200 sm:w-1/2 sm:ml-16 md:w-full md:ml-0 md:mt-10 md:overflow-auto">
         <CategoryButtonComponent
           buttons={buttonData}
