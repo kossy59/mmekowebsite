@@ -66,23 +66,23 @@ export default function MobileSidebar() {
   const { isOpen, toggle } = useAuth();
   return (
     <section
-      className={`h-screen transform transition-transform duration-300 ease-in-out ${
+      className={`h-screen z-[999] transform transition-transform duration-300 ease-in-out ${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      }  mt-12 fixed w-[70%] bg-gray-900`}
+      }  mt-12 fixed w-full max-w-[250px] md:max-w-sm bg-gray-900`}
     >
-      <ul className="px-4 py-6">
+      <div className="px-4 py-6 grid gap-y-4">
         {sideBarItems.map((item) => (
-          <li key={item.name} onClick={toggle} className="grid mb-4 gap-y-5">
-            <Link
-              className="flex items-center text-white space-x-2"
-              href={item.route}
-            >
-              {item.icon}
-              <p className="text-lg">{item.name}</p>
-            </Link>
-          </li>
+          <Link
+            className="flex hover:text-secondary  items-center text-white space-x-2"
+            href={item.route}
+            key={item.name}
+            onClick={toggle}
+          >
+            {item.icon}
+            <p className="text-lg">{item.name}</p>
+          </Link>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
