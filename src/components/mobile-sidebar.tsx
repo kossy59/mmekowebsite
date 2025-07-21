@@ -33,7 +33,7 @@ export default function MobileSidebar() {
       icon: <FaCompass size={25} />,
     },
     {
-      route: "/",
+      route: "/upload",
       name: "Upload",
       icon: <FaUpload size={25} />,
     },
