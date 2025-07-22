@@ -33,7 +33,7 @@ export default function BottomNavBar() {
     },
     {
       imgUrl: "/icons/icons8-message.png",
-      route: "/",
+      route: "/message",
     },
     {
       route: "/",
