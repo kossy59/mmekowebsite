@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import Link from "next/link";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Input from "./Input";
 // import { useSelector, useDispatch } from "react-redux";
@@ -24,7 +24,7 @@ export const Loginview = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
-  
+
   // const message = useSelector((state: any) => state.register.message);
   // const stats = useSelector((state: any) => state.register.logstats);
   // const [open, setopen] = useState(false);
@@ -159,11 +159,8 @@ export const Loginview = () => {
         </p>
 
         <div className="mt-6 space-y-4">
-          <Input
-            type="email"
-            placeholder="Email Address"
-          />
-          <Input type="password"/>
+          <Input type="email" placeholder="Email Address" />
+          <Input type="password" />
           <div className="flex items-start mt-4">
             <Input
               type="checkbox"
