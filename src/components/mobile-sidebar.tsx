@@ -84,8 +84,9 @@ export default function MobileSidebar() {
               <p className="text-lg">{item.name}</p>
             </Link>
           </li>
+
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

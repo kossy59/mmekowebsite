@@ -87,6 +87,14 @@
         z-index: 1000;
         width: 90%;
       }
+      .sidebar-open {
+        display: block;
+        transform: translateX(0%);
+      }
+
+      .sidebar-closed {
+        transform: translateX(-100%);
+      }
       .navBtn {
         opacity: 100;
         visibility: visible;
@@ -112,15 +120,6 @@
   .sidebar .logo{
     display: none;
   }
-    .sidebar-open {
-      display: block;
-      transform: translateX(0%);
-    }
-    
-    .sidebar-closed {
-      transform: translateX(-100%);
-    }
-
   }
   .slide{
     animation: slideShow 24s infinite;
