@@ -139,7 +139,7 @@ export const MessageView = () => {
           )}
         </div>
       </div></div>
-      {/* <div className="md:hidden"><BottomNav /></div> */}
+      <div className="md:hidden"><BottomNav /></div>
     </div>
   );
 };
