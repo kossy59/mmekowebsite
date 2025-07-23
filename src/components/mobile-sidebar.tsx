@@ -85,7 +85,7 @@ export default function MobileSidebar() {
             </Link>
           </li>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
