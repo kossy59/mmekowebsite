@@ -1,4 +1,5 @@
 import { useAuth } from "@/lib/context/auth-context";
+import "../styles/app.css"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -66,21 +67,23 @@ export default function MobileSidebar() {
   const { isOpen, toggle } = useAuth();
   return (
     <section
-      className={`h-screen z-[999] transform transition-transform duration-300 ease-in-out ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      }  mt-12 fixed w-full max-w-[250px] md:max-w-sm bg-gray-900`}
+      className={`sidebar bg-gray-900 ${isOpen ? "sidebar-open" : "sidebar-closed"}`}
     >
-      <div className="px-4 py-6 grid gap-y-4">
+      <Link href="/" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <img src={'/icons/logo.png'} alt="logo" className="brand-logo w-20" />
+        {/* <img src={'/icons/icon-192.png'} alt="logo" className="logo" /> */}
+      </Link>
+      <ul className="px-4 py-6">
         {sideBarItems.map((item) => (
-          <Link
-            className="flex hover:text-secondary  items-center text-white space-x-2"
-            href={item.route}
-            key={item.name}
-            onClick={toggle}
-          >
-            {item.icon}
-            <p className="text-lg">{item.name}</p>
-          </Link>
+          <li key={item.name} onClick={toggle} className="grid gap-y-5 text-sm">
+            <Link
+              className="flex items-center text-white space-x-2"
+              href={item.route}
+            >
+              {item.icon}
+              <p className="text-lg">{item.name}</p>
+            </Link>
+          </li>
         ))}
       </div>
     </section>

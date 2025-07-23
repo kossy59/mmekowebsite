@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #ff8a23;
+  --secondary: #0c0f27;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,4 +24,9 @@ body {
 
 .bg-img{
   background-image: url("/register.png");
+}
+
+.scrollbar{
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--secondary);
 }

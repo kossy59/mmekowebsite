@@ -30,11 +30,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased bg-background`}>
         <Providers>
-          <main className="flex min-h-screen">
+          <main className="flex overflow-hidden h-screen">
             <Sidebar />
-            <div className="w-full">
+            <div className="w-full grid grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden">
               <Navbar />
-              <div className="pt-14 mx-auto overflow-hidden">{children}</div>
+              <div className="scrollbar overflow-y-auto contain-size">
+                <div className="max-w-[70%] max-[1000px]:max-w-[90%] max-[800px]:max-w-[100%] mx-auto">{children}</div>
+              </div>
               <BottomNavBar />
               <PopUp />
             </div>
