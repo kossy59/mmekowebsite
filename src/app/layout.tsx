@@ -33,8 +33,8 @@ export default function RootLayout({
             <Sidebar />
             <div className="w-full grid grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden">
               <Navbar />
-              <div className="scrollbar pt-14 overflow-y-auto ">
-                <div className="max-w-[80%] mx-auto">{children}</div>
+              <div className="scrollbar overflow-y-auto contain-size">
+                <div className="max-w-[70%] max-[1000px]:max-w-[90%] max-[800px]:max-w-[100%] mx-auto">{children}</div>
               </div>
               <BottomNavBar />
             </div>

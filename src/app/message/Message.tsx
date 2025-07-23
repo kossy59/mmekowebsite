@@ -92,7 +92,7 @@ export const MessageView = () => {
 
 
   return (
-    <div className="w-screen mt-16 bg-black sm:w-8/12 md:w-8/12 lg:w-7/12 xl:w-7/12 md:mr-auto md:mt-8" >
+    <div className=" sm:w-8/12 lg:w-7/12 xl:w-7/12" >
              
 <div className="md:w-3/5 md:mx-auto">
       
@@ -110,11 +110,10 @@ export const MessageView = () => {
 
       {/* <div className="sticky top-0 z-10 " onClick={(e)=>setclick(true)}> // replace with div below */} 
       <div className="sticky top-0 z-10 " >
-        <div className="px-2 pb-2 bg-black md:px-4 sm:p-6 lg:pl-10 ">
-        
+        <div className="px-2 pb-2 md:px-4 sm:p-6 lg:pl-10 ">
           <input
             type="text"
-            className="w-full pl-4 inpt sm:pl-6 rounded-2xl"
+            className="w-full h-10 px-4 text-center rounded-full"
             placeholder="Search for message"
           />
         </div>
@@ -140,7 +139,7 @@ export const MessageView = () => {
           )}
         </div>
       </div></div>
-      <div className="md:hidden"><BottomNav /></div>
+      {/* <div className="md:hidden"><BottomNav /></div> */}
     </div>
   );
 };

@@ -67,9 +67,6 @@ export default function MobileSidebar() {
   const { isOpen, toggle } = useAuth();
   return (
     <section
-      // className={`h-screen transform transition-transform duration-300 ease-in-out ${
-      //   isOpen ? "translate-x-0" : "-translate-x-full"
-      // }  mt-12 fixed w-[50%] bg-gray-900`}
       className={`sidebar bg-gray-900 ${isOpen ? "sidebar-open" : "sidebar-closed"}`}
     >
       <Link href="/" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
