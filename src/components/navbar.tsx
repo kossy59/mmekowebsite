@@ -8,7 +8,7 @@ import Logins from "./Login";
 export default function Navbar() {
   const { isOpen, toggle } = useAuth();
   return (
-    <div className="flex w-full z-[999] fixed top-0 p-2 items-center justify-between">
+    <div className="flex z-[999] w-full top-0 left-0 p-2 items-center justify-between">
       <button onClick={toggle}>
         {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
       </button>

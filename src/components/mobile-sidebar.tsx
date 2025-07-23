@@ -1,4 +1,5 @@
 import { useAuth } from "@/lib/context/auth-context";
+import "../styles/app.css"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -66,13 +67,18 @@ export default function MobileSidebar() {
   const { isOpen, toggle } = useAuth();
   return (
     <section
-      className={`h-screen transform transition-transform duration-300 ease-in-out ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      }  mt-12 fixed w-[70%] bg-gray-900`}
+      // className={`h-screen transform transition-transform duration-300 ease-in-out ${
+      //   isOpen ? "translate-x-0" : "-translate-x-full"
+      // }  mt-12 fixed w-[50%] bg-gray-900`}
+      className={`sidebar bg-gray-900 ${isOpen ? "sidebar-open" : "sidebar-closed"}`}
     >
+      <Link href="/" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <img src={'/icons/logo.png'} alt="logo" className="brand-logo w-20" />
+        {/* <img src={'/icons/icon-192.png'} alt="logo" className="logo" /> */}
+      </Link>
       <ul className="px-4 py-6">
         {sideBarItems.map((item) => (
-          <li key={item.name} onClick={toggle} className="grid mb-4 gap-y-5">
+          <li key={item.name} onClick={toggle} className="grid gap-y-5 text-sm">
             <Link
               className="flex items-center text-white space-x-2"
               href={item.route}

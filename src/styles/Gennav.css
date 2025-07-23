@@ -1,0 +1,22 @@
+.header-main-container{
+   
+    position: fixed;
+  top: 0;
+  right: 0;
+
+   
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    max-width: 1700px;
+}
+.brand-logo{
+    width: 100px;
+}

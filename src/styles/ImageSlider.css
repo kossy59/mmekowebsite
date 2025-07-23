@@ -1,0 +1,13 @@
+.imageslide{
+    width:40%;
+    position:fixed;
+    right:10px;
+    top:100px ;
+    z-index: 0;
+    overflow:visible
+}
+@media (max-width:900px) {
+    .imageslide{
+        display: none;
+    }
+}
