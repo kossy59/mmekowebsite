@@ -11,12 +11,10 @@ export default function Logins() {
         nested
         trigger={
           <button
-            className="btn"
+            className="btn bg-[#f97316] mr-2 text-white hover:bg-[#f97316] hover:text-white active:bg-[#f97416d5] active:text-white focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-opacity-50 rounded-full"
             style={{
               display: "flex",
               alignItems: "center",
-              color: "#f97316",
-              gap: 10,
               padding: "10px 15px",
               borderRadius: 20,
             }}
