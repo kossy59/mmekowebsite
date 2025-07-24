@@ -11,7 +11,7 @@ export default function Navbar() {
   const router = useRouter()
   
   return (
-    <div className="flex z-[999] w-full top-0 left-0 p-2 items-center text-[#ff8a23] justify-between">
+    <div className="flex z-[999] w-full fixed top-0 left-0 p-2 items-center text-[#ff8a23] justify-between">
       <button onClick={toggle} className="navBtn">
         {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
       </button>
