@@ -44,7 +44,7 @@ export default function MobileSidebar() {
       icon: <FaVideo size={25} />,
     },
     {
-      route: "/",
+      route: "/settings",
       name: "Settings",
       icon: <FaCog size={25} />,
     },
