@@ -71,9 +71,9 @@ export default function MobileSidebar() {
     >
       <Link href="/" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
         <img src={'/icons/logo.png'} alt="logo" className="brand-logo w-20" />
-        {/* <img src={'/icons/icon-192.png'} alt="logo" className="logo" /> */}
+        <img src={'/icons/icon-192.png'} alt="logo" className="logo" />
       </Link>
-      <ul className="px-4 py-6">
+      <ul className="py-6">
         {sideBarItems.map((item) => (
           <li key={item.name} onClick={toggle} className="grid gap-y-5 text-sm">
             <Link

@@ -15,6 +15,10 @@
     --foreground: #ededed;
   }
 }
+html{
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
 
 body {
   color: var(--foreground);
@@ -28,5 +32,17 @@ body {
 
 .scrollbar{
   scrollbar-width: thin;
-  scrollbar-color: var(--primary) var(--secondary);
+  scrollbar-color: #fff var(--secondary);
+}
+button{
+    font-family: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
 }

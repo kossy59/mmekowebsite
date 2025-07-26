@@ -3,14 +3,14 @@ import React from "react";
 
 export default function ImagePostCard() {
   return (
-    <div className="h-[600px] overflow-y-hidden bg-gray-800 p-3 rounded-md">
+    <div className="h-[400px] mx-auto max-w-[30rem] overflow-y-hidden bg-gray-800 p-3 rounded-md">
       <div className="flex items-center gap-x-3">
         <div className="size-10 rounded-full overflow-hidden">
           <Image
             src={"/icons/profile.png"}
             alt="profile"
-            width={500}
-            height={500}
+            width={100}
+            height={100}
             className="object-cover object-center size-full"
           />
         </div>
