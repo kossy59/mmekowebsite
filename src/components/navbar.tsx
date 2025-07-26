@@ -15,14 +15,7 @@ export default function Navbar() {
       <button onClick={toggle} className="navBtn">
         {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
       </button>
-      <Image
-        src={"/icons/icon-192.png"}
-        alt="image"
-        height={50}
-        width={50}
-        className="logo cursor-pointer"
-        onClick={()=>router.push("/")}
-      />
+      
       <Logins />
     </div>
   );

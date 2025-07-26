@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import "../styles/Navs.css";
+import React, { useState } from "react";
+import "@/styles/Navs.css";
 import { usePathname, useRouter } from "next/navigation";
 // import { useAuth } from "../hooks/useAuth";
 // import { useDispatch, useSelector } from "react-redux";

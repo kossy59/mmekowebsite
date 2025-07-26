@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar";
 import Providers from "./providers";
 import BottomNavBar from "@/components/bottom-navbar";
 import { PopUp } from "@/components/popup";
+import Navapp from "@/navs/NavApp";
 
 const inter = Inter({
   weight: ["100", "300", "400", "500", "700"],
@@ -32,13 +33,16 @@ export default function RootLayout({
         <Providers>
           <main className="flex overflow-hidden h-screen relative">
             <Sidebar />
-              <Navbar />
+              {/* <Navbar /> */}
             <div className="w-full grid grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden">
-              <div className="scrollbar overflow-y-auto w-full py-16">
-                <div className="max-w-[70%] max-[1000px]:max-w-[90%] max-[800px]:max-w-[100%]">{children}</div>
+              <div className="scrollbar overflow-y-auto w-full pb-16 pt-4 grid grid-cols-[60fr_40fr] max-[600px]:grid-cols-1 justify-between">
+                <div className="w-full max-[1000px]:max-w-[90%]  max-[800px]:max-w-[100%]">
+                  {children}
+                  </div>
+                  <div className="w-full h-full max-[600px]:w-0"></div>
               </div>
-              <BottomNavBar />
-              <PopUp />
+                  <BottomNavBar />
+              {/* <PopUp /> */}
             </div>
           </main>
         </Providers>
