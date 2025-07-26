@@ -7,6 +7,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaThLarge } from "react-icons/fa";
 import Navapp from "@/navs/NavApp";
+import MenuContext from "@/Context/MenuContext";
+import MenuProvider from "@/Context/MenuContext";
+import OpenMobileMenuBtn from "./OpenMobileMenuBtn";
 
 interface BottomNavBarItemProps {
   imgUrl?: string;
@@ -42,22 +45,26 @@ export default function BottomNavBar() {
     // },
   ];
   return (
-    <div className="flex justify-end h-fit mr-8 mt-4 fixed right-0 max-[600px]:bottom-6 max-[600px]:w-full">
-      <div className="w-[23rem] max-[600px]:w-[90%] rounded-2xl p-6 bg-gray-900 flex justify-between max-[500px]:w-[93%] mx-2 items-center bottom-4">
-        {routes.map((item, i) => (
-          <Link key={i} href={item.route}>
-            {<Image
-                src={item.imgUrl || ""}
-                className="size-8"
-                alt="Home"
-                width={100}
-                height={100}
-              />
-            }
-          </Link>
-        ))}
-        <Navapp />
+    <MenuProvider>
+      <div className=" h-fit mr-8 mt-4 max-[600px]:m-0 fixed right-0 max-[600px]:bottom-6 max-[600px]:w-full">
+        <div className="w-[23rem] max-[600px]:w-[90%] rounded-2xl p-6 bg-gray-900 flex justify-between max-[500px]:w-[93%] mx-2 items-center bottom-4">
+          {routes.map((item, i) => (
+            <Link key={i} href={item.route}>
+              {<Image
+                  src={item.imgUrl || ""}
+                  className="size-8"
+                  alt="Home"
+                  width={100}
+                  height={100}
+                />
+              }
+            </Link>
+          ))}
+          <div className="max-[600px]:-top-0 max-[600px]:fixed"><Navapp /></div>
+          <div className="max-[600px]:block hidden"><OpenMobileMenuBtn /></div>
+        </div>
       </div>
-    </div>
+    </MenuProvider>
+
   );
 }
