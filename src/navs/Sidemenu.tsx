@@ -1,8 +1,9 @@
 import "./Navs.css";
 import { useRouter } from "next/navigation";
 import MenuIconImg from "@/components/MenuIcon-img";
+import { useMenuContext } from "@/Context/MenuContext";
 
- const Sidemenu = ({ open, handleMenubar }: {open: boolean, handleMenubar: () => void}) => {
+ const Sidemenu = () => {
   const router = useRouter();
   const exclusive_verify = true
   const modelID = "random_id_123" // useSelector((state) => state.profile.modelID);
@@ -12,6 +13,8 @@ import MenuIconImg from "@/components/MenuIcon-img";
   const isModel = true
   const gold_balance = 0 // const [gold_balance, setgold_balance] = useState("");
   const admin = true // useSelector((state) => state.profile.admin);
+    const { open, toggleMenu: handleMenubar } = useMenuContext();
+  
   
   // const [profile_photo, setprofile_photo] = useState(profileIcon);
   // const photo = useSelector((state) => state.comprofile.profilephoto);
@@ -117,7 +120,7 @@ import MenuIconImg from "@/components/MenuIcon-img";
           onClick={handleMenubar}
           className={`${
             open ? "show" : "hide"
-          } sm:block menu-width origin-top-right mr  mt p-2 h-fit bg-gray-900 text-white fixed sm:rounded-l-lg z-[70] `}
+          } sm:block menu-width origin-top-right mr mt p-2 h-fit bg-gray-900 text-white fixed sm:rounded-lg z-[70] `}
         >
           <div className="overflow-hidden">
             <div className="flex flex-col items-start ml-1 mr-1 p-2">

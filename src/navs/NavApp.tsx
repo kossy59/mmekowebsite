@@ -5,6 +5,8 @@ import Sidemenu from "./Sidemenu";
 import "../styles/Navs.css";
 import { FaThLarge, FaTimes } from "react-icons/fa";
 import "../styles/Gennav.css";
+import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
+import { useMenuContext } from "@/Context/MenuContext";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Logins } from "../../auth/Logins";
 // import { ModelSideMenu } from "./ModelSideMenu";
@@ -27,12 +29,9 @@ import "../styles/Gennav.css";
 }) => {
   // const login = useSelector((state) => state.register.logedin);
   const login = true; // Assuming login is true for demonstration purposes
-  const [open, setOpen] = useState(false);
   const [modelToggle, setModelToggle] = useState(false);
+  const { open } = useMenuContext();
 
-  const handleMenubar = () => setOpen(!open);
-  // const handleModelToggle = () => setModelToggle(!modelToggle);
-  const toggleSidebar = () => setOpen(!open);
 
   // useEffect(() => {
   //   if (click) {
@@ -43,14 +42,8 @@ import "../styles/Gennav.css";
 
   return (
     <>
-      <div className="">
-        <button className="width bg-slate-50 flex items-center justify-center" onClick={toggleSidebar}>
-          {open ? (
-            <FaTimes size={24} color="#fff" />
-          ) : (
-            <FaThLarge className="w-8 h-8 text-gray-500" />
-          )}
-        </button>
+      <div className="hidebtn">
+        <OpenMobileMenuBtn />
       </div>
 
       <div
@@ -65,11 +58,7 @@ import "../styles/Gennav.css";
           />
         )} */}
         {login && (
-          <Sidemenu
-            open={open}
-            handleMenubar={handleMenubar}
-            // handleGenderSearchQuery={handleGenderSearchQuery}
-          />
+          <Sidemenu />
         )}
         {/* {login && <Sidemenu open={modelToggle} handleMenubar={handleModelToggle} handleGenderSearchQuery={handleGenderSearchQuery} />} */}
         {/* {login && (

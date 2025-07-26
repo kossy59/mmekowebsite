@@ -32,13 +32,18 @@ header:hover {
 }
 .txt-color{
   color: #bfdbfe;
-  /* font-weight: 600; */
 }
 .mt{
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 .mr{
-  margin-right: 3rem;
+  margin-right: 2.5rem;
+}
+.hidebtn{
+  display: block;
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 .menu-width{
   width: 23rem;
