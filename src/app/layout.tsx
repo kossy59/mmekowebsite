@@ -33,7 +33,7 @@ export default function RootLayout({
         <Providers>
           <main className="flex overflow-hidden h-screen relative">
             <Sidebar />
-              {/* <Navbar /> */}
+              <Navbar />
             <div className="w-full grid grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden">
               <div className="scrollbar overflow-y-auto w-full pb-16 pt-4 grid grid-cols-[60fr_40fr] max-[600px]:grid-cols-1 justify-between">
                 <div className="w-full max-[1000px]:max-w-[90%]  max-[800px]:max-w-[100%]">

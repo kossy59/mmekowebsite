@@ -40,7 +40,7 @@ header:hover {
   color: #bfdbfe;
 }
 .mt{
-  margin-top: 2rem;
+  margin-top: 1.8rem;
 }
 .mr{
   margin-right: 2.5rem;
@@ -55,7 +55,7 @@ header:hover {
   }
 }
 .menu-width{
-  width: 23rem;
+  width: 25rem;
   @media (max-width: 490px) {
       width: 100%;
     }

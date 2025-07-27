@@ -17,6 +17,6 @@ export default function MenuIconImg({name, src, url, itc="items-center", rounded
         //   e.target.src = "/icons/icons8-profile_Icon1.png";
         // }}
         />
-        <p className="mt-1 ml-1 group-hover:text-gray-400">{name}</p>
+        <p className="mt-1 text-center group-hover:text-gray-400">{name}</p>
     </Link>
 }
