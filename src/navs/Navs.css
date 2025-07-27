@@ -13,6 +13,18 @@ header:focus {
   color: #f1c37e;
   transform: scaleY(1.5);
 }
+.cstm-flex{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
 
 header:hover {
   color: #f1c37e;
@@ -28,6 +40,32 @@ header:hover {
     row-gap: 1rem;
     column-gap: 0.5rem;
     padding: 0.5rem;
+  }
+}
+.cls-btn {
+  display: none;
+  @media (max-width: 400px) {
+    display: block;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 1000;
+  }
+}
+.btn-bg-orange {
+  background-color: #fd6d06;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: #fd6d06a8;
+  }
+}
+.btn-bg-white {
+  background-color: #ffffff;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: #ffffffb2;
   }
 }
 .hide{
