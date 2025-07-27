@@ -23,6 +23,12 @@ header:hover {
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   padding: 1rem;
+  @media (max-width: 490px) {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 1rem;
+    column-gap: 0.5rem;
+    padding: 0.5rem;
+  }
 }
 .hide{
   display: none;
@@ -38,6 +44,9 @@ header:hover {
 }
 .mr{
   margin-right: 2.5rem;
+  @media (max-width: 490px) {
+    margin-right: 0;
+  }
 }
 .hidebtn{
   display: block;
@@ -47,6 +56,9 @@ header:hover {
 }
 .menu-width{
   width: 23rem;
+  @media (max-width: 490px) {
+      width: 100%;
+    }
 }
 .width{
   width: 2rem;
