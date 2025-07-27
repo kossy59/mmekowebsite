@@ -2,6 +2,9 @@ import "./Navs.css";
 import { useRouter } from "next/navigation";
 import MenuIconImg from "@/components/MenuIcon-img";
 import { useMenuContext } from "@/Context/MenuContext";
+import Profile from "@/components/Profile";
+import { FaCoins } from "react-icons/fa";
+import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
 
  const Sidemenu = () => {
   const router = useRouter();
@@ -115,22 +118,24 @@ import { useMenuContext } from "@/Context/MenuContext";
 
   return (
     <div className="fixed z-50">
-      <div className="">
+      
+      <div className="p-2">
         <nav
           onClick={handleMenubar}
           className={`${
             open ? "show" : "hide"
           } sm:block menu-width origin-top-right mr mt p-2 h-fit bg-gray-900 text-white fixed sm:rounded-lg z-[70] `}
         >
+          <div className="absolute top-0 right-0 w-fit cls-btn">
+            <OpenMobileMenuBtn />
+          </div>
           <div className="overflow-hidden">
-            <div className="flex flex-col items-start ml-1 mr-1 p-2">
+            <div className="flex flex-col items-start ml-1 mr-1 p-2 border-b border-gray-800 pb-4">
               <div className="flex justify-between w-full ">
                 <div className="flex text-xs  text-blue-200 mb-3">
-                  <MenuIconImg 
+                  <Profile
                   src="/icons/icons8-profile_user.png" 
                   name={firstname} 
-                  itc="null"
-                  rounded="rounded-full"
                   url="/profile" />
                 </div>
 
@@ -147,58 +152,12 @@ import { useMenuContext } from "@/Context/MenuContext";
               </div>
               {/* time modal */}
 
-              <div className="txt-color flex justify-between w-full text-xs">
-                <div className="flex ">
-                  <p className="mt-1 ml-1">status:</p>
-                  <p className="mt-1 ml-3">Basic Member</p>
-                </div>
-
-                <button
-                  // onClick={(e) => {
-                  //   e.stopPropagation();
-                  //   handleMenubar();
-                  //   // setUpgrade(true)
-                  //   router.push("/coming-soon");
-                  // }}
-                >
-                  <p className="mt-1 ml-3 hover:text-blue-400 active:text-blue-100">
-                    (Upgrade)
-                  </p>
-                </button>
+              <div className="cstm-flex gap-4 items-start w-full">
+                <button className="w-full rounded-md btn-bg-orange py-3 text-sm font-bold flex gap-2 items-center justify-center"><FaCoins /> <span>Get More Golds</span></button>
+                <button className="w-full rounded-md btn-bg-white py-3 text-sm font-bold bg-inherit border border-gray-600 flex gap-2 items-center justify-center"><img src="/icons/icons8-model.png" alt="modelIcon" className="object-cover w-5 h-5" /> <span>Become a Model</span></button>
               </div>
-              {/* {upgrade && (
-                <div className="fixed inset-0 flex items-center justify-center bg-opacity-50">
-                  <div className="p-5 px-10 text-center bg-gray-300 rounded-lg shadow-lg">
-                    <p className="text-lg font-semibold text-gray-800">
-                      Coming Soon
-                    </p>
-                    <button
-                      className="px-4 py-2 mt-4 text-white bg-orange-600 rounded font-semigold"
-                      // onClick={() => setUpgrade(false)}
-                    >
-                      OK
-                    </button>
-                  </div>
-                </div>
-              )} */}
-              {/* {!loggedInUser?.isModel && ( */}
-              {isModel && (
-                <div className="flex justify-between w-full text-xs txt-color">
-                  <div className="flex ">
-                    <p className="mt-1 ml-1">You have:</p>
-                    <p className="mt-1 ml-3">{gold_balance} Golds</p>
-                  </div>
-
-                  <p
-                    className="mt-1 ml-3 hover:text-blue-400 active:text-blue-100 bt"
-                    onClick={(e) => router.push("/topup")}
-                  >
-                    (Get More)
-                  </p>
-                </div>
-              )}
             </div>
-            <hr className="w-full my-3 bg-blue-900 "></hr>
+            {/* <hr className="w-full my-3 bg-blue-900 "></hr> */}
 
             <div className="grid-sys text-xs  text-blue-100">
                {/* onClick={(e) => {
