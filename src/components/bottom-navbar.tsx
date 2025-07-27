@@ -47,7 +47,7 @@ export default function BottomNavBar() {
   return (
     <MenuProvider>
       <div className=" h-fit mr-8 mt-4 max-[600px]:m-0 fixed right-0 max-[600px]:bottom-6 max-[600px]:w-full">
-        <div className="w-[23rem] max-[600px]:w-[90%] rounded-2xl p-6 bg-gray-900 flex justify-between max-[500px]:w-[93%] mx-2 items-center bottom-4">
+        <div className="w-[25rem] max-[600px]:w-[90%] rounded-2xl p-6 bg-gray-900 flex justify-between max-[500px]:w-[93%] mx-2 items-center bottom-4">
           {routes.map((item, i) => (
             <Link key={i} href={item.route}>
               {<Image
