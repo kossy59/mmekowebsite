@@ -80,6 +80,15 @@ header:hover {
 }
 .mt{
   margin-top: 1.5rem;
+  @media (max-width: 600px) {
+    margin-top: 0;
+  }
+}
+.pt{
+  padding-top: 1rem;
+  @media (max-width: 600px) {
+    padding-top: 2rem;
+  }
 }
 .mr{
   margin-right: 2.5rem;
@@ -91,7 +100,7 @@ header:hover {
 .divider{
   padding-bottom: 2rem;
   border-bottom: 1px solid #68686879;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 .hidebtn{
   display: block;

@@ -106,7 +106,7 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
           onClick={handleMenubar}
           className={`${
             open ? "show" : "hide"
-          } sm:block menu-width origin-top-right mr mt p-2 h-fit bg-gray-900 text-white fixed sm:rounded-lg z-[70] `}
+          } sm:block menu-width origin-top-right mr mt pt px-2 py-4 h-fit bg-gray-900 text-white fixed sm:rounded-lg z-[70] `}
         >
           <div className="absolute top-0 right-0 w-fit cls-btn">
             <OpenMobileMenuBtn />
