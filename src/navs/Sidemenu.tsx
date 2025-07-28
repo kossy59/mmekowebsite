@@ -112,9 +112,10 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
             <OpenMobileMenuBtn />
           </div>
           <div className="overflow-hidden">
-            <div className="flex flex-col items-start ml-1 mr-1 p-2 border-b border-b-gray-800 pb-4">
+            <div className="flex flex-col items-start ml-1 mr-1 p-2 divider">
               <div className="flex justify-between w-full ">
-                <div className="flex text-xs  text-blue-200 mb-3">
+                <div className="flex text-xs  text-blue-200 mb-3 w-full">
+                  {/* <p className="font-bold">Welcome, {firstname}</p> */}
                   <Profile
                   src="/icons/icons8-profile_user.png" 
                   name={firstname} 
@@ -134,7 +135,7 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
               </div>
               {/* time modal */}
 
-              <div className="cstm-flex gap-4 items-start w-full">
+              <div className="cstm-flex gap-4 items-start w-full mt-4">
                 <button className="flex gap-2 items-center justify-center font-bold text-sm w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 rounded-lg transition-transform duration-300 hover:scale-105 shadow-md"><FaCoins /> <span>Get More Golds</span></button>
                 <button className="cstm-boder w-full rounded-lg py-3 text-sm font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent bg-inherit flex gap-2 items-center justify-center transition-transform duration-300 hover:scale-105">🚀 <span>Upgrade Account</span></button>
               </div>
