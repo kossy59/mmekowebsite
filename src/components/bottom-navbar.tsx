@@ -10,14 +10,17 @@ import Navapp from "@/navs/NavApp";
 import MenuContext from "@/Context/MenuContext";
 import MenuProvider from "@/Context/MenuContext";
 import OpenMobileMenuBtn from "./OpenMobileMenuBtn";
+import { usePathname } from "next/navigation";
 
 interface BottomNavBarItemProps {
   imgUrl?: string;
   route: string;
   icon?: ReactNode;
+  name?: string;
 }
 export default function BottomNavBar() {
   const [activeTab, setActiveTab] = useState("home");
+  const pathname = usePathname()
   const handleNavigation = (path: string, home: string) => {
     console.log(path, home);
   };
@@ -26,18 +29,22 @@ export default function BottomNavBar() {
     {
       imgUrl: "/icons/icons8-home.png",
       route: "/",
+      name: "Home"
     },
     {
       imgUrl: "/icons/icons8-search-2.png",
-      route: "/",
+      route: "/search",
+      name: "Search"
     },
     {
       imgUrl: "/icons/icons8-notification-1.png",
-      route: "/",
+      route: "/notifications",
+      name: "Notifications"
     },
     {
       imgUrl: "/icons/icons8-message.png",
       route: "/message",
+      name: "Messages"
     },
     // {
     //   route: "/",
@@ -47,17 +54,18 @@ export default function BottomNavBar() {
   return (
     <MenuProvider>
       <div className=" h-fit mr-8 mt-4 max-[600px]:m-0 fixed right-0 max-[600px]:bottom-6 max-[600px]:w-full">
-        <div className="w-[25rem] max-[600px]:w-[90%] rounded-2xl p-6 bg-gray-900 flex justify-between max-[500px]:w-[93%] mx-2 items-center bottom-4">
+        <div className="w-[25rem] max-[600px]:w-[90%] rounded-2xl px-4 pt-4 pb-2 bg-gray-900 flex justify-between max-[500px]:w-[93%] mx-2 bottom-4">
           {routes.map((item, i) => (
-            <Link key={i} href={item.route}>
+            <Link key={i} href={item.route} className={`w-12 flex flex-col items-center  group hover:scale-110 transition-all duration-500`}>
               {<Image
                   src={item.imgUrl || ""}
-                  className="size-8"
+                  className={`size-8 grayscale ${pathname === item.route ? "grayscale-0" : ""}`}
                   alt="Home"
                   width={100}
                   height={100}
                 />
               }
+              <p className={` group-hover:opacity-100 opacity-0 mt-1 ${pathname === item.route ? "text-white" : "text-gray-500 "} text-xs transition-all duration-300`}>{item.name}</p>
             </Link>
           ))}
           <div className="max-[600px]:-top-0 max-[600px]:fixed"><Navapp /></div>

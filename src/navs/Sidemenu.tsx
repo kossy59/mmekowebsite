@@ -130,7 +130,7 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
             <OpenMobileMenuBtn />
           </div>
           <div className="overflow-hidden">
-            <div className="flex flex-col items-start ml-1 mr-1 p-2 border-b border-gray-800 pb-4">
+            <div className="flex flex-col items-start ml-1 mr-1 p-2 border-b border-b-gray-800 pb-4">
               <div className="flex justify-between w-full ">
                 <div className="flex text-xs  text-blue-200 mb-3">
                   <Profile
@@ -154,7 +154,7 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
 
               <div className="cstm-flex gap-4 items-start w-full">
                 <button className="w-full rounded-md btn-bg-orange py-3 text-sm font-bold flex gap-2 items-center justify-center"><FaCoins /> <span>Get More Golds</span></button>
-                <button className="w-full rounded-md btn-bg-white py-3 text-sm font-bold bg-inherit border border-gray-600 flex gap-2 items-center justify-center"><img src="/icons/icons8-model.png" alt="modelIcon" className="object-cover w-5 h-5" /> <span>Become a Model</span></button>
+                <button className="w-full rounded-md btn-bg-white py-3 text-sm font-bold bg-inherit border border-gray-600 flex gap-2 items-center justify-center"><img src="/icons/icons8-model.png" alt="modelIcon" className="object-cover w-5 h-5" /> <span>Upgrade Account</span></button>
               </div>
             </div>
             {/* <hr className="w-full my-3 bg-blue-900 "></hr> */}
