@@ -18,8 +18,8 @@ export default function Profile({name, src, url}:
         //   e.target.src = "/icons/icons8-profile_Icon1.png";
         // }}
         />
-        <div className='flex flex-col gap-1'>
-        <p className=" group-hover:text-gray-400 text-lg">{name}</p>
+        <div className='flex flex-col gap-1 font-bold'>
+        <p className=" group-hover:text-gray-400 text-xl">{name}</p>
         <p className=" group-hover:text-gray-400 text-blue-400">Basic Mode</p>
         <p>Gold bal: <span className='text-yellow-500 font-bold'>0</span></p>
         <p className='text-gray-500 italic my-2'>Member since 2021</p>

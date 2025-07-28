@@ -67,46 +67,28 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
     if (!exclusive_verify) {
       if (model) {
         return (
-          <button
-            className="flex flex-col items-center"
-            onClick={(e) => router.push(`/modelbyid/${modelID}`)}
-          >
-            <img
-              alt="manageIcon"
-              src={"/icons/icons8-model.png"}
-              className="object-cover w-7 h-7"
-            ></img>
-            <p className="mt-1 ml-1">Model portfolio</p>
-          </button>
+          <MenuIconImg
+            src="/icons/icons8-model.png"
+            name="Model portfolio"
+            url={`/modelbyid/${modelID}`}
+          />
         );
       } else {
         return (
-          <button
-            className="flex flex-col items-center"
-            onClick={(e) => router.push("/createmodel")}
-          >
-            <img
-              alt="manageIcon"
-              src={"/icons/icons8-model.png"}
-              className="object-cover w-7 h-7"
-            ></img>
-            <p className="mt-1 ml-1">Model portfolio</p>
-          </button>
+          <MenuIconImg
+            src="/icons/icons8-model.png"
+            name="Model portfolio"
+            url="/createmodel"
+          />
         );
       }
     } else {
       return (
-        <button
-          className="flex flex-col items-center"
-          onClick={(e) => router.push("/verification")}
-        >
-          <img
-            alt="addIcon"
-            src={"/icons/icons8-plus.png"}
-            className="object-cover w-7 h-7"
-          ></img>
-          <p className="mt-1 ml-1">Model Application</p>
-        </button>
+        <MenuIconImg
+          src="/icons/icons8-plus.png"
+          name="Model Application"
+          url="/be-a-model"
+        />
       );
     }
   };
@@ -153,8 +135,8 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
               {/* time modal */}
 
               <div className="cstm-flex gap-4 items-start w-full">
-                <button className="w-full rounded-md btn-bg-orange py-3 text-sm font-bold flex gap-2 items-center justify-center"><FaCoins /> <span>Get More Golds</span></button>
-                <button className="w-full rounded-md btn-bg-white py-3 text-sm font-bold bg-inherit border border-gray-600 flex gap-2 items-center justify-center"><img src="/icons/icons8-model.png" alt="modelIcon" className="object-cover w-5 h-5" /> <span>Upgrade Account</span></button>
+                <button className="flex gap-2 items-center justify-center font-bold text-sm w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 rounded-lg transition-transform duration-300 hover:scale-105 shadow-md"><FaCoins /> <span>Get More Golds</span></button>
+                <button className="cstm-boder w-full rounded-lg py-3 text-sm font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent bg-inherit flex gap-2 items-center justify-center transition-transform duration-300 hover:scale-105">🚀 <span>Upgrade Account</span></button>
               </div>
             </div>
             {/* <hr className="w-full my-3 bg-blue-900 "></hr> */}
