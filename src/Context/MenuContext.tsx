@@ -3,14 +3,17 @@ import { createContext } from 'react';
 
 interface MenuContextProps {   
     open: boolean;
-    toggleMenu: () => void;
+    toggleMenu: (e?: React.MouseEvent<HTMLElement>) => void;
 }
 const MenuContext = createContext<MenuContextProps | undefined>(undefined);
 
 const MenuProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = React.useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu = (e?: React.MouseEvent<HTMLElement>) => {
+    e?.preventDefault();
+    const target = e?.target as HTMLButtonElement;
+    if (target?.classList.contains("mini-btn")) return;
     setOpen(!open);
   };
 
