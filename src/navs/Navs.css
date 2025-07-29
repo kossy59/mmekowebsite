@@ -97,15 +97,14 @@ header:hover {
   }
 }
 .minimize{
-  height: 0;
+  height: 33px;
 }
 .maximize {
   height: 15rem;
 }
 .divider{
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid #68686879;
-  /* margin-bottom: 1rem; */
 }
 .hidebtn{
   display: block;

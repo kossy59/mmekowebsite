@@ -32,7 +32,13 @@ body {
 
 .scrollbar{
   scrollbar-width: thin;
-  scrollbar-color: #fff var(--secondary);
+  scrollbar-color: var(--secondary) var(--secondary);
+  /* overflow: hidden; */
+  box-sizing: border-box;
+  &:hover{
+    scrollbar-color: #192050 var(--secondary);
+    overflow-y: scroll;
+  }
 }
 button{
     font-family: inherit;
