@@ -104,7 +104,7 @@ export function PopUp() {
   const { icon, text } = messages[currentMessageIndex];
 
   return (
-    <div className="fixed bottom-6 md:bottom-20 left-0 right-0 z-40 flex justify-center px-4 sm:bottom-24">
+    <div className="fixed bottom-6 max-[600px]:bottom-28 left-0 right-0 z-40 flex justify-center px-4 sm:bottom-24">
       <div
         className={`bg-gray-900 text-white p-4 rounded-lg shadow-lg max-w-md w-full border border-gray-700
           transform transition-all duration-500 ${

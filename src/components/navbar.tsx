@@ -23,7 +23,7 @@ export default function Navbar() {
       <div></div>
       </div>
       {/* <Logins /> */}
-      <div></div> {/**<Logins /> placeholder */}
+      <div className="size-6"></div> {/**<Logins /> placeholder */}
     </div>
     </div>
   );
