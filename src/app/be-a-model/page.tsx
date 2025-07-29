@@ -22,7 +22,7 @@ export default function VerificationPage(){
       title: "Keep 100% of Your Earnings",
       subtitle: "For 3 Months",
       description:
-        "Unlike other platforms, we take 0%. Every cent you make from Fan Meets, Fan Dates, and Private Shows is yours.",
+        "Unlike other platforms, we take 0%. Every cent you make from Fan Meets, Fan Dates, and Fan calls is yours.",
     },
     {
       icon: FaCreditCard,
@@ -33,7 +33,7 @@ export default function VerificationPage(){
     },
     {
       icon: FaVideo,
-      title: "Private Show = Real-Time Earnings",
+      title: "Fan Call = Real-Time Earnings",
       subtitle: "Live Tracking",
       description:
         "Private video calls aren't just random chats. They're built to make you money. Fans pay per minute and both of you can track the balance live during the show.",

@@ -97,7 +97,7 @@ header:hover {
   }
 }
 .minimize{
-  height: 0;
+  height: 33px;
 }
 .maximize {
   height: 15rem;

@@ -11,7 +11,7 @@ import { FaAngleDown } from "react-icons/fa";
 import { useState } from "react";
 
  const Sidemenu = () => {
-  const [minimize, setMinimize] = useState(true);
+  const [minimize, setMinimize] = useState(false);
 
   const router = useRouter();
   const exclusive_verify = true
@@ -117,12 +117,12 @@ import { useState } from "react";
             open ? "show" : "hide"
           } sm:block menu-width origin-top-right mr mt pt px-2 py-4 h-fit bg-gray-900 text-white fixed sm:rounded-lg z-[70] `}
         >
-          <div className="absolute top-0 right-0 w-fit cls-btn">
+          <div className="absolute -top-3 right-0 w-fit cls-btn">
             <OpenMobileMenuBtn />
           </div>
           <div className="overflow-hidden">
             <div className={`${minimize ? "minimize" : "maximize"} transition-all duration-500 flex flex-col items-start ml-1 mr-1 p-2 divider relative overflow-hidden`}>
-              <button onClick={() => setMinimize(!minimize)} className="top 0 right-0 absolute p-2"><p className="absolute top-0 right-0 w-full h-full mini-btn"></p>{minimize ? <FaAngleRight /> :  <FaAngleDown />}</button>
+              <button onClick={() => setMinimize(!minimize)} className="top-0 right-0 absolute p-2"><p className="absolute top-0 right-0 w-full h-full mini-btn"></p>{minimize ? <FaAngleRight /> :  <FaAngleDown />}</button>
               <div className="flex justify-between w-full ">
                 <div className="flex text-xs  text-blue-200 mb-3 w-full">
                   {/* <p className="font-bold">Welcome, {firstname}</p> */}
