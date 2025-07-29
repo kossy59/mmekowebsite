@@ -1,3 +1,4 @@
+"use client"
 import "./Navs.css";
 import { useRouter } from "next/navigation";
 import MenuIconImg from "@/components/MenuIcon-img";
@@ -5,8 +6,13 @@ import { useMenuContext } from "@/Context/MenuContext";
 import Profile from "@/components/Profile";
 import { FaCoins } from "react-icons/fa";
 import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
+import { FaAngleRight } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
+import { useState } from "react";
 
  const Sidemenu = () => {
+  const [minimize, setMinimize] = useState(true);
+
   const router = useRouter();
   const exclusive_verify = true
   const modelID = "random_id_123" // useSelector((state) => state.profile.modelID);
@@ -18,7 +24,10 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
   const admin = true // useSelector((state) => state.profile.admin);
     const { open, toggleMenu: handleMenubar } = useMenuContext();
   
-  
+  // function handleMinimize(e: React.MouseEvent<HTMLButtonElement>) {
+  //   setMinimize(!minimize);
+  //   handleMenubar(e);
+  // }
   // const [profile_photo, setprofile_photo] = useState(profileIcon);
   // const photo = useSelector((state) => state.comprofile.profilephoto);
   // const postuserid = useSelector((state) => state.register.userID);
@@ -112,7 +121,8 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
             <OpenMobileMenuBtn />
           </div>
           <div className="overflow-hidden">
-            <div className="flex flex-col items-start ml-1 mr-1 p-2 divider">
+            <div className={`${minimize ? "minimize" : "maximize"} transition-all duration-500 flex flex-col items-start ml-1 mr-1 p-2 divider relative overflow-hidden`}>
+              <button onClick={() => setMinimize(!minimize)} className="top 0 right-0 absolute p-2"><p className="absolute top-0 right-0 w-full h-full mini-btn"></p>{minimize ? <FaAngleRight /> :  <FaAngleDown />}</button>
               <div className="flex justify-between w-full ">
                 <div className="flex text-xs  text-blue-200 mb-3 w-full">
                   {/* <p className="font-bold">Welcome, {firstname}</p> */}

@@ -96,7 +96,12 @@ header:hover {
     margin-right: 0;
   }
 }
-
+.minimize{
+  height: 0;
+}
+.maximize {
+  height: 15rem;
+}
 .divider{
   padding-bottom: 2rem;
   border-bottom: 1px solid #68686879;
