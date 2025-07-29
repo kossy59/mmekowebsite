@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import HeaderBackNav from "../navs/HeaderBackNav";
+import Modal from "../../components/Modal";
 
 const FeedbackForm = () => {
   const [selectedRating, setSelectedRating] = useState(null);
@@ -86,13 +87,7 @@ const FeedbackForm = () => {
         </button>
       </div>
 
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center md:justify-start w-[90%] mx-auto md:w-4/5">
-          <div className="p-6 bg-white rounded-lg shadow-lg md:ml-40">
-            <p className="font-semibold text-center text-orange-500">Your review has been sent</p>
-          </div>
-        </div>
-      )}
+      <Modal show={showModal} message="Your review has been sent" />
     </div>
   );
 };
