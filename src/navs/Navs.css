@@ -101,6 +101,9 @@ header:hover {
 }
 .maximize {
   height: 15rem;
+  @media (width <= 400px) {
+    height: 17rem;
+  }
 }
 .divider{
   padding-bottom: 1rem;
