@@ -98,9 +98,8 @@ header:hover {
 }
 
 .divider{
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid #68686879;
-  /* margin-bottom: 1rem; */
 }
 .hidebtn{
   display: block;
