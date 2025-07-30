@@ -18,8 +18,6 @@ export const meta = {
 export function generateStaticParams() {
   return [
     { userid: 'user_1' },
-    { userid: 'user_2' },
-    { userid: 'user_3' },
     { userid: 'randomuserid_123456789' },
   ];
 }
