@@ -49,7 +49,7 @@ export default function MobileSidebar() {
       icon: <FaCog size={25} />,
     },
     {
-      route: "/",
+      route: "/feedback",
       name: "Feedback",
       icon: <FaComments size={25} />,
     },

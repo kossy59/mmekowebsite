@@ -1,5 +1,5 @@
 "use client";
-import FeedBackForm from "@/components/feedback/FeedBackForm";
+import FeedBackForm from "@/components/feedback/FeedbackForm";
 
 
 const FeedbackPage = () => {
