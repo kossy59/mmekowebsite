@@ -1,6 +1,9 @@
-"use client";
-import FeedBackForm from "@/components/feedback/FeedbackForm";
+import FeedBackForm from "../../components/feedback/FeedBackForm";
 
+
+export const metadata = {
+  title: "User Feedback",
+};
 
 const FeedbackPage = () => {
   return <FeedBackForm />;
