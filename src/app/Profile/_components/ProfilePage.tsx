@@ -4,6 +4,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Tabs from "./Tabs";
 import DropdownMenu from "./DropDonMenu";
+import { useParams } from "next/navigation";
 // import backIcon from "../icons/backIcon.svg";
 // import StarIcon from "../icons/transparentstar.svg";
 // import StarIcon2 from "../icons/star.svg";
@@ -60,6 +61,8 @@ const profile = {
 }
 
 export const Profile = () => {
+  const params = useParams()
+  console.log(params)
   const [username, setusername] = useState("");
   const [nickname, setnickname] = useState("");
   const [isbuying, setisbuying] = useState(false);
