@@ -129,7 +129,7 @@ import { useState } from "react";
                   <Profile
                   src="/icons/icons8-profile_user.png" 
                   name={firstname} 
-                  url="/profile/1234567890" />
+                  url="/Profile/1234567890" />
                 </div>
 
                 {/* <div className="flex p-1 "> */}
@@ -162,7 +162,7 @@ import { useState } from "react";
               <MenuIconImg 
                 src="/icons/icons8-customer.gif" 
                 name="Profile" 
-                url="/profile/randomuserid_123456789" />
+                url="/Profile/randomuserid_123456789" />
 
               {verify()}
 
