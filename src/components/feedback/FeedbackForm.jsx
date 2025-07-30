@@ -29,7 +29,7 @@ const FeedbackForm = () => {
   return (
     <div className="w-full pt-6 mx-auto sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12">
       <HeaderBackNav title="Feedback" />
-      <div className="w-[90%] mx-auto md:w-3/5 text-white p-4 md:mr-auto md:ml-0">
+      <div className="w-[90%] mx-auto text-white p-4 md:mr-auto md:ml-0">
         <h1 className="text-2xl font-bold text-orange-600">Mmeko Feedback</h1>
 
         <p className="mt-4 text-lg font-semibold">
