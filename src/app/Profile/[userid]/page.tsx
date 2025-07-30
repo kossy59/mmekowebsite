@@ -1,12 +1,13 @@
 import { CallProvider } from '@/Context/callContext'
 import React from 'react'
-import { Profile } from './ProfilePage'
+import { Profile } from '../_components/ProfilePage'
 
 export const meta = {
     title: "profile account",
 }
 export default function page() {
   return <CallProvider>
+    <div>profile page</div>
     <Profile />
   </CallProvider>
   

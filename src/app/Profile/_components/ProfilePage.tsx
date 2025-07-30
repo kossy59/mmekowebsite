@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import Tabs from "../_components/Tabs";
-import DropdownMenu from "../_components/DropDonMenu";
+import Tabs from "./Tabs";
+import DropdownMenu from "./DropDonMenu";
 // import backIcon from "../icons/backIcon.svg";
 // import StarIcon from "../icons/transparentstar.svg";
 // import StarIcon2 from "../icons/star.svg";
