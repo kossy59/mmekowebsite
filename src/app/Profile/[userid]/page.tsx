@@ -1,4 +1,3 @@
-import { CallProvider } from '@/Context/callContext'
 import React from 'react'
 import { Profile } from '../_components/ProfilePage'
 
@@ -24,9 +23,7 @@ export function generateStaticParams() {
 }
 
 export default function Page() {
-  return <CallProvider>
+  return <Profile />
+   
     {/* <div>profile page</div> */}
-    <Profile />
-  </CallProvider>
-  
 }
