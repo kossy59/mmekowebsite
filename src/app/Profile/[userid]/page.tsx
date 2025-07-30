@@ -24,7 +24,7 @@ export function generateStaticParams() {
   ];
 }
 
-export default function page() {
+export default function Page() {
   return <CallProvider>
     {/* <div>profile page</div> */}
     <Profile />
