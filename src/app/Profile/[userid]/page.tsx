@@ -18,13 +18,11 @@ export const meta = {
 export function generateStaticParams() {
   return [
     { userid: 'user_1' },
-    { userid: 'user_2' },
-    { userid: 'user_3' },
     { userid: 'randomuserid_123456789' },
   ];
 }
 
-export default function page() {
+export default function Page() {
   return <CallProvider>
     {/* <div>profile page</div> */}
     <Profile />
