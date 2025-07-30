@@ -1,4 +1,4 @@
-import FeedBackForm from "../../components/feedback/FeedBackForm";
+import FeedBackForm from "../../components/feedback/FeedbackForm";
 
 
 export const metadata = {
