@@ -2,8 +2,9 @@ import { CallProvider } from '@/Context/callContext'
 import React from 'react'
 import { Profile } from '../_components/ProfilePage'
 
-export const meta = {
+export const metadata = {
     title: "profile account",
+    description: "Your profile account"
 }
 // export const dynamic = 'force-dynamic';
 // export async function generateStaticParams() {
