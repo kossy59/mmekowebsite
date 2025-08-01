@@ -1,29 +1,16 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Input from "./Input";
-// import { useSelector, useDispatch } from "react-redux";
-// import Popup from "reactjs-popup";
-// import { Fail } from "../../fragment/Fail";
-// import { PassEmail } from "../auth/sent-confirmation-link/page";
-// import {
-//   changecompleate,
-//   error,
-//   loginuser,
-//   savelogin,
-//   changelogin,
-//   forgetpass,
-// } from "../../services/features/register/registerSlice";
-// import { useNavigate } from "react-router-dom";
-// import { alert, dismissalert } from "@/utils/alert";
-// import { AppDispatch } from "../store";
-
-// export const Loginview = ({ close }: {close: boolean}) => { // use later
+import { register } from "@/lib/service/register";
+import { login } from "@/lib/service/login";
 export const Loginview = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [state, action, pending] = useActionState(login, undefined)
+
 
   return (
     <div
@@ -47,9 +34,10 @@ export const Loginview = () => {
           Log in to access your account
         </p>
 
-        <div className="mt-6 space-y-4">
+        <form action={action} className="mt-6 space-y-4">
           <Input type="email" placeholder="Email Address" />
           <Input type="password" />
+          <input type="hidden" name="signing-type" value={"login"} />
           <div className="flex items-start mt-4">
             <Input
               type="checkbox"
@@ -93,7 +81,7 @@ export const Loginview = () => {
               Register
             </Link>
           </p>
-        </div>
+        </form>
       </div>
     </div>
   );

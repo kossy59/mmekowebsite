@@ -1,5 +1,12 @@
+import z from "zod";
 import { LoginFormSchema } from "./zodLoginSchema"
 import { SignupFormSchema } from "./zodSignupSchema"
+
+type ValidationResult<T> = {
+  success: boolean;
+  validatedFields: T | {};
+  errors?: Record<string, string[] | string>;
+};
 
 // Rate limiting configuration
 const RATE_LIMIT = {
@@ -10,7 +17,7 @@ const RATE_LIMIT = {
 // Track sign-up attempts
 const signUpAttempts = new Map()
 
-export default function validations(formData, callback) {
+export default function validations(formData: FormData): ValidationResult<z.infer<typeof SignupFormSchema> | z.infer <typeof LoginFormSchema>> {
   // Rate limiting check
   const ip = "default" // Placeholder for IP address
   const attempts = signUpAttempts.get(ip) || 0
@@ -18,7 +25,8 @@ export default function validations(formData, callback) {
   if (attempts >= RATE_LIMIT.MAX_ATTEMPTS) {
     return {
       errors: { general: "Too many sign-up attempts. Please try again later." },
-      success: false
+      success: false,
+      validatedFields: {}
     }
   }
 
@@ -46,7 +54,8 @@ export default function validations(formData, callback) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      success: false
+      success: false,
+      validatedFields: {}
     }
   }
 
@@ -54,6 +63,6 @@ export default function validations(formData, callback) {
   // console.log({ name, email, password })
   return { 
     validatedFields: validatedFields.data, 
-    success: true 
+    success: true,
   }
 }
