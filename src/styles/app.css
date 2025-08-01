@@ -64,7 +64,8 @@
     display: none;
   }
   .top-bar-visibility{
-    display: none;
+    /* display: none; */
+    padding: 1rem 2rem;
   }
     @media (width <= 1000px) {
       .sidebar {

@@ -234,7 +234,7 @@ export const Register = () => {
                 />
                 <label htmlFor="dob">Date of Birth</label>
               </div>
-
+              <input type="hidden" name="signing-type" value={"signup"} />
               <button
                 type="button"
                 // onClick={() => {

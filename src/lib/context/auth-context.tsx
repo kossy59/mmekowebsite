@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useState,
   ReactNode,
+  useReducer,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -27,8 +28,30 @@ interface AuthContextType {
   toggle: () => void;
 }
 
+type ReducerAction<T = any> = {
+  type: string;
+  payload?: T;
+};
+
+type ReducerState<T = any> = T;
+
 // Create the AuthContext
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+const initialState: ReducerState<any> = {};
+
+function reducer(state: ReducerState, action: ReducerAction){
+
+  switch(action.type){
+    case "" :
+      return {
+        ...state,
+
+      }
+      default:
+            throw new Error("unknown action")
+    }
+}
 
 // AuthProvider component
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
@@ -37,6 +60,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [{}, dispatch] = useReducer(reducer, initialState)
 
   const router = useRouter();
   const pathName = usePathname();

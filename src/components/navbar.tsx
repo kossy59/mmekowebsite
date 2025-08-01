@@ -22,8 +22,8 @@ export default function Navbar() {
       <img src={'/icons/icon-192.png'} alt="logo" className="logo" />
       <div></div>
       </div>
-      {/* <Logins /> */}
-      <div className="size-6"></div> {/**<Logins /> placeholder */}
+      <Logins />
+      {/* <div className="size-6"></div> *<Logins /> placeholder */}
     </div>
     </div>
   );

@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
-    "axios": "^1.10.0",
+    "@tanstack/react-query": "^5.84.0",
+    "axios": "^1.11.0",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.11",
     "next": "^15.4.2",
@@ -22,7 +23,8 @@
     "react-spinners": "^0.17.0",
     "react-toastify": "^11.0.5",
     "reactjs-popup": "^2.0.6",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^4.0.14"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
