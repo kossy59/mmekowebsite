@@ -41,7 +41,7 @@ export default function RootLayout({
                   </div>
                   <div className="w-full h-full max-[600px]:w-0"></div>
               </div>
-                  <BottomNavBar />
+                  {/* <BottomNavBar /> */}
               <PopUp />
             </div>
           </main>

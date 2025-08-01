@@ -1,4 +1,4 @@
-import { CallProvider } from '@/Context/callContext'
+import { CallProvider } from '@/lib/context/callContext'
 import React from 'react'
 import { Profile } from '../_components/ProfilePage'
 

@@ -6,7 +6,7 @@ import "../styles/Navs.css";
 import { FaThLarge, FaTimes } from "react-icons/fa";
 import "../styles/Gennav.css";
 import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
-import { useMenuContext } from "@/Context/MenuContext";
+import { useMenuContext } from "@/lib/context/MenuContext";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Logins } from "../../auth/Logins";
 // import { ModelSideMenu } from "./ModelSideMenu";

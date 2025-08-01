@@ -1,5 +1,5 @@
 "use client"
-import { useMenuContext } from '@/Context/MenuContext';
+import { useMenuContext } from '@/lib/context/MenuContext';
 import React from 'react'
 import { FaThLarge, FaTimes } from 'react-icons/fa';
 

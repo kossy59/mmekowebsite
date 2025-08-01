@@ -2,7 +2,7 @@
 import "./Navs.css";
 import { useRouter } from "next/navigation";
 import MenuIconImg from "@/components/MenuIcon-img";
-import { useMenuContext } from "@/Context/MenuContext";
+import { useMenuContext } from "@/lib/context/MenuContext";
 import Profile from "@/components/Profile";
 import { FaCoins } from "react-icons/fa";
 import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";

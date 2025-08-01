@@ -7,8 +7,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaThLarge } from "react-icons/fa";
 import Navapp from "@/navs/NavApp";
-import MenuContext from "@/Context/MenuContext";
-import MenuProvider from "@/Context/MenuContext";
+import MenuContext from "@/lib/context/MenuContext";
+import MenuProvider from "@/lib/context/MenuContext";
 import OpenMobileMenuBtn from "./OpenMobileMenuBtn";
 import { usePathname } from "next/navigation";
 
