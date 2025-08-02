@@ -147,8 +147,8 @@ export const Register = () => {
               <input type="submit" value={"Register"} className="btn" />
             </Step>
           </div>
-        </form>
           <p>I already have an account <Link href="/">Login</Link></p>
+        </form>
       </div>
     </div>
   );
