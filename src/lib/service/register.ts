@@ -9,14 +9,9 @@ import axios from "axios"
 
 type formValues = z.infer<typeof LoginFormSchema>
 
-// export function register(state: void, formData: formValues){
-
-// }
-
-// actions/register.ts
-
 export async function register(state: void, formData: FormData) {
     const result = validations(formData);
+    console.log({formData})
 
   if (!result.success) {
     console.error(result.errors);

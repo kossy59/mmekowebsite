@@ -1,7 +1,7 @@
 "use client"
 // import Popup from "reactjs-popup";
 // import locationIcon from "../../../public/icons/locationIcon.svg"
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 // import Confirmemail from "../confirm-email/page";
 // import HeaderBackNav from "../../_components/navs/HeaderBackNav";
 // import { ToastContainer, toast } from "react-toastify";
@@ -11,370 +11,143 @@ import "./styles.css";
 import Image from "next/image";
 import Link from "next/link";
 import CountrySelect from "@/components/CountrySelect/CountrySelect";
-// import { Action, Dispatch, UnknownAction } from "@reduxjs/toolkit";
-// import {
-//   registernewUser,
-//   status,
-//   error,
-//   changeStatus
-// } from "../../../services/features/register/registerSlice";
-// import { AppDispatch } from "@/app/store";
-// import { alert, dismissalert } from "@/utils/alert";
+import NextSlide from "./_components/NextSlideBtn";
+import Input from "@/components/Input";
+import Step from "./_components/Step";
+import DotSlideBtn from "./_components/DotSlideBtn";
+import Agree from "./_components/AgreeBtn";
+import { register } from "@/lib/service/register";
 
 export const Register = () => {
   const [firstname, setfirstname] = useState<string>("");
   const [gender, setgender] = useState<string>("");
   const [agreedTerms, setAgreedTerms] = useState<boolean>(false);
   const [agreedPrivacy, setAgreedPrivacy] = useState<boolean>(false);
-  const [step, setStep] = useState<"1" | "2" | "3">("1");
+  const [step, setStep] = useState<number>(1);
   const [password, setpassword] = useState<string>("");
   const [compas, setcompas] = useState<string>("");
   const [nickname, setnickname] = useState<string>("");
   const [country, setcountry] = useState<string>("");
+  const [state, action, pending] = useActionState(register, undefined)
   
-  // const [lastname, setlastname] = useState<string>("");
-  // const [dob, setdob] = useState<string>("");
-  // const stats = useSelector(status);
-  // const errs = useSelector(error);
-  // const dispatch = useDispatch<AppDispatch>();
-  // const [email, setemail] = useState<string>("");
-  // const [dateofbirth, setdateofbirth] = useState<Date>(new Date());
-  // const dispatch = useDispatch();
 
   let regex = /^[a-zA-Z0-9_@]+$/;
   // let firstLatter = /^@.*/;
 
-  // const notify = (message: string) =>
-    // toast.error(`${message}`, {
-    //   autoClose: 1000,
-    //   pauseOnHover: false,
-    //   pauseOnFocusLoss: false,
-    // });
-
-  // const checkInput = () => {
-  //   if (!firstname) {
-  //     notify("Enter first name");
-  //     return true;
-  //   }
-
-  //   if (firstname.length > 12) {
-  //     notify("Name must be maximum of 12 characters");
-  //     return true;
-  //   }
-  //   if (!lastname) {
-  //     notify("Enter last name");
-  //     return true;
-  //   }
-  //   if (lastname.length > 12) {
-  //     notify("Name must be maximum of 12 characters");
-  //     return true;
-  //   }
-  //   if (!dob) {
-  //     notify("Enter date of birth");
-  //     return true;
-  //   }
-  //   if (!gender) {
-  //     notify("Select gender");
-  //     return true;
-  //   }
-  //   if (!nickname) {
-  //     notify("user must choose username");
-  //     return true;
-  //   }
-  //   if (nickname.length > 20) {
-  //     notify("Username must be maximum of 20 characters");
-  //     return true;
-  //   }
-
-  //   if (!country) {
-  //     notify("Enter country");
-  //     return true;
-  //   }
-  //   if (!email) {
-  //     notify("Enter email");
-  //     return true;
-  //   }
-  //   if (!password) {
-  //     notify("Enter password");
-  //     return true;
-  //   }
-  //   if (password !== compas) {
-  //     notify("Password mismatch");
-  //     return true;
-  //   }
-
-  //   if (!agreedTerms || !agreedPrivacy) {
-  //     notify("You must read and agree to the Terms and Privacy Policy");
-  //     return true;
-  //   }
-
-  //   return false;
-  // };
-
-  // useEffect(() => {
-  //   if (stats.toString() === "succeeded") {
-  //     dismissalert();
-  //     alert("Success!", "success", 2000);
-  //     dispatch(changeStatus("idle"));
-  //     toast(
-  //       <Confirmemail
-  //         email={email}
-  //         alert={alert}
-  //         dismissalert={dismissalert}
-  //       />,
-  //       { autoClose: false }
-  //     );
-  //   }
-  //   if (stats.toString() === "failed") {
-  //     dismissalert();
-  //     alert(
-  //       `${`${
-  //         typeof errs === "string" ? errs : "Please check internet connection"
-  //       }`}`,
-  //       "error",
-  //       2000
-  //     );
-  //     dispatch(changeStatus("idle"));
-  //   }
-  // }, [stats, errs, email, dispatch]);
-
   const getLocation = (country: string) => {
     setcountry(`${country}`);
   };
+  function handleSubmit(formData: FormData){
+    if(!agreedPrivacy && !agreedTerms) return
+    register(undefined, formData)
+  }
+  const inputs = [
+    {
+      step_1: [
+        {
+          label: "First Name",
+          input: <Input type="text" name="firstname" placeholder="" overide={true} classNames="" />,
+        },
+        {
+          label: "Last Name",
+          input: <Input type="text" name="lastname" placeholder="" overide={true} classNames="" />,
+        },
+        {
+          label: "Email",
+          input: <Input required={true} type="email" placeholder="" overide={true} classNames="" />,
+        },
+        {
+          label: "Date of birth",
+          input: <Input required={true} type="date" name="dob" placeholder="" overide={true} classNames="" />,
+        },
+      ],
+      step_2: [
+        {
+          label: "Gender",
+          input: <select
+          id="Gender">
+                  <option value="">Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+        },
+        {
+          label: "@User Name",
+          input: <Input required={true} type="text" name="username" placeholder="" overide={true} classNames="" />
+        },
+      ],
+      step_3: [
+        {
+          label: "Password",
+          input: <Input type="password" placeholder="" overide={true} classNames="" />,
+        },
+        {
+          label: "Confirm Password",
+          input: <Input type="password" name="confirmpassword" placeholder="" overide={true} classNames="" />,
+        },
+      ]
+    }
+  ]
 
-  console.log({nickname, compas, password, country}) // use to avoid lint errors 
+  // console.log({}) // use to avoid lint errors 
   return (
     <div className="body w-full">
       {/* <ToastContainer position="top-center" theme="dark" /> */}
       <div className="form-container-wrapper w-full">
         <Image src={"/register.png"} alt="Register" width={500} height={300} />
 
-        <form>
+        <form action={handleSubmit}>
           <h2>Register</h2>
           <p>Create. Connect. Cash Out.</p>
           {/* Pagination Steps */}
           <div className="pagination">
-            <div
-              className={step === "1" ? "step active" : "step"}
-              onClick={() => setStep("1")}
-            ></div>
-            <div
-              className={step === "2" ? "step active" : "step"}
-              onClick={() => setStep("2")}
-            ></div>
-            <div
-              className={step === "3" ? "step active" : "step"}
-              onClick={() => setStep("3")}
-            ></div>
+            <DotSlideBtn setStep={setStep} step={step} slide={1} />
+            <DotSlideBtn setStep={setStep} step={step} slide={2} />
+            <DotSlideBtn setStep={setStep} step={step} slide={3} />
           </div>
 
           <div className="form-input-wrapper">
             {/* Step 1 */}
-            <div className={step === "1" ? "form active" : "form"}>
-              <div className="floating-label-group">
-                <input
-                  type="text"
-                  value={firstname}
-                  onChange={(e) => {
-                    const value = e.target.value;
-
-                    if (/[^a-zA-Z\s]/.test(value)) {
-                      // toast.error("Special characters are not allowed", {
-                      //   autoClose: 2000,
-                      // });
-                      return;
-                    } else setfirstname(e.target.value);
-                  }}
-                  placeholder=""
-                  required
-                />
-                <label htmlFor="firstName">First Name</label>
+            <Step step={step} slide={1}>
+             {inputs[0].step_1.map((v, i)=>{
+              return  <div className="floating-label-group" key={i}>
+                {v.input}
+                <label htmlFor={v.label}>{v.label}</label>
               </div>
-
-              <div className="floating-label-group">
-                <input
-                  type="text"
-                  // value={lastname}
-                  // onChange={(e) => {
-                  //   const value = e.target.value;
-
-                  //   if (/[^a-zA-Z\s]/.test(value)) {
-                  //     toast.error("Special characters are not allowed", {
-                  //     //   autoClose: 2000,
-                  //     // });
-                  //     return;
-                  //   } else setlastname(e.target.value);
-                  // }}
-                  placeholder=""
-                />
-                <label htmlFor="lastName">Last Name</label>
-              </div>
-
-              <div className="floating-label-group">
-                <input
-                  type="email"
-                  // onChange={(e) => setemail(e.target.value)}
-                  placeholder=""
-                  required
-                />
-                <label htmlFor="email">Email</label>
-              </div>
-
-              <div className="floating-label-group">
-                <input
-                  type="date"
-                  onChange={(e) => {
-                    let date = new Date(String(e.target.value));
-                    let current_date = new Date(Number(Date.now()));
-                    let years = current_date.getFullYear() - date.getFullYear();
-                    // setdob(String(years));
-                    // setdateofbirth(date);
-                  }}
-                  required
-                />
-                <label htmlFor="dob">Date of Birth</label>
-              </div>
+             })}
               <input type="hidden" name="signing-type" value={"signup"} />
-              <button
-                type="button"
-                // onClick={() => {
-                //   setStep("2");
-                // }}
-              >
-                Next
-              </button>
-            </div>
+              <NextSlide setStep={setStep} />
+            </Step>
 
-            {/* Step 2 */}
-            <div className={step === "2" ? "form active" : "form"}>
-              <div className="floating-label-group">
-                <select
-                  id="gender"
-                  value={gender}
-                  onChange={(e) => setgender(e.target.value)}
-                  required
-                >
-                  <option value="">Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
+            <Step step={step} slide={2}>
+             {inputs[0].step_2.map((v, i)=>{
+              return  <div className="floating-label-group" key={i}>
+                {v.input}
+                <label htmlFor={v.label}>{v.label}</label>
               </div>
-
-              <div className="floating-label-group username">
-                <span>@</span>
-                <input
-                  type="text"
-                  placeholder=""
-                  onChange={(e) => {
-                    if (!regex.test(e.target.value)) {
-                      // toast.info("invalid input format", {
-                      //   autoClose: false,
-                      // });
-                      return;
-                    }
-                    if (e.target.value.length > 20) {
-                      // toast.info("username must be maximum of 20 characters", {
-                      //   autoClose: false,
-                      // });
-                      return;
-                    }
-                    setnickname("@".concat(e.target.value));
-                  }}
-                  required
-                />
-                <label
-                  htmlFor="username"
-                  style={{ left: "30px", width: "fit-content" }}
-                >
-                  User Name
-                </label>
-              </div>
-
+             })}
+              <input type="hidden" name="signing-type" value={"signup"} />
               <div className="floating-label-group">
                 <CountrySelect onSelectCountry={getLocation} />
               </div>
-
-              <button type="button" onClick={() => setStep("3")}>
-                Next
-              </button>
-            </div>
+              <NextSlide setStep={setStep} />
+            </Step>
 
             {/* Step 3 */}
-            <div className={step === "3" ? "form active" : "form"}>
-              <div className="floating-label-group">
-                <input
-                  type="password"
-                  placeholder=""
-                  onChange={(e) => setpassword(e.target.value)}
-                  required
-                />
-                <label htmlFor="password">Password</label>
+            <Step step={step} slide={3}>
+             {inputs[0].step_3.map((v, i)=>{
+              return  <div className="floating-label-group" key={i}>
+                {v.input}
+                <label htmlFor={v.label}>{v.label}</label>
               </div>
-
-              <div className="floating-label-group">
-                <input
-                  type="password"
-                  placeholder=""
-                  onChange={(e) => setcompas(e.target.value)}
-                  required
-                />
-                <label htmlFor="confirmPassword">Confirm Password</label>
-              </div>
-
-              <label className="custom-checkbox">
-                <input
-                  type="checkbox"
-                  checked={agreedTerms}
-                  onChange={(e) => setAgreedTerms(e.target.checked)}
-                />
-                <span className="checkmark"></span>
-                <span>
-                  I read and agree to{" "}
-                  <a href="/term_condition">the Terms and Conditions.</a>
-                </span>
-              </label>
-
-              <label className="custom-checkbox">
-                <input
-                  type="checkbox"
-                  checked={agreedPrivacy}
-                  onChange={(e) => setAgreedPrivacy(e.target.checked)}
-                />
-                <span className="checkmark"></span>
-                <span>
-                  I read and agree to{" "}
-                  <a href="/privacy_policy">the Privacy Policy.</a>
-                </span>
-              </label>
-
-              <button
-                type="button"
-                // onClick={() => {
-                //   if (!checkInput()) {
-                //     alert("Please wait...", "info", false);
-                //     dispatch(
-                //       registernewUser({
-                //         firstname,
-                //         lastname,
-                //         age: dob,
-                //         gender,
-                //         nickname,
-                //         country,
-                //         email,
-                //         password,
-                //         dob: dateofbirth,
-                //       })
-                //     );
-                //   }
-                // }}
-              >
-                Register
-              </button>
-            </div>
+             })}
+              <input type="hidden" name="signing-type" value={"signup"} />
+              <Agree toThe={<Link href="/term_condition">the Terms and Conditions.</Link>} agree={agreedTerms} setAgree={()=> setAgreedTerms(prev=> !prev)} />
+              <Agree toThe={<Link href={"/privacy_&_policy"}>Privacy and Policy</Link>} agree={agreedPrivacy} setAgree={()=> setAgreedPrivacy(prev=> !prev)} />
+              <input type="submit" value={"Register"} className="btn" />
+            </Step>
           </div>
-          <p>
-            I already have an account <Link href="/">Login</Link>
-          </p>
+          <p>I already have an account <Link href="/">Login</Link></p>
         </form>
       </div>
     </div>
