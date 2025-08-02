@@ -21,6 +21,7 @@ export async function login(state: void, formData: FormData) {
 
   try {
     const response = await axios.post('http://localhost:3000/login', signinData);
+    console.log({data: response.data})
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

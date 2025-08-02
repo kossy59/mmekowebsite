@@ -137,8 +137,7 @@
 .floating-label-group input:focus {
     border-color: #bec8fa;
 }
-
-.form-container-wrapper button {
+.btn {
     background-color: #ff8a23;
     width: 90%;
     padding: 15px;

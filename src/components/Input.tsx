@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Input({ value, name, type, placeholder, id, overide, classNames, checked, onChange }: {
+export default function Input({required, value, name, type, placeholder, id, overide, classNames, checked, onChange }: {
   type: string,
   value?: string,
   name?: string,
@@ -9,6 +9,7 @@ export default function Input({ value, name, type, placeholder, id, overide, cla
   overide?: boolean,
   classNames?: string,
   checked?: boolean,
+  required?: boolean
   onChange?: React.ChangeEventHandler<HTMLInputElement>
 }) {
   return <input
@@ -20,5 +21,6 @@ export default function Input({ value, name, type, placeholder, id, overide, cla
             id={id}
             checked={type === "checkbox" ? checked : undefined}
             onChange={onChange}
+            required={required}
           />
 }
