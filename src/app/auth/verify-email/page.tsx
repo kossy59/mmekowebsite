@@ -1,0 +1,93 @@
+"use client"
+import { useState } from "react";
+import "../register/styles.css"
+// import type Ref from ""
+// import { close, type } from "../_utils/_types/constants"
+
+// import React, { useState, useEffect } from 'react'
+// import { Routes ,Route,useNavigate} from 'react-router-dom'
+import { ToastContainer,toast } from 'react-toastify'
+import axios from "axios";
+// import 'react-toastify/dist/ReactToastify.css'
+// import {comfirmpasscode,error} from '@/services/features/register/registerSlice'
+// import {changeemailvery} from '@/services/features/register/registerSlice'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { close, type } from '@/utils/alert'
+// import { AppDispatch } from '@/app/store'
+
+// export const PassEmail = ({setClosetoast,email,alert,dismissalert, close}: 
+//   {setClosetoast: (closetoast: boolean)=>boolean, email: string, alert: (success: string, type: type, close: close)=>any, dismissalert: ()=>void, close: false}) => {
+type PassCodeInputProps = React.ComponentPropsWithoutRef<'input'>
+export default function ConfirmPassCode(){
+  const [codeComplete, setCodeComplete] = useState('')
+  
+    function handleChange(e: React.FormEvent<HTMLFormElement>) {
+      const target = e.target as HTMLInputElement;
+
+      if (!target.classList.contains('code-input')) return;
+
+      const value = target.value.replace(/[^0-9]/g, '');
+
+      target.value = value;
+
+      if (value.length === 1) {
+        const form = e.currentTarget;
+        const inputs = Array.from(form.querySelectorAll<HTMLInputElement>('.code-input'));
+        const index = inputs.indexOf(target);
+        console.log(index === (inputs.length -1))
+
+        if (index < inputs.length - 1) {
+          inputs[index + 1].value || index === (inputs.length -1) && inputs[index].value ?  inputs.find(v=> v.value === "")?.focus() : 
+          inputs[index + 1].focus();
+        }
+        if(inputs.every(v=> v.value.length > 0)) {
+          const code = inputs.map(v=> v.value).join("")
+          setCodeComplete(code)
+        }
+      }
+    }
+
+    async function handleSubmitCode(){
+      if(codeComplete.length < 5) return toast.error("Code is incomplete")
+        await axios.post("http://localhost:3100/verifyemail", codeComplete)
+        console.log({codeComplete})
+    }
+  
+    return (
+    
+      <div className='text-black mx-auto text-center overflow-hidden
+      border-0 pt-16
+      '>
+        
+  
+          <p className='text-orange-500 text-xl font-bold'>Confirm Your Email</p>
+          <p className='text-orange-500 text-sm '>Enter the confirmation code sent to your email</p>
+  
+          <div className='mt-4 px-3 flex flex-col items-center gap-8'>
+
+          <form onChange={handleChange} className="flex gap-4 mt-8">
+              <PassCodeInput />  
+              <PassCodeInput />  
+              <PassCodeInput />  
+              <PassCodeInput />  
+              <PassCodeInput />  
+          </form>
+
+          <button onClick={handleSubmitCode} className=' bg-gray-700 text-white px-10 py-3 w-fit rounded-lg '>
+          Confirm
+          </button> 
+          </div>
+      </div>
+    )
+  }
+
+  function PassCodeInput() {
+    return (
+      <input
+        inputMode="numeric"
+        type="text"
+        maxLength={1}
+        className="code-input size-12 rounded-lg border bg-transparent text-white flex justify-center items-center text-2xl text-center"
+      />
+    );
+  }

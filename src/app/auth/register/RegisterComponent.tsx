@@ -17,18 +17,15 @@ import Step from "./_components/Step";
 import DotSlideBtn from "./_components/DotSlideBtn";
 import Agree from "./_components/AgreeBtn";
 import { register } from "@/lib/service/register";
+import { useRouter } from "next/navigation";
 
 export const Register = () => {
-  const [firstname, setfirstname] = useState<string>("");
-  const [gender, setgender] = useState<string>("");
   const [agreedTerms, setAgreedTerms] = useState<boolean>(false);
   const [agreedPrivacy, setAgreedPrivacy] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
-  const [password, setpassword] = useState<string>("");
-  const [compas, setcompas] = useState<string>("");
-  const [nickname, setnickname] = useState<string>("");
   const [country, setcountry] = useState<string>("");
-  const [state, action, pending] = useActionState(register, undefined)
+  const router = useRouter()
+  // const [state, action, pending] = useActionState(register, undefined)
   
 
   let regex = /^[a-zA-Z0-9_@]+$/;
@@ -37,9 +34,14 @@ export const Register = () => {
   const getLocation = (country: string) => {
     setcountry(`${country}`);
   };
-  function handleSubmit(formData: FormData){
+  async function handleSubmit(formData: FormData){
     if(!agreedPrivacy && !agreedTerms) return
-    register(undefined, formData)
+    try{
+      const result = await register(undefined, formData)
+      router.push("/auth/verfy-email")
+    }catch(error){
+      console.log(error)
+    }
   }
   const inputs = [
     {
@@ -65,10 +67,10 @@ export const Register = () => {
         {
           label: "Gender",
           input: <select
-          id="Gender">
+          id="Gender" name="gender">
                   <option value="">Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
                 </select>
         },
         {
@@ -83,7 +85,7 @@ export const Register = () => {
         },
         {
           label: "Confirm Password",
-          input: <Input type="password" name="confirmpassword" placeholder="" overide={true} classNames="" />,
+          input: <Input type="password" name="confirmPassword" placeholder="" overide={true} classNames="" />,
         },
       ]
     }
@@ -115,7 +117,6 @@ export const Register = () => {
                 <label htmlFor={v.label}>{v.label}</label>
               </div>
              })}
-              <input type="hidden" name="signing-type" value={"signup"} />
               <NextSlide setStep={setStep} />
             </Step>
 
@@ -126,9 +127,9 @@ export const Register = () => {
                 <label htmlFor={v.label}>{v.label}</label>
               </div>
              })}
-              <input type="hidden" name="signing-type" value={"signup"} />
               <div className="floating-label-group">
                 <CountrySelect onSelectCountry={getLocation} />
+                <input type="hidden" name="country" value={country} />
               </div>
               <NextSlide setStep={setStep} />
             </Step>
@@ -141,7 +142,7 @@ export const Register = () => {
                 <label htmlFor={v.label}>{v.label}</label>
               </div>
              })}
-              <input type="hidden" name="signing-type" value={"signup"} />
+              <input type="hidden" name="signing-type" value="signup" />
               <Agree toThe={<Link href="/term_condition">the Terms and Conditions.</Link>} agree={agreedTerms} setAgree={()=> setAgreedTerms(prev=> !prev)} />
               <Agree toThe={<Link href={"/privacy_&_policy"}>Privacy and Policy</Link>} agree={agreedPrivacy} setAgree={()=> setAgreedPrivacy(prev=> !prev)} />
               <input type="submit" value={"Register"} className="btn" />

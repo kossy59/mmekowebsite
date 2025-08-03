@@ -1,17 +1,11 @@
 'use server';
-import React from "react";
 import z from "zod";
-import { LoginFormSchema } from "../formValidations/zodLoginSchema";
 import validations from "../formValidations/validateFormInputs"
 import { SignupFormSchema } from "../formValidations/zodSignupSchema";
 import axios from "axios"
 
-
-type formValues = z.infer<typeof LoginFormSchema>
-
 export async function register(state: void, formData: FormData) {
     const result = validations(formData);
-    console.log({formData})
 
   if (!result.success) {
     console.error(result.errors);
@@ -19,10 +13,10 @@ export async function register(state: void, formData: FormData) {
   }
 
     const signupData = result.validatedFields as z.infer<typeof SignupFormSchema>;
-
+    const {confirmPassword, ...data} = signupData
      try {
-    const response = await axios.post('http://localhost:3000/register', signupData);
-    return response.data;
+    const response = await axios.post('http://localhost:3100/register', data);
+    return {data: response.data};
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error('Axios error:', error.response?.data);
