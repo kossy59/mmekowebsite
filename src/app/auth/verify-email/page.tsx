@@ -8,6 +8,7 @@ import "../register/styles.css"
 // import { Routes ,Route,useNavigate} from 'react-router-dom'
 import { ToastContainer,toast } from 'react-toastify'
 import axios from "axios";
+import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
 // import 'react-toastify/dist/ReactToastify.css'
 // import {comfirmpasscode,error} from '@/services/features/register/registerSlice'
 // import {changeemailvery} from '@/services/features/register/registerSlice'
@@ -20,6 +21,9 @@ import axios from "axios";
 type PassCodeInputProps = React.ComponentPropsWithoutRef<'input'>
 export default function ConfirmPassCode(){
   const [codeComplete, setCodeComplete] = useState('')
+  const searchParams = useSearchParams()
+  const email: string | null = searchParams.get("email")
+  const router = useRouter()
   
     function handleChange(e: React.FormEvent<HTMLFormElement>) {
       const target = e.target as HTMLInputElement;
@@ -34,7 +38,6 @@ export default function ConfirmPassCode(){
         const form = e.currentTarget;
         const inputs = Array.from(form.querySelectorAll<HTMLInputElement>('.code-input'));
         const index = inputs.indexOf(target);
-        console.log(index === (inputs.length -1))
 
         if (index < inputs.length - 1) {
           inputs[index + 1].value || index === (inputs.length -1) && inputs[index].value ?  inputs.find(v=> v.value === "")?.focus() : 
@@ -49,8 +52,13 @@ export default function ConfirmPassCode(){
 
     async function handleSubmitCode(){
       if(codeComplete.length < 5) return toast.error("Code is incomplete")
-        await axios.post("http://localhost:3100/verifyemail", codeComplete)
-        console.log({codeComplete})
+        try{
+          await axios.post("http://localhost:3100/verifyemail", {email, codeComplete})
+          console.log({codeComplete})
+          router.push("/")
+        }catch(error){
+          console.log(error)
+        }
     }
   
     return (

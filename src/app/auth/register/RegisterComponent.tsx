@@ -18,14 +18,16 @@ import DotSlideBtn from "./_components/DotSlideBtn";
 import Agree from "./_components/AgreeBtn";
 import { register } from "@/lib/service/register";
 import { useRouter } from "next/navigation";
+import BtnLoader from "@/constants/BtnLoader";
 
+let emailCapture: FormDataEntryValue | null
 export const Register = () => {
   const [agreedTerms, setAgreedTerms] = useState<boolean>(false);
   const [agreedPrivacy, setAgreedPrivacy] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
   const [country, setcountry] = useState<string>("");
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
-  // const [state, action, pending] = useActionState(register, undefined)
   
 
   let regex = /^[a-zA-Z0-9_@]+$/;
@@ -34,14 +36,18 @@ export const Register = () => {
   const getLocation = (country: string) => {
     setcountry(`${country}`);
   };
+
+  // Submit form
   async function handleSubmit(formData: FormData){
+    setLoading(true)
+    emailCapture = formData.get("email")
     if(!agreedPrivacy && !agreedTerms) return
     try{
       const result = await register(undefined, formData)
-      router.push("/auth/verfy-email")
+      router.push(`/auth/verify-email/?email=${emailCapture}`)
     }catch(error){
       console.log(error)
-    }
+    }finally {setLoading(false)}
   }
   const inputs = [
     {
@@ -145,7 +151,9 @@ export const Register = () => {
               <input type="hidden" name="signing-type" value="signup" />
               <Agree toThe={<Link href="/term_condition">the Terms and Conditions.</Link>} agree={agreedTerms} setAgree={()=> setAgreedTerms(prev=> !prev)} />
               <Agree toThe={<Link href={"/privacy_&_policy"}>Privacy and Policy</Link>} agree={agreedPrivacy} setAgree={()=> setAgreedPrivacy(prev=> !prev)} />
-              <input type="submit" value={"Register"} className="btn" />
+              <button type="button" className="btn flex items-center justify-center">
+                {!loading ? <p style={{color: "white"}} className="flex items-center justify-center gap-3 text-white"><BtnLoader /> Please wait...</p> : "Register" }
+              </button>
             </Step>
           </div>
           <p>I already have an account <Link href="/">Login</Link></p>
