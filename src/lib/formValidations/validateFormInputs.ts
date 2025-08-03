@@ -34,17 +34,23 @@ export default function validations(formData: FormData): ValidationResult<z.infe
   setTimeout(() => signUpAttempts.delete(ip), RATE_LIMIT.WINDOW_TIME)
 
   // Validate form fields
-  const validatedFields = formData.get("signing-type") === "signup" 
+  const password = formData.get("password")
+  const confirmPassword = formData.get("confirmPassword")
+  const dob = String(formData.get("dob"))
+  const isSignup = formData.get("signing-type") === "signup"
+  const age = new Date().getFullYear() - new Date(dob).getFullYear()
+  
+  const validatedFields =  isSignup
     ? SignupFormSchema.safeParse({
         firstname: formData.get('firstname'),
         lastname: formData.get('lastname'),
-        nickname: formData.get("nickname"),
+        username: formData.get("username"),
         email: formData.get('email'),
-        password: formData.get('password'),
-        confirmpassword: formData.get('confirmpassword'),
         gender: formData.get('gender'),  
         country: formData.get('country'),
-        dob: formData.get('dob')
+        password,
+        confirmPassword,
+        dob
       })
     : LoginFormSchema.safeParse({
         email: formData.get('email'),
@@ -59,10 +65,13 @@ export default function validations(formData: FormData): ValidationResult<z.infe
     }
   }
 
-  // const { name, email, password } = validatedFields.data
-  // console.log({ name, email, password })
+  if(isSignup && (password !== confirmPassword)) return {
+      errors: {mismatch: "Password does not match"},
+      success: false,
+      validatedFields: {}
+    }
   return { 
-    validatedFields: validatedFields.data, 
-    success: true,
-  }
+      validatedFields: {...validatedFields.data, age}, 
+      success: true,
+    }
 }

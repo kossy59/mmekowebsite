@@ -13,7 +13,8 @@ export const zodObj = {
     .regex(/[0-9]/, { message: 'Contain at least one number.' })
     .trim(),
   dob: z
-    .date(),
+    .string()
+    .trim(),
   gender: z
     .enum(['male', 'female'],
     { message: 'Gender must be either "male" or "female".' })
@@ -22,7 +23,7 @@ export const zodObj = {
 export const SignupFormSchema = z.object({
   firstname: zodObj.name,
   lastname: zodObj.name,
-  nickname: zodObj.name,
+  username: zodObj.name,
   country: zodObj.name,
   email: zodObj.email,
   password: zodObj.password,

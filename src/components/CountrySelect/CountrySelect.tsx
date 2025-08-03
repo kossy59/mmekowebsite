@@ -59,6 +59,7 @@ const CountrySelect: React.FC<Props> = ({ onSelectCountry }) => {
             placeholder="Search country..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            name="country"
             style={{
               width: "95%",
               margin: "5px auto",

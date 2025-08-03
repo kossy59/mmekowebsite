@@ -3,8 +3,9 @@ import Link from "next/link";
 import React, { useActionState, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Input from "./Input";
-import { register } from "@/lib/service/register";
 import { login } from "@/lib/service/login";
+
+
 export const Loginview = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
