@@ -4,12 +4,14 @@ import React, { useActionState, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Input from "./Input";
 import { login } from "@/lib/service/login";
+import Processing from "./tick-animation/LoginProcessing";
 
 
 export const Loginview = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [state, action, pending] = useActionState(login, undefined)
 
 
@@ -84,6 +86,8 @@ export const Loginview = () => {
           </p>
         </form>
       </div>
+      {/* Loading/processing */}
+      <Processing loading={pending} />
     </div>
   );
 };
