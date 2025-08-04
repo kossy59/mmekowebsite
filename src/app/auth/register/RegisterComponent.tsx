@@ -151,8 +151,8 @@ export const Register = () => {
               <input type="hidden" name="signing-type" value="signup" />
               <Agree toThe={<Link href="/term_condition">the Terms and Conditions.</Link>} agree={agreedTerms} setAgree={()=> setAgreedTerms(prev=> !prev)} />
               <Agree toThe={<Link href={"/privacy_&_policy"}>Privacy and Policy</Link>} agree={agreedPrivacy} setAgree={()=> setAgreedPrivacy(prev=> !prev)} />
-              <button type="button" className="btn flex items-center justify-center">
-                {!loading ? <p style={{color: "white"}} className="flex items-center justify-center gap-3 text-white"><BtnLoader /> Please wait...</p> : "Register" }
+              <button type="submit" className="btn flex items-center justify-center mx-auto">
+                {loading ? <p style={{color: "white"}} className="flex items-center justify-center gap-3 text-white"><BtnLoader /> Please wait...</p> : "Register" }
               </button>
             </Step>
           </div>

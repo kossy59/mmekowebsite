@@ -9,6 +9,7 @@ import "../register/styles.css"
 import { ToastContainer,toast } from 'react-toastify'
 import axios from "axios";
 import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
+import Tick from "@/components/tick-animation/Tick";
 // import 'react-toastify/dist/ReactToastify.css'
 // import {comfirmpasscode,error} from '@/services/features/register/registerSlice'
 // import {changeemailvery} from '@/services/features/register/registerSlice'
@@ -21,6 +22,9 @@ import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/naviga
 type PassCodeInputProps = React.ComponentPropsWithoutRef<'input'>
 export default function ConfirmPassCode(){
   const [codeComplete, setCodeComplete] = useState('')
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("")
+  const [isRegisterComplete, setIsRegisterComplete] = useState(false)
   const searchParams = useSearchParams()
   const email: string | null = searchParams.get("email")
   const router = useRouter()
@@ -52,28 +56,28 @@ export default function ConfirmPassCode(){
 
     async function handleSubmitCode(){
       if(codeComplete.length < 5) return toast.error("Code is incomplete")
+        setStatus("checking")
         try{
-          await axios.post("http://localhost:3100/verifyemail", {email, codeComplete})
-          console.log({codeComplete})
-          router.push("/")
+          await axios.post("http://localhost:3100/verifyemail", {email, code: codeComplete})
+          setIsRegisterComplete(true)
         }catch(error){
           console.log(error)
+          setError("Something Went Wrong!")
+          setCodeComplete("")
+        }finally{
+          setStatus("resolved")
         }
     }
   
     return (
     
-      <div className='text-black mx-auto text-center overflow-hidden
-      border-0 pt-16
-      '>
-        
-  
+      <div className='text-black mx-auto text-center overflow-hidden border-0 pt-16'>
           <p className='text-orange-500 text-xl font-bold'>Confirm Your Email</p>
           <p className='text-orange-500 text-sm '>Enter the confirmation code sent to your email</p>
   
-          <div className='mt-4 px-3 flex flex-col items-center gap-8'>
-
+          {!isRegisterComplete && ["resolved", "idle"].includes(status) ? <div className='mt-4 px-3 flex flex-col items-center gap-8'>
           <form onChange={handleChange} className="flex gap-4 mt-8">
+              <PassCodeInput />  
               <PassCodeInput />  
               <PassCodeInput />  
               <PassCodeInput />  
@@ -81,10 +85,18 @@ export default function ConfirmPassCode(){
               <PassCodeInput />  
           </form>
 
-          <button onClick={handleSubmitCode} className=' bg-gray-700 text-white px-10 py-3 w-fit rounded-lg '>
-          Confirm
+          <button 
+          onClick={handleSubmitCode} className=' bg-gray-700 text-white hover:bg-orange-600/50 duration-500 transition-all px-10 py-3 w-fit rounded-lg'>
+           Confirm
           </button> 
+          <p className=" text-red-600">{error}</p>
+          </div> :
+          <div className="mt-11 w-full flex flex-col items-center justify-center ">
+            <Tick loading={isRegisterComplete}>
+              {isRegisterComplete && <button onClick={()=>{router.push("/"); setCodeComplete("")}} className="bg-green-600 text-white rounded-lg py-3 px-10">Finish</button>}
+            </Tick>
           </div>
+          }
       </div>
     )
   }
