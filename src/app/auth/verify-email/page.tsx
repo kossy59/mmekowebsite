@@ -58,7 +58,7 @@ export default function ConfirmPassCode(){
       if(codeComplete.length < 5) return toast.error("Code is incomplete")
         setStatus("checking")
         try{
-          await axios.post("http://localhost:3100/verifyemail", {email, code: codeComplete})
+          await axios.post("https://mmekowebsite.onrender.com/verifyemail", {email, code: codeComplete})
           setIsRegisterComplete(true)
         }catch(error){
           console.log(error)

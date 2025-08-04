@@ -15,7 +15,7 @@ export async function register(state: void, formData: FormData) {
     const signupData = result.validatedFields as z.infer<typeof SignupFormSchema>;
     const {confirmPassword, ...data} = signupData
      try {
-    const response = await axios.post('http://localhost:3100/register', data);
+    const response = await axios.post("https://mmekowebsite.onrender.com/register", data);
     return {data: response.data};
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -11,6 +11,7 @@ import axios from "axios"
 
 export async function login(state: void, formData: FormData) {
     const result = validations(formData);
+    console.log(formData)
 
   if (!result.success) {
     console.error(result.errors);
@@ -20,7 +21,7 @@ export async function login(state: void, formData: FormData) {
     const signinData = result.validatedFields as z.infer<typeof LoginFormSchema>;
 
   try {
-    const response = await axios.post('http://localhost:3000/login', signinData);
+    const response = await axios.post("https://mmekowebsite.onrender.com/login", signinData);
     console.log({data: response.data})
     return response.data;
   } catch (error) {
