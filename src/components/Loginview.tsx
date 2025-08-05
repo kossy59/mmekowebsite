@@ -1,19 +1,32 @@
 "use client";
 import Link from "next/link";
-import React, { useActionState, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Input from "./Input";
 import { login } from "@/lib/service/login";
 import Processing from "./tick-animation/LoginProcessing";
+import { useAuth } from "@/lib/context/auth-context";
+
 
 
 export const Loginview = () => {
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [loading, setLoading] = useState(false)
-  const [state, action, pending] = useActionState(login, undefined)
+  const {setIsLoggedIn, setStatus, isLoggedIn, status} = useAuth()
 
+  async function handleLogin(formData: FormData){
+    if(!acceptedTerms) return    
+    try{
+      const res = await login(undefined, formData) 
+      setIsLoggedIn(true)
+      console.log(res)
+    }catch(error){
+      console.log(error)
+    }finally{setTimeout(()=>setStatus("resolved"),3000)}
+  }
+
+  function checkAcceptTerms(){
+    if(acceptedTerms) setStatus("checking")
+  }
 
   return (
     <div
@@ -37,7 +50,7 @@ export const Loginview = () => {
           Log in to access your account
         </p>
 
-        <form action={action} className="mt-6 space-y-4">
+        <form action={handleLogin} className="mt-6 space-y-4">
           <Input type="email" placeholder="Email Address" />
           <Input type="password" />
           <input type="hidden" name="signing-type" value={"login"} />
@@ -63,7 +76,7 @@ export const Loginview = () => {
 
           <button
             className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded shadow transition"
-            // onClick={checkinput}
+            onClick={checkAcceptTerms}
           >
             Log In
           </button>
@@ -87,7 +100,7 @@ export const Loginview = () => {
         </form>
       </div>
       {/* Loading/processing */}
-      <Processing loading={pending} />
+      <Processing status={status} isLoggedIn={isLoggedIn} />
     </div>
   );
 };

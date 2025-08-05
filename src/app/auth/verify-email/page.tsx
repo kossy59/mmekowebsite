@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../register/styles.css"
 // import type Ref from ""
 // import { close, type } from "../_utils/_types/constants"
@@ -28,6 +28,13 @@ export default function ConfirmPassCode(){
   const searchParams = useSearchParams()
   const email: string | null = searchParams.get("email")
   const router = useRouter()
+
+  useEffect(()=>{
+    isRegisterComplete && setTimeout(()=> {
+      router.push("/")
+      setCodeComplete("")
+    }, 3000)
+  }, [isRegisterComplete])
   
     function handleChange(e: React.FormEvent<HTMLFormElement>) {
       const target = e.target as HTMLInputElement;
@@ -58,7 +65,7 @@ export default function ConfirmPassCode(){
       if(codeComplete.length < 5) return toast.error("Code is incomplete")
         setStatus("checking")
         try{
-          await axios.post("https://mmekowebsite.onrender.com/verifyemail", {email, code: codeComplete})
+          await axios.post(process.env.NEXT_API+"/verifyemail", {email, code: codeComplete}, {withCredentials: true})
           setIsRegisterComplete(true)
         }catch(error){
           console.log(error)
@@ -93,7 +100,7 @@ export default function ConfirmPassCode(){
           </div> :
           <div className="mt-11 w-full flex flex-col items-center justify-center ">
             <Tick loading={isRegisterComplete}>
-              {isRegisterComplete && <button onClick={()=>{router.push("/"); setCodeComplete("")}} className="bg-green-600 text-white rounded-lg py-3 px-10">Finish</button>}
+              {isRegisterComplete && <p className="text-green-600 text-xl">Congrats! Your account is ready</p>}
             </Tick>
           </div>
           }

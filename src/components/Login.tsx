@@ -1,12 +1,21 @@
 "use client";
 import { FaSignInAlt } from "react-icons/fa";
-import Popup from "reactjs-popup";
+// import Popup from ;
 import { Loginview } from "./Loginview";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useAuth } from "@/lib/context/auth-context";
+// import { status } from "@/constants/status";
+
+const Popup = dynamic(()=> import("reactjs-popup"), {ssr: false,})
 
 export default function Logins() {
+  const {status} = useAuth()
+  
   return (
     <div className="">
       <Popup
+        open={!["idle","resolved"].includes(status)}
         modal
         nested
         trigger={
