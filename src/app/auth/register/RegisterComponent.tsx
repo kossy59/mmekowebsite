@@ -39,16 +39,21 @@ export const Register = () => {
 
   // Submit form
   async function handleSubmit(formData: FormData){
-    setLoading(true)
     emailCapture = formData.get("email")
     if(!agreedPrivacy && !agreedTerms) return
     try{
       const result = await register(undefined, formData)
       router.push(`/auth/verify-email/?email=${emailCapture}`)
+      setLoading(false)
     }catch(error){
       console.log(error)
     }finally {setLoading(false)}
   }
+  function handleClick(){
+    if(!agreedPrivacy && !agreedTerms) return
+    setLoading(true)
+  }
+
   const inputs = [
     {
       step_1: [
@@ -97,7 +102,6 @@ export const Register = () => {
     }
   ]
 
-  // console.log({}) // use to avoid lint errors 
   return (
     <div className="body w-full">
       {/* <ToastContainer position="top-center" theme="dark" /> */}
@@ -149,9 +153,9 @@ export const Register = () => {
               </div>
              })}
               <input type="hidden" name="signing-type" value="signup" />
-              <Agree toThe={<Link href="/term_condition">the Terms and Conditions.</Link>} agree={agreedTerms} setAgree={()=> setAgreedTerms(prev=> !prev)} />
-              <Agree toThe={<Link href={"/privacy_&_policy"}>Privacy and Policy</Link>} agree={agreedPrivacy} setAgree={()=> setAgreedPrivacy(prev=> !prev)} />
-              <button type="submit" className="btn flex items-center justify-center mx-auto">
+              <Agree id="terms" toThe={<Link href="/term_condition">the Terms and Conditions.</Link>} agree={agreedTerms} setAgree={()=> setAgreedTerms(prev=> !prev)} />
+              <Agree id="privacy" toThe={<Link href={"/privacy_&_policy"}>Privacy and Policy</Link>} agree={agreedPrivacy} setAgree={()=> setAgreedPrivacy(prev=> !prev)} />
+              <button onClick={handleClick} type="submit" className="btn flex items-center justify-center mx-auto">
                 {loading ? <p style={{color: "white"}} className="flex items-center justify-center gap-3 text-white"><BtnLoader /> Please wait...</p> : "Register" }
               </button>
             </Step>

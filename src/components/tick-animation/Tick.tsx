@@ -10,9 +10,9 @@ export default function Tick({loading, children}: {loading: boolean, children?: 
                 <div className={`circle-loader ${loading && "load-complete"}`}>
                     <div className="checkmark draw" style={{display: `${loading ?  "block" : "none"}`}}></div>
                 </div>		
-                <p>
+                <div>
                     {children}
-                </p>
+                </div>
     		</div>
 		</div>
     </div>

@@ -191,6 +191,7 @@
 .custom-checkbox .checkmark {
     width: 20px;
     height: 20px;
+    display: inline-block;
     background-color: #eee;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -214,8 +215,8 @@
 /* Show checkmark when checked */
 .custom-checkbox input:checked+.checkmark::after {
     display: block;
-    left: 1px;
-    top: 0.6px;
+    left: 7.5px;
+    top: -1.4px;
     width: 10px;
     height: 10px;
     border: solid white;

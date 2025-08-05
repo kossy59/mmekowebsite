@@ -9,6 +9,7 @@ import React, {
   useReducer,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { popup, status } from "@/constants/status";
 
 // Define the Session interface
 export interface Session {
@@ -26,6 +27,11 @@ interface AuthContextType {
   signOut: () => void;
   isOpen: boolean;
   toggle: () => void;
+  isLoggedIn: boolean,
+  setIsLoggedIn: (isLoggedIn: boolean) => void,
+  status: status,
+  setStatus: (status: status) => void,
+  popup: popup
 }
 
 type ReducerAction<T = any> = {
@@ -59,8 +65,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [status, setStatus] = useState<status>("idle")
   const [isOpen, setIsOpen] = useState(false);
   const [{}, dispatch] = useReducer(reducer, initialState)
+  const [popup, setPopup] = useState<popup>("open")
+  const pathname = usePathname()
 
   const router = useRouter();
   const pathName = usePathname();
@@ -86,12 +96,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   //       if (pathName?.includes("/admin")) router.push("/dashboard");
   //     }
   //   }, [loading, session, router, pathName]);
+  
   const toggle = () => setIsOpen((prev) => !prev);
   const login = (userData: Session) => {
     setSession(userData);
     localStorage.setItem("session", JSON.stringify(userData));
     router.push(userData.isAdmin ? "/admin" : "/dashboard");
   };
+  
 
   // Sign out function
   const signOut = () => {
@@ -99,6 +111,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     localStorage.removeItem("session");
     router.push("/login");
   };
+
+  useEffect(()=>{pathname.includes("register") ? setPopup("close") : setPopup("open")},[pathname])
   return (
     <AuthContext.Provider
       value={{
@@ -107,6 +121,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         login,
         signOut,
         isOpen,
+        isLoggedIn,
+        setIsLoggedIn,
+        status,
+        setStatus,
+        popup,
       }}
     >
       {/* {loading ? null : children} */}

@@ -1,14 +1,29 @@
-// middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-  const url = request.nextUrl;
-  console.log("middleware is now active")
+const publicRoutes = [
+  '/',
+  '/auth/register',
+  '/auth/verify-email',
+  '/models',
+  '/guidelines',
+  '/privacy_&_policy'
+];
 
-  // Example: Redirect unauthenticated users
-  const isLoggedIn = request.cookies.get('auth_token');
-  if (!isLoggedIn && url.pathname.startsWith('/dashboard')) {
+const PUBLIC_FILE = /\.(.*)$/
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const authToken = request.cookies.get('auth_token');
+  const isPublic = publicRoutes.includes(pathname);
+
+  console.log({midware: authToken})
+  // Skip middleware for static files
+  if (PUBLIC_FILE.test(pathname)) {
+    return NextResponse.next();
+  }
+
+  if (!authToken && !isPublic) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
@@ -19,6 +34,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!^$|privacy-policy|terms|about|contact|login|signup).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.css$|.*\\.js$).*)',
   ],
 };
