@@ -1,19 +1,26 @@
 import axios from 'axios';
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// let token: string;
 export async function POST(request: NextRequest) {
   const { email, password } = await request.json();
 
- try {
-    const response = await axios.post(process.env.NEXT_PUBLIC_API+"/login", { email, password }, {withCredentials: true});
-    return NextResponse.json({ status: 200, ok: true, response: response.data });
+  try{
+    // const response = await fetch(`${process.env.NEXT_PUBLIC_API}/login`, {
+    const response = await fetch(`http://localhost:3100/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+    credentials: 'include',
+  });
+    const res = new NextResponse(await response.text(), {
+        status: response.status,
+        headers: response.headers,
+  });
+    return res
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error('Axios error:', error.response?.data);
-    } else {
-      console.error('Unexpected error:', error);
-    }
-    throw error;
-  }
+    console.error('Unexpected error:', error);
+}
 }

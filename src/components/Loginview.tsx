@@ -6,6 +6,7 @@ import Input from "./Input";
 import { login } from "@/lib/service/login";
 import Processing from "./tick-animation/LoginProcessing";
 import { useAuth } from "@/lib/context/auth-context";
+import { revalidate } from "@/lib/utils/revalidate";
 
 
 
@@ -21,7 +22,7 @@ export const Loginview = () => {
       console.log(res)
     }catch(error){
       console.log(error)
-    }finally{setTimeout(()=>setStatus("resolved"),3000)}
+    }finally{setTimeout(()=>{setStatus("resolved"); revalidate("/")},3000)}
   }
 
   function checkAcceptTerms(){
