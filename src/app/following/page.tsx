@@ -9,7 +9,7 @@ import Spinner from "../../components/ui/Spinner";
 import { mockFollowData } from "../../utils/mockData";
 import { User } from "../../types/user";
 
-const firstname = "Jane"; // Replace with actual data source if needed
+const firstname = "Jane"; 
 const lastname = "Doe";
 
 const FollowingPage: React.FC = () => {
