@@ -22,6 +22,7 @@ export async function login(state: void, formData: FormData) {
 
   try {
     const response = await axios.post(process.env.NEXT_API+"/login", signinData, {withCredentials: true});
+    // const response = await axios.post("http://localhost:3100/login", signinData, {withCredentials: true});
     console.log({data: response.data})
     return response.data;
   } catch (error) {

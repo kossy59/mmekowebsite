@@ -6,7 +6,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import Logins from "./Login";
 import { useRouter } from "next/navigation";
 
-export default function Navbar() {
+export default function Navbar({isAuthenticated}:{isAuthenticated: boolean}) {
   const { isOpen, toggle } = useAuth();
   const router = useRouter()
   
@@ -22,7 +22,7 @@ export default function Navbar() {
       <img src={'/icons/icon-192.png'} alt="logo" className="logo" />
       <div></div>
       </div>
-      <Logins />
+      {!isAuthenticated && <Logins />}
       {/* <div className="size-6"></div> *<Logins /> placeholder */}
     </div>
     </div>

@@ -16,6 +16,7 @@ export async function register(state: void, formData: FormData) {
     const {confirmPassword, ...data} = signupData
      try {
     const response = await axios.post(process.env.NEXT_API+"/register", data, {withCredentials: true});
+    console.log({response})
     return {data: response.data};
   } catch (error) {
     if (axios.isAxiosError(error)) {
