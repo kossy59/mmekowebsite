@@ -1,157 +1,112 @@
 "use client";
-
 import React, { useState } from "react";
-import CollectionTabs from "@/components/collections/CollectionTabs";
-import ContentCard from "@/components/collections/ContentCard";
-import CrushCard from "@/components/collections/CrushCard";
+import { MdShoppingBag, MdFavorite } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaSpinner } from "react-icons/fa";
 
-export const metadata = {
-  title: "Collections",
-  description: "Your purchased content and crush list",
-};
 
-// Mock data - replace with actual API calls
-const mockContent = [
-  {
-    id: "1",
-    title: "Beautiful sunset photography session",
-    imageUrl: "/placeholder-image.jpg",
-    modelName: "Sarah Johnson",
-    modelAvatar: "/default-avatar.jpg",
-    likes: 245,
-    comments: 18,
-    price: 15,
-    isPurchased: true,
-    type: "image" as const,
-  },
-  {
-    id: "2",
-    title: "Exclusive behind the scenes video",
-    imageUrl: "/placeholder-image.jpg",
-    modelName: "Emma Wilson",
-    modelAvatar: "/default-avatar.jpg",
-    likes: 189,
-    comments: 32,
-    price: 25,
-    isPurchased: true,
-    type: "video" as const,
-  },
-];
-
-const mockCrushes = [
-  {
-    id: "1",
-    name: "Sarah Johnson",
-    username: "sarahj_model",
-    avatar: "/default-avatar.jpg",
-    coverImage: "/placeholder-image.jpg",
-    isVerified: true,
-    isFollowing: true,
-    mutualFollowers: 12,
-    lastActive: "2 hours ago",
-  },
-  {
-    id: "2",
-    name: "Emma Wilson",
-    username: "emma_w",
-    avatar: "/default-avatar.jpg",
-    isVerified: false,
-    isFollowing: false,
-    mutualFollowers: 5,
-    lastActive: "1 day ago",
-  },
-];
-
-const CollectionsPage = () => {
-  const [activeTab, setActiveTab] = useState<"content" | "crush">("content");
-
-  const handleFollow = (id: string) => {
-    console.log("Follow user:", id);
-    // Implement follow logic
-  };
-
-  const handleMessage = (id: string) => {
-    console.log("Message user:", id);
-    // Implement message logic
-  };
-
-  const handleRemoveCrush = (id: string) => {
-    console.log("Remove from crush list:", id);
-    // Implement remove crush logic
-  };
+const ImageCard = ({ src }: { src: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          My Collections
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Manage your purchased content and crush list
-        </p>
-      </div>
-
-      {/* Tabs */}
-      <CollectionTabs
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        contentCount={mockContent.length}
-        crushCount={mockCrushes.length}
+    <div className="relative rounded-xl overflow-hidden shadow-lg mb-6 min-h-[24rem] bg-gray-800">
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <FaSpinner className="animate-spin text-white text-2xl" />
+        </div>
+      )}
+      <img
+        src={src}
+        alt="Preview"
+        className={`w-full h-96 object-cover sm:rounded-xl transition-opacity duration-300 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        onLoad={() => setIsLoaded(true)}
       />
-
-      {/* Content */}
-      {activeTab === "content" && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {mockContent.map((content) => (
-            <ContentCard key={content.id} {...content} />
-          ))}
-          {mockContent.length === 0 && (
-            <div className="col-span-full text-center py-12">
-              <div className="text-gray-400 dark:text-gray-500 mb-4">
-                <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                No purchased content yet
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Start exploring and purchase content from your favorite models
-              </p>
-            </div>
-          )}
-        </div>
+      {isLoaded && (
+        <button className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full">
+          <BsThreeDotsVertical />
+        </button>
       )}
+    </div>
+  );
+};
 
-      {activeTab === "crush" && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {mockCrushes.map((crush) => (
-            <CrushCard
-              key={crush.id}
-              {...crush}
-              onFollow={handleFollow}
-              onMessage={handleMessage}
-              onRemoveCrush={handleRemoveCrush}
-            />
-          ))}
-          {mockCrushes.length === 0 && (
-            <div className="col-span-full text-center py-12">
-              <div className="text-gray-400 dark:text-gray-500 mb-4">
-                <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                No crushes added yet
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Add models to your crush list to keep track of your favorites
-              </p>
+
+const Content = () => {
+  const images = [
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+   "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+    "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=800&q=80",
+    "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80",
+  ];
+
+  return (
+    <div className="mt-4">
+      {images.map((src, idx) => (
+        <ImageCard key={idx} src={src} />
+      ))}
+    </div>
+  );
+};
+
+const Crush = () => {
+  const images = [
+    "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1595152772835-219674b2a8a0?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1614289966287-3a1bb7f9e2dc?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+  ];
+
+  return (
+    <div className="mt-4">
+      {images.map((src, idx) => (
+        <ImageCard key={idx} src={src} />
+      ))}
+    </div>
+  );
+};
+
+const CollectionsPage: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<"content" | "crush">("content");
+
+  const getBtnStyle = (tab: "content" | "crush") =>
+    activeTab === tab
+      ? { backgroundColor: "#292d31", borderColor: "#d1d5db" }
+      : { backgroundColor: "#18181b", borderColor: "#334155" };
+
+  return (
+    <div className="min-h-screen bg-[#0e0f2a] text-white">
+      <div className="w-screen sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 mx-auto pt-16">
+        <div className="w-full flex flex-col text-gray-400 px-4 md:px-0">
+      
+          <div className="sticky z-10 top-0 bg-[#0e0f2a] pb-4">
+            <div className="grid grid-cols-2 gap-4 pt-2">
+              <button
+                className="flex items-center justify-center gap-2 border-2 transition-all duration-200 ease-in-out text-white py-3 px-4 rounded-lg font-medium w-full shadow-sm hover:shadow-md text-sm sm:text-base"
+                style={getBtnStyle("content")}
+                onClick={() => setActiveTab("content")}
+              >
+                <MdShoppingBag className="text-xl" />
+                Purchased Content
+              </button>
+              <button
+                className="flex items-center justify-center gap-2 border-2 transition-all duration-200 ease-in-out text-white py-3 px-4 rounded-lg font-medium w-full shadow-sm hover:shadow-md text-sm sm:text-base"
+                style={getBtnStyle("crush")}
+                onClick={() => setActiveTab("crush")}
+              >
+                <MdFavorite className="text-xl" />
+                Crush List
+              </button>
             </div>
-          )}
+          </div>
+
+          {/* Tab Content */}
+          <div>{activeTab === "content" ? <Content /> : <Crush />}</div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

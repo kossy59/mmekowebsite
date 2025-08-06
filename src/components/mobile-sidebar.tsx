@@ -13,6 +13,7 @@ import {
   FaUpload,
   FaUsersCog,
   FaVideo,
+  FaStar,
 } from "react-icons/fa";
 
 export default function MobileSidebar() {
@@ -27,7 +28,16 @@ export default function MobileSidebar() {
       name: "Models",
       icon: <FaCamera size={25} />,
     },
-
+    {
+      route: "/collections",
+      name: "Collections",
+      icon: <FaStar size={25} />,
+    },
+    {
+      route: "/following",
+      name: "Following",
+      icon: <FaUsersCog size={25} />,
+    },
     {
       route: "/",
       name: "Explorer",
@@ -75,10 +85,11 @@ export default function MobileSidebar() {
       </Link>
       <ul className="py-4">
         {sideBarItems.map((item) => (
-          <li key={item.name} onClick={toggle} className="gap-y-3.5 text-sm">
+          <li key={item.name} className="gap-y-3.5 text-sm">
             <Link
               className="flex items-center gap-4 text-white space-x-2"
               href={item.route}
+              onClick={toggle}
             >
               {item.icon}
               <p className="text-lg">{item.name}</p>
