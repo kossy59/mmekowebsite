@@ -7,7 +7,9 @@ const publicRoutes = [
   '/auth/verify-email',
   '/models',
   '/guidelines',
-  '/privacy_&_policy'
+  '/privacy_&_policy',
+  '/collections',
+  '/following',
 ];
 
 const PUBLIC_FILE = /\.(.*)$/
