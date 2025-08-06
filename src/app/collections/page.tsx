@@ -4,8 +4,14 @@ import { MdShoppingBag, MdFavorite } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaSpinner } from "react-icons/fa";
 
+interface ImageCardProps {
+  src: string;
+  status: string;
+  type: string;
+  name: string;
+}
 
-const ImageCard = ({ src }: { src: string }) => {
+const ImageCard: React.FC<ImageCardProps> = ({ src, status, type, name }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -28,15 +34,25 @@ const ImageCard = ({ src }: { src: string }) => {
           <BsThreeDotsVertical />
         </button>
       )}
+      {isLoaded && (
+        <div className="absolute bottom-4 left-4 flex items-center space-x-2">
+          <span
+            className={`w-3 h-3 rounded-full ${
+              status === "active" ? "bg-green-500" : "bg-red-500"
+            }`}
+          ></span>
+          <span className="text-white text-sm">{type}</span>
+          <span className="text-white text-sm">{name}</span>
+        </div>
+      )}
     </div>
   );
 };
 
-
 const Content = () => {
   const images = [
     "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
-   "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+    "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
     "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=800&q=80",
     "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80",
@@ -45,26 +61,48 @@ const Content = () => {
   return (
     <div className="mt-4">
       {images.map((src, idx) => (
-        <ImageCard key={idx} src={src} />
-      ))}
+  <ImageCard
+    key={idx}
+    src={src}
+    status="active"   // or whatever value makes sense
+    type="premium"    // or whatever value makes sense
+    name="Jane Doe"   // or whatever value makes sense
+  />
+))}
     </div>
   );
 };
 
 const Crush = () => {
-  const images = [
-    "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1595152772835-219674b2a8a0?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1614289966287-3a1bb7f9e2dc?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+  const crushItems = [
+    {
+      src: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80",
+      status: "active",
+      type: "premium",
+      name: "Soph",
+    },
+    {
+      src:  "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+      status: "inactive",
+      type: "standard",
+      name: "Isab",
+    },
   ];
 
   return (
     <div className="mt-4">
-      {images.map((src, idx) => (
-        <ImageCard key={idx} src={src} />
-      ))}
+      <h2 className="text-white text-center mb-4">List Of My Crush Models</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {crushItems.map((item, idx) => (
+          <ImageCard
+            key={idx}
+            src={item.src}
+            status={item.status}
+            type={item.type}
+            name={item.name}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -81,7 +119,6 @@ const CollectionsPage: React.FC = () => {
     <div className="min-h-screen bg-[#0e0f2a] text-white">
       <div className="w-screen sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 mx-auto pt-16">
         <div className="w-full flex flex-col text-gray-400 px-4 md:px-0">
-      
           <div className="sticky z-10 top-0 bg-[#0e0f2a] pb-4">
             <div className="grid grid-cols-2 gap-4 pt-2">
               <button

@@ -1,5 +1,5 @@
 import React from "react";
-import CrushList from "./Crushlist";
+import CrushList from "./CrushList";
 import type { CrushItem } from "@/types/collection";
 
 

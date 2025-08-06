@@ -1,5 +1,5 @@
 import React from "react";
-import MyContentList from "./Mycontentlist";
+import MyContentList from "./MyContentList";
 import type { ContentItem } from "@/types/collection";
 
 // Replace this with your Redux selector or API call as needed
