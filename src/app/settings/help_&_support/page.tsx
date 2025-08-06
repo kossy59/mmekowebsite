@@ -6,7 +6,7 @@ import { BiSupport } from "react-icons/bi";
 import { MdOutlinePrivacyTip } from "react-icons/md";
 import { GiWorld } from "react-icons/gi";
 import { FaListCheck } from "react-icons/fa6";
-import Head from "../_components/Head";
+import Head from "../../../components/Head";
 import NavigateForward from "../_components/NavigateForward";
 
 

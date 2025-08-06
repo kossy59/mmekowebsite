@@ -153,8 +153,8 @@ export const Register = () => {
               </div>
              })}
               <input type="hidden" name="signing-type" value="signup" />
-              <Agree id="terms" toThe={<Link href="/term_condition">the Terms and Conditions.</Link>} agree={agreedTerms} setAgree={()=> setAgreedTerms(prev=> !prev)} />
-              <Agree id="privacy" toThe={<Link href={"/privacy_&_policy"}>Privacy and Policy</Link>} agree={agreedPrivacy} setAgree={()=> setAgreedPrivacy(prev=> !prev)} />
+              <Agree id="terms" toThe={<Link href="/T_&_C">the Terms and Conditions.</Link>} agree={agreedTerms} setAgree={()=> setAgreedTerms(prev=> !prev)} />
+              <Agree id="privacy" toThe={<Link href={"/privacy-policy"}>Privacy and Policy</Link>} agree={agreedPrivacy} setAgree={()=> setAgreedPrivacy(prev=> !prev)} />
               <button onClick={handleClick} type="submit" className="btn flex items-center justify-center mx-auto">
                 {loading ? <p style={{color: "white"}} className="flex items-center justify-center gap-3 text-white"><BtnLoader /> Please wait...</p> : "Register" }
               </button>

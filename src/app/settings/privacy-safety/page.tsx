@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import { LiaUserSlashSolid } from "react-icons/lia";
-import Head from "../_components/Head";
+import Head from "../../../components/Head";
 import { useRouter } from "next/navigation";
 import { FaAngleRight } from "react-icons/fa";
 

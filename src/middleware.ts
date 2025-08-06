@@ -7,8 +7,14 @@ const publicRoutes = [
   '/auth/verify-email',
   '/models',
   '/guidelines',
-  '/privacy_&_policy'
+  '/privacy-policy',
+  '/T_&_C'
 ];
+
+const prohibitedRoute = [
+  '/auth/register',
+  '/auth/verify-email',
+]
 
 const PUBLIC_FILE = /\.(.*)$/
 
@@ -16,6 +22,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const authToken = request.cookies.get('auth_token');
   const isPublic = publicRoutes.includes(pathname);
+  const isProhibited = prohibitedRoute.includes(pathname);
 
   console.log({midware: authToken})
   // Skip middleware for static files
@@ -24,6 +31,9 @@ export function middleware(request: NextRequest) {
   }
 
   if (!authToken && !isPublic) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+  if (authToken && isProhibited) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 

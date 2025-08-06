@@ -9,6 +9,7 @@ import OpenMobileMenuBtn from "@/components/OpenMobileMenuBtn";
 import { FaAngleRight } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
 import { useState } from "react";
+import handleLogout from "@/lib/service/logout";
 
  const Sidemenu = () => {
   const [minimize, setMinimize] = useState(false);
@@ -100,11 +101,6 @@ import { useState } from "react";
         />
       );
     }
-  };
-
-  const logout = () => {
-    localStorage.removeItem("login");
-    window.location.href = "/";
   };
 
   return (
@@ -223,10 +219,18 @@ import { useState } from "react";
                   name={"Whats New"} 
                   url="/change-log" />
 
-              <MenuIconImg 
-                  src="/icons/icons8-log-out.png" 
-                  name={"Log out"} 
-                  url="/logout" />
+              <div onClick={handleLogout}>
+              <img
+                  alt={"Logout"}
+                  src={"/icons/icons8-log-out.png"}
+                  style={{
+                      display: "block",
+                      verticalAlign: "middle"
+                  }}
+                  className={`object-cover w-7 h-7 bg-slate-900`}
+                  />
+                  <p className="mt-1 text-center group-hover:text-gray-400">Log Out</p>
+              </div>
             </div>
 
             {/* <hr className="w-full mt-1 bg-blue-900 ht"></hr> */}

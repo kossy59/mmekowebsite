@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import { FaAngleLeft } from "react-icons/fa";
 import Switch from "../../_components/Switch";
-import Head from '../../_components/Head';
+import Head from '../../../../components/Head';
 // import { useSelector, useDispatch } from "react-redux";
 // import { updatesetting, ProfilechangeStatus , getprofile} from "../../app/features/profile/profile";
 

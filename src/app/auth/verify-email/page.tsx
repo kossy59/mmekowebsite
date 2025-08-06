@@ -8,8 +8,9 @@ import "../register/styles.css"
 // import { Routes ,Route,useNavigate} from 'react-router-dom'
 import { ToastContainer,toast } from 'react-toastify'
 import axios from "axios";
-import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Tick from "@/components/tick-animation/Tick";
+import { revalidate } from "@/lib/utils/revalidate";
 // import 'react-toastify/dist/ReactToastify.css'
 // import {comfirmpasscode,error} from '@/services/features/register/registerSlice'
 // import {changeemailvery} from '@/services/features/register/registerSlice'
@@ -31,6 +32,7 @@ export default function ConfirmPassCode(){
 
   useEffect(()=>{
     isRegisterComplete && setTimeout(()=> {
+      revalidate("/")
       router.push("/")
       setCodeComplete("")
     }, 3000)
@@ -65,7 +67,7 @@ export default function ConfirmPassCode(){
       if(codeComplete.length < 5) return toast.error("Code is incomplete")
         setStatus("checking")
         try{
-          const res = await axios.post("http://localhost:3100/verifyemail", {email, code: codeComplete}, {withCredentials: true})
+          const res = await axios.post(process.env.NEXT_PUBLIC_API+"/verifyemail", {email, code: codeComplete}, {withCredentials: true})
           if(res.status) setIsRegisterComplete(true)
           console.log({res})
           
@@ -80,12 +82,12 @@ export default function ConfirmPassCode(){
   
     return (
     
-      <div className='text-black mx-auto text-center overflow-hidden border-0 pt-16'>
+      <div className='text-black mx-auto text-center overflow-hidden border-0 pt-16 px-4'>
           <p className='text-orange-500 text-xl font-bold'>Confirm Your Email</p>
-          <p className='text-orange-500 text-sm '>Enter the confirmation code sent to your email</p>
+          <p className='text-orange-500 mt-4'>Enter the confirmation code sent to your email</p>
   
           {!isRegisterComplete && ["resolved", "idle"].includes(status) ? <div className='mt-4 px-3 flex flex-col items-center gap-8'>
-          <form onChange={handleChange} className="flex gap-4 mt-8">
+          <form onChange={handleChange} className="flex gap-4 mt-8 max-[490px]:gap-2">
               <PassCodeInput />  
               <PassCodeInput />  
               <PassCodeInput />  
@@ -116,7 +118,7 @@ export default function ConfirmPassCode(){
         inputMode="numeric"
         type="text"
         maxLength={1}
-        className="code-input size-12 rounded-lg border bg-transparent text-white flex justify-center items-center text-2xl text-center"
+        className="code-input size-12 max-[490px]:size-10 max-[490px]:text-xl rounded-lg border bg-transparent text-white flex justify-center items-center text-2xl text-center"
       />
     );
   }

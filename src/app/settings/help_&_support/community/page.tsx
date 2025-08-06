@@ -1,5 +1,5 @@
 import React from "react";
-import Head from "../../_components/Head"
+import Head from "../../../../components/Head"
 
 
 const Community = () => {

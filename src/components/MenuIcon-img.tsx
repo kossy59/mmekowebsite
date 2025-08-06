@@ -3,6 +3,7 @@ import React from 'react'
 
 export default function MenuIconImg({name, src, url, itc="items-center", rounded=""}: 
     {name: string, src: string, url: string, itc?: string, rounded?: string}) {
+
   return <Link href={url} className={`flex flex-col ${itc} group`}>
      <img
         alt={name}

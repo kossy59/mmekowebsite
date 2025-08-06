@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react'
 // import { getblockedUsers, ProfilechangeStatus } from '../../app/features/profile/profile';
 import PacmanLoader from "react-spinners/RotateLoader";
 // import { useDispatch, useSelector } from 'react-redux';
-import Head from '../../_components/Head';
+import Head from '../../../../components/Head';
 
  const Blockusers = () => {
     // let blockuserstats = useSelector((state) => state.profile.blockuserstats);
