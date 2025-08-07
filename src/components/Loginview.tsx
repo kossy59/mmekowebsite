@@ -21,7 +21,7 @@ export const Loginview = () => {
       const {email, password} = login(formData) 
       const res = await axios.post(process.env.NEXT_PUBLIC_API+"/login", {email, password}, {withCredentials: true})
       setIsLoggedIn(true)
-      console.log(res.data)
+      // console.log(res.data)
     }catch(error){
       console.log(error)
     }finally{setTimeout(()=>{setStatus("resolved"); revalidate("/")},3000)}
