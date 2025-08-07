@@ -219,7 +219,7 @@ import handleLogout from "@/lib/service/logout";
                   name={"Whats New"} 
                   url="/change-log" />
 
-              <div onClick={handleLogout}>
+              <div onClick={handleLogout} className="flex flex-col items-center group cursor-pointer">
               <img
                   alt={"Logout"}
                   src={"/icons/icons8-log-out.png"}
