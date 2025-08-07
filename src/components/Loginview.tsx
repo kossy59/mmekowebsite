@@ -19,9 +19,18 @@ export const Loginview = () => {
     if(!acceptedTerms) return    
     try{
       const {email, password} = login(formData) 
-      const res = await axios.post(process.env.NEXT_PUBLIC_API+"/login", {email, password}, {withCredentials: true})
+      const res = await fetch(process.env.NEXT_PUBLIC_API+"/login",
+         {
+          method: "POST",
+          body: JSON.stringify({email, password}),
+          credentials: "include",
+          headers: {
+            "Content-Type": "Application/json"
+          }
+         })
       setIsLoggedIn(true)
-      // console.log(res.data)
+      const data = await res.json() 
+      console.log({data})
     }catch(error){
       console.log(error)
     }finally{setTimeout(()=>{setStatus("resolved"); revalidate("/")},3000)}
