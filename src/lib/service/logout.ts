@@ -15,5 +15,4 @@ export default async function handleLogout() {
   });
   NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_API || 'http://localhost:3000'))
   revalidatePath("/", "layout")
-  return response;
 }
