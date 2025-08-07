@@ -50,7 +50,7 @@ export default async function RootLayout({
                   <div className="w-full h-full max-[600px]:w-0"></div>
               </div>
               {isAuthenticated && <BottomNavBar />}
-              <ShouldRenderPopUp />
+              {!isAuthenticated && <ShouldRenderPopUp />}
             </div>
           </main>
         </Providers>
