@@ -7,6 +7,7 @@ import { login } from "@/lib/service/login";
 import Processing from "./tick-animation/LoginProcessing";
 import { useAuth } from "@/lib/context/auth-context";
 import { revalidate } from "@/lib/utils/revalidate";
+import axios from "axios";
 
 
 
@@ -17,9 +18,10 @@ export const Loginview = () => {
   async function handleLogin(formData: FormData){
     if(!acceptedTerms) return    
     try{
-      const res = await login(undefined, formData) 
+      const {email, password} = login(formData) 
+      const res = await axios.post(process.env.NEXT_PUBLIC_API+"/login", {email, password}, {withCredentials: true})
       setIsLoggedIn(true)
-      console.log(res)
+      console.log(res.data)
     }catch(error){
       console.log(error)
     }finally{setTimeout(()=>{setStatus("resolved"); revalidate("/")},3000)}

@@ -1,37 +1,24 @@
-'use server';
 import z from "zod";
 import { LoginFormSchema } from "../formValidations/zodLoginSchema";
 import validations from "../formValidations/validateFormInputs"
-import { revalidatePath } from "next/cache";
-import axios from "axios";
-import { cookies } from "next/headers";
 
-let token: string;
+type LoginSuccess = {
+  email: string;
+  password: string;
+  success: boolean;
+  errors: Record<string, string | string[]> | undefined;
+};
 
-export async function login(state: void, formData: FormData) {
+export function login(formData: FormData): LoginSuccess {
   const result = validations(formData);
 
   if (!result.success) {
     console.error(result.errors);
-    return;
+    return {success: false, errors: result.errors, password: "", email: ""};
   }
 
   const {email, password} = result.validatedFields as z.infer<typeof LoginFormSchema>;
-  try{
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-    credentials: 'include',
-  });
-  const data = await response.json()
-  console.log(data)
-    if(!response.status) throw new Error("access denied")
-    // revalidatePath("/", "layout")
-    return {success: true};
-  }catch(error){
-      console.log(error)
-  }
+  return {success: true, errors: result.errors, password, email}
 }
 
 

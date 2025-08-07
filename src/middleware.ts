@@ -8,7 +8,8 @@ const publicRoutes = [
   '/models',
   '/guidelines',
   '/privacy-policy',
-  '/T_&_C'
+  '/T_&_C',
+  '/login'
 ];
 
 const prohibitedRoute = [

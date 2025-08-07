@@ -29,16 +29,6 @@ export default function MobileSidebar() {
       icon: <FaCamera size={25} />,
     },
     {
-      route: "/collections",
-      name: "Collections",
-      icon: <FaStar size={25} />,
-    },
-    {
-      route: "/following",
-      name: "Following",
-      icon: <FaUsersCog size={25} />,
-    },
-    {
       route: "/",
       name: "Explorer",
       icon: <FaCompass size={25} />,
