@@ -25,7 +25,11 @@ export function middleware(request: NextRequest) {
   const isPublic = publicRoutes.some((route)=> route === pathname);
   const isProhibited = prohibitedRoute.some((route)=> route === pathname);
 
-  console.log({midware: authToken})
+  console.log({token: authToken, 
+    cred: request.credentials, 
+    cookie: request.cookies, 
+    dest: request.destination, 
+    headers: request.headers})
   // Skip middleware for static files
   if (PUBLIC_FILE.test(pathname)) {
     return NextResponse.next();
@@ -39,7 +43,6 @@ export function middleware(request: NextRequest) {
   }
 
   const response = NextResponse.next();
-  response.headers.set('x-powered-by', 'MintMiddleware');
   return response;
 }
 
