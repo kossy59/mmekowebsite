@@ -19,7 +19,7 @@ export const Loginview = () => {
     if(!acceptedTerms) return    
     try{
       const {email, password} = login(formData) 
-      const res = await fetch(process.env.NEXT_PUBLIC_API+"/login",
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/login`,
          {
           method: "POST",
           body: JSON.stringify({email, password}),
