@@ -15,7 +15,7 @@ export default function Navbar({isAuthenticated}:{isAuthenticated: boolean}) {
     <div className="flex items-center text-orange-600 justify-between">
       <div></div>
       <div></div>
-      <div className="absolute z-[999] left-0 top-0 p-2 flex items-center justify-between w-full">
+      <div className="absolute left-0 top-0 p-2 flex items-center justify-between w-full">
         <button onClick={toggle} className="navBtn">
           {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
         </button>
