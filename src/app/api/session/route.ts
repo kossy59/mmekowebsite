@@ -3,9 +3,7 @@ import { decryptData, encryptData } from "@/lib/service/manageSession";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  debugger
-  console.log("route was hit")
-  try{
+  // debugger
     const data = await request.json();
     const sessionId = await encryptData({user: data, expires: expires});
   
@@ -17,9 +15,9 @@ export async function POST(request: NextRequest) {
     // Create response
     const res = new NextResponse(JSON.stringify({ sessionId }), {
       status: 200,
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   
     // Set cookie in response
@@ -31,7 +29,4 @@ export async function POST(request: NextRequest) {
     });
   
     return res;
-  }catch(error){
-    console.log(error)
-  }
 }
