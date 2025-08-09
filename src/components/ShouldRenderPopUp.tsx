@@ -4,7 +4,14 @@ import React from 'react'
 import { PopUp } from './popup'
 
 export default function ShouldRenderPopUp() {
-  const {popup} = useAuth()
-  if(popup === "open") return <PopUp />
-  return null
+  const { popup } = useAuth();
+  const [hasMounted, setHasMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
+  if (popup === "open") return <PopUp />;
+  return null;
 }
