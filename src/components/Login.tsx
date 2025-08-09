@@ -22,13 +22,15 @@ export default function Logins() {
           <button
             className=" bg-[#f97316] text-white hover:bg-[#f97316] hover:text-white active:bg-[#f97416d5] active:text-white focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-opacity-50 rounded-full"
             style={{
+              fontWeight: "bold",
               display: "flex",
               alignItems: "center",
-              padding: "8px 10px",
+              padding: "8px 16px",
               borderRadius: 20,
             }}
           >
-            <FaSignInAlt size={24} />
+            {/* <FaSignInAlt size={24} /> */}
+            Login
           </button>
         }
       >
