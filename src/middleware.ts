@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { sessionMng } from './lib/service/manageSession';
 
 const publicRoutes = [
   '/',
@@ -9,27 +10,25 @@ const publicRoutes = [
   '/guidelines',
   '/privacy-policy',
   '/T_&_C',
-  '/login'
+  '/login',
+  '/api/session'
 ];
 
 const prohibitedRoute = [
   '/auth/register',
   '/auth/verify-email',
+  '/api/session'
 ]
 
 const PUBLIC_FILE = /\.(.*)$/
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const authToken = request.cookies.get('auth_token');
+  const authToken = request.cookies.get("session")
   const isPublic = publicRoutes.some((route)=> route === pathname);
   const isProhibited = prohibitedRoute.some((route)=> route === pathname);
 
-  console.log({token: authToken, 
-    cred: request.credentials, 
-    cookie: request.cookies, 
-    dest: request.destination, 
-    headers: request.headers})
+  console.log(authToken)
   // Skip middleware for static files
   if (PUBLIC_FILE.test(pathname)) {
     return NextResponse.next();
@@ -43,6 +42,7 @@ export function middleware(request: NextRequest) {
   }
 
   const response = NextResponse.next();
+  response.headers.set('x-powered-by', 'MintMiddleware');
   return response;
 }
 
