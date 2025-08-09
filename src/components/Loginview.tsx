@@ -8,20 +8,22 @@ import Processing from "./tick-animation/LoginProcessing";
 import { useAuth } from "@/lib/context/auth-context";
 import { revalidate } from "@/lib/utils/revalidate";
 import axios from "axios";
+import { isRegistered } from "@/lib/service/manageSession";
 
 
 
 export const Loginview = () => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const {setIsLoggedIn, setStatus, isLoggedIn, status} = useAuth()
+  const [user, setUser] = useState<{email: string, password: string}  | undefined>()
 
   async function handleLogin(formData: FormData){
     if(!acceptedTerms) return    
     try{
       const {email, password} = login(formData) 
-      const res = await axios.post(process.env.NEXT_PUBLIC_API+"/login", {email, password}, {withCredentials: true})
-      setIsLoggedIn(true)
-      // console.log(res.data)
+      const res = await isRegistered({email,password})
+      setUser(res)
+      if(res)setIsLoggedIn(true)
     }catch(error){
       console.log(error)
     }finally{setTimeout(()=>{setStatus("resolved"); revalidate("/")},3000)}
@@ -30,6 +32,26 @@ export const Loginview = () => {
   function checkAcceptTerms(){
     if(acceptedTerms) setStatus("checking")
   }
+  useEffect(()=>{
+   async function createSession() {
+     if(!user) return
+     try{
+       const result = await fetch(process.env.NEXT_PUBLIC_URL+"/api/session", {
+           method: "POST",
+           body: JSON.stringify(user),
+           credentials: "include",
+           headers: {
+               "Content-Type": "application/json"
+           }
+       })
+      const data = await result.text()
+      console.log(data)
+     }catch(error){
+      console.log(error)
+     }
+   }
+   createSession()
+  },[user])
 
   return (
     <div

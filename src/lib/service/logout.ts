@@ -9,7 +9,7 @@ export default async function handleLogout() {
   const cookieStore = await cookies()
 
   const response = NextResponse.next();
-  cookieStore.set('auth_token', '', {
+  cookieStore.set('session', '', {
     path: '/',
     expires: new Date(0),
   });
