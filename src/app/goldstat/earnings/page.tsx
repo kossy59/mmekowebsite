@@ -6,31 +6,11 @@ import { format } from "date-fns";
 // Import your redux actions if available
 // import { get_monthly_history } from "../../features/profile/profile";
 
-// Dummy data for months and earnings
-const dummyMonthsData = [
-  {
-    month: "July",
-    total: 320,
-    data: {
-      year: 2025,
-      earning: [
-        { id: 1, date: "2025-07-02T12:00:00Z", amount: 120, type: "subscription", desc: "Subscription from user1" },
-        { id: 2, date: "2025-07-10T18:30:00Z", amount: 200, type: "tip", desc: "Tip from user2" },
-      ],
-    },
-  },
-  {
-    month: "June",
-    total: 180,
-    data: {
-      year: 2025,
-      earning: [
-        { id: 3, date: "2025-06-15T09:15:00Z", amount: 100, type: "post", desc: "Paid post" },
-        { id: 4, date: "2025-06-20T21:45:00Z", amount: 80, type: "subscription", desc: "Subscription from user3" },
-      ],
-    },
-  },
-];
+import { get_monthly_history } from '@/store/goldstatSlice';
+import { RootState } from '@/store/store';
+import { useAuth } from '@/lib/context/auth-context';
+
+// Remove dummyMonthsData. We'll use Redux state instead.
 
 interface Earning {
   id: number;
@@ -50,24 +30,30 @@ interface MonthData {
 }
 
 const Earnings: React.FC = () => {
+  const dispatch = useDispatch();
+  const { session } = useAuth();
+  const { earnings, loading, error } = useSelector((state: RootState) => state.goldstat);
   const [detailClick, setDetailClick] = useState(false);
   const [monthClick, setMonthClick] = useState("");
-  const [earnsList, setEarnsList] = useState<Earning[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [earnsList, setEarnsList] = useState<any[]>([]);
   const [color] = useState("#FFFFFF");
-  const monthsData: MonthData[] = dummyMonthsData;
-
-
 
   useEffect(() => {
-    
-    setLoading(false);
-   
-  }, []);
+    if (session?._id && session?.token) {
+      dispatch(get_monthly_history({ userId: session._id, token: session.token }) as any);
+    }
+  }, [dispatch, session]);
+
+  const handleMonthClick = (month: string, earning: any[]) => {
+    setMonthClick(month);
+    setEarnsList(earning);
+    setDetailClick(true);
+  };
 
 
   const displayMonth = () => {
-    return monthsData.map((value) => (
+    if (!earnings || earnings.length === 0) return <p className="text-center text-gray-400">No earnings data</p>;
+    return earnings.map((value) => (
       <div className="w-full h-full mb-3" key={value.month}>
         <div className="flex justify-between">
           <div className="flex">

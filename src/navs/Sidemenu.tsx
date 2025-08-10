@@ -186,7 +186,7 @@ import handleLogout from "@/lib/service/logout";
               <MenuIconImg 
                   src="/icons/icons8-gold.png" 
                   name={"Gold Stats"} 
-                  url="/goldstats" />
+                  url="/goldstat/history" />
 
               {/* <button
                 className="flex flex-col items-center"

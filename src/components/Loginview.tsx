@@ -12,18 +12,33 @@ import { isRegistered } from "@/lib/service/manageSession";
 
 
 
+import type { Session } from "@/lib/context/auth-context";
+type LoginResponse = Session & { accessToken?: string };
+
 export const Loginview = () => {
+  const [loginError, setLoginError] = useState<string | null>(null);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const {setIsLoggedIn, setStatus, isLoggedIn, status} = useAuth()
   const [user, setUser] = useState<{email: string, password: string}  | undefined>()
 
-  async function handleLogin(formData: FormData){
+async function handleLogin(formData: FormData){
     if(!acceptedTerms) return    
     try{
       const {email, password} = login(formData) 
-      const res = await isRegistered({email,password})
-      setUser(res)
-      if(res)setIsLoggedIn(true)
+      setUser({ email, password });
+      const res = await isRegistered({email,password}) as LoginResponse;
+      if (res && res.email) {
+        setIsLoggedIn(true);
+        setLoginError(null);
+        console.log("LOGIN SESSION OBJECT", res);
+        // Map accessToken to token for AuthProvider compatibility
+        const sessionObj = { ...res, token: res.accessToken };
+        localStorage.setItem("session", JSON.stringify(sessionObj));
+        console.log("LOGIN SESSION OBJECT (with token)", sessionObj);
+      } else {
+        setIsLoggedIn(false);
+        setLoginError("Invalid email or password. Please try again.");
+      }
     }catch(error){
       console.log(error)
     }finally{setTimeout(()=>{setStatus("resolved"); revalidate("/")},3000)}
@@ -75,6 +90,11 @@ export const Loginview = () => {
           Log in to access your account
         </p>
 
+        {loginError && (
+          <div className="bg-red-500 text-white rounded p-2 mb-3 text-center animate-pulse">
+            {loginError}
+          </div>
+        )}
         <form action={handleLogin} className="mt-6 space-y-4">
           <Input type="email" placeholder="Email Address" />
           <Input type="password" />

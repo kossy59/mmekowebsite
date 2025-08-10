@@ -25,16 +25,21 @@ export async function decryptData(input: string){
     return payload
 }
 
-export async function isRegistered(payload: {email: string, password: string}): Promise<{email: string, password: string} | undefined> {
+import type { Session } from "@/lib/context/auth-context";
+type LoginResponse = Session & { accessToken?: string };
+
+export async function isRegistered(payload: {email: string, password: string}): Promise<LoginResponse | undefined> {
     try{
-        const res = axios.post(`${process.env.NEXT_PUBLIC_API}/login`, payload, {withCredentials: true})
-        const user = (await res).data.user
-        console.log(user)
-        return user
+       
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API}/login`, payload, {withCredentials: true});
+       
+        const user = res.data.user;
+        if (!user || !user.email) return undefined;
+        return user;
     }catch(error){
         console.log(error)
         credentials = false
-        return {email: "", password: ""}
+        return undefined
     }
 }
 
