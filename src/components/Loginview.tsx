@@ -1,14 +1,14 @@
 "use client";
 import Link from "next/link";
 import React, { useActionState, useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Input from "./Input";
 import { login } from "@/lib/service/login";
 import Processing from "./tick-animation/LoginProcessing";
 import { useAuth } from "@/lib/context/auth-context";
 import { revalidate } from "@/lib/utils/revalidate";
-import axios from "axios";
 import { isRegistered } from "@/lib/service/manageSession";
+import toastError from "./ToastError";
 
 
 
@@ -21,27 +21,23 @@ export const Loginview = () => {
   const {setIsLoggedIn, setStatus, isLoggedIn, status} = useAuth()
   const [user, setUser] = useState<{email: string, password: string}  | undefined>()
 
-async function handleLogin(formData: FormData){
-    if(!acceptedTerms) return    
+  async function handleLogin(e: React.FormEvent<HTMLFormElement>){
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
     try{
-      const {email, password} = login(formData) 
-      setUser({ email, password });
-      const res = await isRegistered({email,password}) as LoginResponse;
-      if (res && res.email) {
-        setIsLoggedIn(true);
-        setLoginError(null);
-        console.log("LOGIN SESSION OBJECT", res);
-        // Map accessToken to token for AuthProvider compatibility
-        const sessionObj = { ...res, token: res.accessToken };
-        localStorage.setItem("session", JSON.stringify(sessionObj));
-        console.log("LOGIN SESSION OBJECT (with token)", sessionObj);
-      } else {
-        setIsLoggedIn(false);
-        setLoginError("Invalid email or password. Please try again.");
-      }
+      const {email, password, errors} = login(formData) 
+
+      if(errors?.length) return toastError({message: "Please input your email and password!"})
+      if(!acceptedTerms) return toastError({message: "Attempted Login: Accept the Terms and Conditions to proceed."}) 
+      const res = await isRegistered({email,password})
+      if(!res?.email?.length && !res?.password?.length) throw Error("No user found")
+      setUser(res)
+      setIsLoggedIn(true)   
     }catch(error){
       console.log(error)
-    }finally{setTimeout(()=>{setStatus("resolved"); revalidate("/")},3000)}
+      setUser({email: "", password:""})
+      toastError({message: "Login failed!"})
+    }finally{setTimeout(()=>{setStatus("resolved"); revalidate("/"); setIsLoggedIn(false)},3000)}
   }
 
   function checkAcceptTerms(){
@@ -49,11 +45,11 @@ async function handleLogin(formData: FormData){
   }
   useEffect(()=>{
    async function createSession() {
-     if(!user) return
+    if(!user?.email?.length && !user?.password?.length) return
      try{
        const result = await fetch(process.env.NEXT_PUBLIC_URL+"/api/session", {
            method: "POST",
-           body: JSON.stringify(user),
+           body: JSON.stringify({email: user.email, password: user.password}),
            credentials: "include",
            headers: {
                "Content-Type": "application/json"
@@ -89,13 +85,6 @@ async function handleLogin(formData: FormData){
         <p className="text-gray-400 text-center mt-2">
           Log in to access your account
         </p>
-
-        {loginError && (
-          <div className="bg-red-500 text-white rounded p-2 mb-3 text-center animate-pulse">
-            {loginError}
-          </div>
-        )}
-        <form action={handleLogin} className="mt-6 space-y-4">
           <Input type="email" placeholder="Email Address" />
           <Input type="password" />
           <input type="hidden" name="signing-type" value={"login"} />
