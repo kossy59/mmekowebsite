@@ -35,14 +35,16 @@ export async function decryptData(input: string): Promise<{ status: string; body
 
 export async function isRegistered(payload: {email: string, password: string, }): Promise<{email: string, password: string} | undefined> {
     try{
-        const res = axios.post(`${process.env.NEXT_PUBLIC_API}/login`, payload, {withCredentials: true})
-        const user = (await res).data.user
-        console.log(user)
-        return user
+       
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API}/login`, payload, {withCredentials: true});
+       
+        const user = res.data.user;
+        if (!user || !user.email) return undefined;
+        return user;
     }catch(error){
         console.log(error)
         credentials = false
-        return {email: "", password: ""}
+        return undefined
     }
 }
 
@@ -55,7 +57,5 @@ export async function sessionMng(request: NextRequest) {
     const decryptCookie = await decryptData(String(cookie))
     console.log({status: decryptCookie?.status})
     if(decryptCookie?.status === "valid") return
-    await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/session`, decryptCookie.body, {withCredentials: true})
-
-    
+    await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/session`, decryptCookie.body, {withCredentials: true})  
 }   

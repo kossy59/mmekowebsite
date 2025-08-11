@@ -12,7 +12,11 @@ import toastError from "./ToastError";
 
 
 
+import type { Session } from "@/lib/context/auth-context";
+type LoginResponse = Session & { accessToken?: string };
+
 export const Loginview = () => {
+  const [loginError, setLoginError] = useState<string | null>(null);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const {setIsLoggedIn, setStatus, isLoggedIn, status} = useAuth()
   const [user, setUser] = useState<{email: string, password: string}  | undefined>()
@@ -28,7 +32,7 @@ export const Loginview = () => {
       const res = await isRegistered({email,password})
       if(!res?.email?.length && !res?.password?.length) throw Error("No user found")
       setUser(res)
-      if(res)setIsLoggedIn(true)
+      setIsLoggedIn(true)   
     }catch(error){
       console.log(error)
       setUser({email: "", password:""})
@@ -81,8 +85,6 @@ export const Loginview = () => {
         <p className="text-gray-400 text-center mt-2">
           Log in to access your account
         </p>
-
-        <form onSubmit={handleLogin} className="mt-6 space-y-4">
           <Input type="email" placeholder="Email Address" />
           <Input type="password" />
           <input type="hidden" name="signing-type" value={"login"} />

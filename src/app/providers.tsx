@@ -1,5 +1,7 @@
 "use client";
 
+import { Provider } from "react-redux";
+import { store } from "@/store/store";
 import { AuthProvider } from "@/lib/context/auth-context";
 import { SnackbarProvider } from "notistack";
 import { Suspense } from "react";
@@ -13,10 +15,12 @@ const Loader = () => (
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <SnackbarProvider {...SNACKBAR_OPTIONS}>
-      <AuthProvider>
-        <Suspense fallback={<Loader />}>{children}</Suspense>
-      </AuthProvider>
-    </SnackbarProvider>
+    <Provider store={store}>
+      <SnackbarProvider {...SNACKBAR_OPTIONS}>
+        <AuthProvider>
+          <Suspense fallback={<Loader />}>{children}</Suspense>
+        </AuthProvider>
+      </SnackbarProvider>
+    </Provider>
   );
 }
