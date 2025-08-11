@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useActionState, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Input from "./Input";
 import { login } from "@/lib/service/login";
@@ -9,8 +9,6 @@ import { useAuth } from "@/lib/context/auth-context";
 import { revalidate } from "@/lib/utils/revalidate";
 import { isRegistered } from "@/lib/service/manageSession";
 import toastError from "./ToastError";
-
-
 
 import type { Session } from "@/lib/context/auth-context";
 type LoginResponse = Session & { accessToken?: string };
@@ -79,13 +77,13 @@ export const Loginview = () => {
     >
       <ToastContainer position="top-center" theme="dark" />
       <div className="bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md">
-      <form onSubmit={handleLogin}>
         <h1 className="text-orange-500 text-3xl font-bold text-center">
           Welcome Back
         </h1>
         <p className="text-gray-400 text-center mt-2">
           Log in to access your account
         </p>
+       <form onSubmit={handleLogin} className="mt-6 space-y-4">
           <Input type="email" placeholder="Email Address" />
           <Input type="password" />
           <input type="hidden" name="signing-type" value={"login"} />
