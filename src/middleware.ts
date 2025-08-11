@@ -28,6 +28,8 @@ export function middleware(request: NextRequest) {
   const isPublic = publicRoutes.some((route)=> route === pathname);
   const isProhibited = prohibitedRoute.some((route)=> route === pathname);
 
+  // console.log(authToken)
+  sessionMng(request)
   console.log(authToken)
   sessionMng(request)
   // Skip middleware for static files

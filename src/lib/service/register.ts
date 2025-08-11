@@ -9,7 +9,7 @@ export async function register(state: void, formData: FormData) {
 
   if (!result.success) {
     console.error(result.errors);
-    return;
+    return {error: result.errors};
   }
 
     const signupData = result.validatedFields as z.infer<typeof SignupFormSchema>;

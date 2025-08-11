@@ -9,6 +9,7 @@ import { PopUp } from "@/components/popup";
 import Navapp from "@/navs/NavApp";
 import ShouldRenderPopUp from "@/components/ShouldRenderPopUp";
 import { cookies } from "next/headers";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({
   weight: ["100", "300", "400", "500", "700"],
@@ -30,14 +31,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const authToken = cookieStore.get('session');
-
-  const isAuthenticated = !!authToken; 
-  console.log({isAuthenticated, authToken}) 
+  const authToken = cookieStore.get('session')?.value;
+  const isAuthenticated = !!authToken?.length; 
   
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased bg-background`}>
+        <ToastContainer />
         <Providers>
           <main className="flex overflow-hidden h-screen relative">
             <Sidebar />

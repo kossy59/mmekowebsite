@@ -1,12 +1,5 @@
 "use client"
-// import Popup from "reactjs-popup";
-// import locationIcon from "../../../public/icons/locationIcon.svg"
-import React, { useActionState, useState } from "react";
-// import Confirmemail from "../confirm-email/page";
-// import HeaderBackNav from "../../_components/navs/HeaderBackNav";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import "./styles.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +12,7 @@ import Agree from "./_components/AgreeBtn";
 import { register } from "@/lib/service/register";
 import { useRouter } from "next/navigation";
 import BtnLoader from "@/constants/BtnLoader";
+import { toast } from "react-toastify";
 
 let emailCapture: FormDataEntryValue | null
 export const Register = () => {
@@ -30,7 +24,7 @@ export const Register = () => {
   const router = useRouter()
   
 
-  let regex = /^[a-zA-Z0-9_@]+$/;
+  // let regex = /^[a-zA-Z0-9_@]+$/;
   // let firstLatter = /^@.*/;
 
   const getLocation = (country: string) => {
@@ -43,6 +37,7 @@ export const Register = () => {
     if(!agreedPrivacy && !agreedTerms) return
     try{
       const result = await register(undefined, formData)
+      console.log(result.error)
       router.push(`/auth/verify-email/?email=${emailCapture}`)
       setLoading(false)
     }catch(error){
@@ -50,7 +45,7 @@ export const Register = () => {
     }finally {setLoading(false)}
   }
   function handleClick(){
-    if(!agreedPrivacy && !agreedTerms) return
+    if(!agreedPrivacy && !agreedTerms) return toast.error("Agree to the Terms & Conditions / Privacy & Policy to proceed", {style: {backgroundColor: "#111"}})
     setLoading(true)
   }
 

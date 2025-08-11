@@ -50,7 +50,7 @@ const FollowingPage: React.FC = () => {
       user.name.toLowerCase().includes(search.toLowerCase())
     );
     return (
-      <div>
+      <div className="">
         <h1 className="text-lg font-bold text-white px-2 text-left mt-4">
           {filtered.length} Following
         </h1>
@@ -114,6 +114,7 @@ const FollowingPage: React.FC = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 

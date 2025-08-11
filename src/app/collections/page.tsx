@@ -64,9 +64,9 @@ const Content = () => {
   <ImageCard
     key={idx}
     src={src}
-    status="active"   // or whatever value makes sense
-    type="premium"    // or whatever value makes sense
-    name="Jane Doe"   // or whatever value makes sense
+    status="active"   
+    type="premium"    
+    name="Jane Doe"   
   />
 ))}
     </div>

@@ -12,6 +12,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Tick from "@/components/tick-animation/Tick";
 import { revalidate } from "@/lib/utils/revalidate";
 import { isRegistered } from "@/lib/service/manageSession";
+import toastError from "@/components/ToastError";
 // import 'react-toastify/dist/ReactToastify.css'
 // import {comfirmpasscode,error} from '@/services/features/register/registerSlice'
 // import {changeemailvery} from '@/services/features/register/registerSlice'
@@ -21,8 +22,8 @@ import { isRegistered } from "@/lib/service/manageSession";
 
 // export const PassEmail = ({setClosetoast,email,alert,dismissalert, close}: 
 //   {setClosetoast: (closetoast: boolean)=>boolean, email: string, alert: (success: string, type: type, close: close)=>any, dismissalert: ()=>void, close: false}) => {
-// type PassCodeInputProps = React.ComponentPropsWithoutRef<'input'>
-
+type PassCodeInputProps = React.ComponentPropsWithoutRef<'input'>
+let captureUser: {email: string, password: string, method?: "signup" | "signin" | undefined} | undefined
 export default function ConfirmPassCode(){
   const [codeComplete, setCodeComplete] = useState('')
   const [status, setStatus] = useState("idle");
@@ -31,14 +32,6 @@ export default function ConfirmPassCode(){
   const searchParams = useSearchParams()
   const email: string | null = searchParams.get("email")
   const router = useRouter()
-
-  useEffect(()=>{
-    isRegisterComplete && setTimeout(()=> {
-      revalidate("/")
-      router.push("/")
-      setCodeComplete("")
-    }, 3000)
-  }, [isRegisterComplete])
   
     function handleChange(e: React.FormEvent<HTMLFormElement>) {
       const target = e.target as HTMLInputElement;
@@ -70,18 +63,31 @@ export default function ConfirmPassCode(){
         setStatus("checking")
         try{
           const res = await axios.post(process.env.NEXT_PUBLIC_API+"/verifyemail", {email, code: codeComplete}, {withCredentials: true})
-          if(res.status) setIsRegisterComplete(true)
-          console.log({res})
-          isRegistered({email: res.data.data.email, password: res.data.data.password})
-        }catch(error){
+          if(res.status !== 200) throw Error("Email verification failed") 
+          setIsRegisterComplete(true)
+          captureUser = {email: res.data.data.user, password: res.data.data.password, method: "signup"}
+          // await isRegistered({email: res.data.data.user, password: res.data.data.password})
+          console.log({res, user: {email: res.data.data.user, password: res.data.data.password}})
+          
+        }catch(error: any){
           console.log(error)
           setError("Something Went Wrong!")
+          toastError({message: "Email code mismatch!"})
           setCodeComplete("")
         }finally{
           setStatus("resolved")
         }
     }
   
+    useEffect(()=>{
+    isRegisterComplete && setTimeout(async ()=> {
+      await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/session`, captureUser, {withCredentials: true})
+      router.push("/")
+      setCodeComplete("")
+      revalidate("/")
+    }, 3000)
+  }, [isRegisterComplete])
+
     return (
     
       <div className='text-black mx-auto text-center overflow-hidden border-0 pt-16 px-4'>
