@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {jwtVerify, SignJWT} from "jose"
 import axios from "axios";
 import { cookies } from "next/headers";
+import handleLogout from "./logout";
 
 export type user = {email: string, password: string}
 export type payload = {user: user, expires: number}
@@ -20,9 +21,19 @@ export async function encryptData(payload:payload ) {
 }
 
 export async function decryptData(input: string){
-    const payload = jwtVerify(input, key, {algorithms: ["HS256"]})
-    console.log(payload)
-    return payload
+    console.log({input})
+    // try{
+        const payload = await jwtVerify(input, key, {algorithms: ["HS256"]})
+        console.log({payload})
+        return payload
+//     }catch(error: any){
+//         console.log(error)
+//         if (error.code === 'ERR_JWT_EXPIRED') {
+//         console.warn("Token expired:", error.payload)
+//         throw new Error("Session expired. Please log in again.")
+//   }
+//         throw error
+//     }
 }
 
 export async function isRegistered(payload: {email: string, password: string}): Promise<{email: string, password: string} | undefined> {
@@ -40,7 +51,16 @@ export async function isRegistered(payload: {email: string, password: string}): 
 
 
 export async function sessionMng(request: NextRequest) {
-    return null
+    const cookie = request.cookies.get("session")?.value
+    if(!cookie) return NextResponse.redirect(new URL('/', request.url))
+    try{
+        const userSession = await decryptData(cookie)
+        console.log({userSession})
+    
+    }catch(error: any){
+        console.log(error)
+        return new Response('Session expired. Please log in again.', { status: 401 })
+    }
 }
 
 // export async function updateSession(request: NextRequest) {

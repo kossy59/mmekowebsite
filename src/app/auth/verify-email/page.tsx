@@ -11,6 +11,7 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import Tick from "@/components/tick-animation/Tick";
 import { revalidate } from "@/lib/utils/revalidate";
+import { isRegistered } from "@/lib/service/manageSession";
 // import 'react-toastify/dist/ReactToastify.css'
 // import {comfirmpasscode,error} from '@/services/features/register/registerSlice'
 // import {changeemailvery} from '@/services/features/register/registerSlice'
@@ -20,7 +21,8 @@ import { revalidate } from "@/lib/utils/revalidate";
 
 // export const PassEmail = ({setClosetoast,email,alert,dismissalert, close}: 
 //   {setClosetoast: (closetoast: boolean)=>boolean, email: string, alert: (success: string, type: type, close: close)=>any, dismissalert: ()=>void, close: false}) => {
-type PassCodeInputProps = React.ComponentPropsWithoutRef<'input'>
+// type PassCodeInputProps = React.ComponentPropsWithoutRef<'input'>
+
 export default function ConfirmPassCode(){
   const [codeComplete, setCodeComplete] = useState('')
   const [status, setStatus] = useState("idle");
@@ -70,7 +72,7 @@ export default function ConfirmPassCode(){
           const res = await axios.post(process.env.NEXT_PUBLIC_API+"/verifyemail", {email, code: codeComplete}, {withCredentials: true})
           if(res.status) setIsRegisterComplete(true)
           console.log({res})
-          
+          isRegistered({email: res.data.data.email, password: res.data.data.password})
         }catch(error){
           console.log(error)
           setError("Something Went Wrong!")

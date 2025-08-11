@@ -13,6 +13,6 @@ export default async function handleLogout() {
     path: '/',
     expires: new Date(0),
   });
-  NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_API || 'http://localhost:3000'))
-  revalidatePath("/", "layout")
+  NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_API))
+  revalidatePath("/", "page")
 }
