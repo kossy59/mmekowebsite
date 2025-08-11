@@ -32,8 +32,8 @@ export const Loginview = () => {
       const res = await isRegistered({email,password})
       if(!res?.email?.length && !res?.password?.length) throw Error("No user found")
       setUser(res)
-      setIsLoggedIn(true)   
-    }catch(error){
+    setIsLoggedIn(true)   
+  }catch(error){
       console.log(error)
       setUser({email: "", password:""})
       toastError({message: "Login failed!"})
@@ -79,6 +79,7 @@ export const Loginview = () => {
     >
       <ToastContainer position="top-center" theme="dark" />
       <div className="bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md">
+      <form onSubmit={handleLogin}>
         <h1 className="text-orange-500 text-3xl font-bold text-center">
           Welcome Back
         </h1>
