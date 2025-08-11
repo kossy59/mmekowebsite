@@ -76,19 +76,20 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const pathName = usePathname();
 
   // Load session from localStorage on initial render
-  //   useEffect(() => {
-  //     const storedSession = localStorage.getItem("session");
-  //     if (storedSession) {
-  //       setSession(JSON.parse(storedSession));
-  //     }
-  //     setLoading(false);
-  //   }, [router, pathName]);
+  useEffect(() => {
+    const storedSession = localStorage.getItem("session");
+    if (storedSession) {
+      setSession(JSON.parse(storedSession));
+    }
+    setLoading(false);
+  }, [router, pathName]);
 
-  //   useEffect(() => {
-  //     if (!loading && !session) {
-  //       if (pathName?.includes("/dashboard") || pathName?.includes("/admin"))
-  //         router.push("/");
-  //     }
+  useEffect(() => {
+    if (!loading && !session) {
+      if (pathName?.includes("/dashboard") || pathName?.includes("/admin"))
+        router.push("/");
+    }
+  }, [loading, session, router, pathName]);
   //   }, [loading, session, router, pathName]);
 
   //   useEffect(() => {
