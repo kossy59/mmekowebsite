@@ -91,7 +91,7 @@ header:hover {
   }
 }
 .mr{
-  margin-right: 2.5rem;
+  margin-right: 2rem;
   @media (max-width: 490px) {
     margin-right: 0;
   }
