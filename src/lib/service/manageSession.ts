@@ -48,7 +48,6 @@ export async function isRegistered(payload: {email: string, password: string, })
     }
 }
 
-
 export async function sessionMng(request: NextRequest) {
     const cookie = request.cookies.get("session")?.value
     const getAllCookies = request.cookies.getAll()
