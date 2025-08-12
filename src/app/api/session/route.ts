@@ -7,9 +7,8 @@ import handleLogout from "@/lib/service/logout";
 export async function POST(request: NextRequest) {
   // debugger
     const data = await request.json();
-    handleLogout()
+    // handleLogout()
     const sessionId = await encryptData({user: data, expires: expires});
-    console.log({data, sessionId})
   
     // Create response
     const res = new NextResponse(JSON.stringify({ sessionId }), {
@@ -18,8 +17,6 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
       },
     });
-    // delete initial cookie
-
   
     // Set cookie in response
     res.cookies.set("session", sessionId, {
