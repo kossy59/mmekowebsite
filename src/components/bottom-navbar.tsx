@@ -38,7 +38,7 @@ export default function BottomNavBar() {
     },
     {
       imgUrl: "/icons/icons8-notification-1.png",
-      route: "/notifications/all/9302193012hwh",
+      route: "/notifications",
       name: "Notifications"
     },
     {

@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import PacmanLoader from "react-spinners/RingLoader";
 // import { useSelector, useDispatch } from "react-redux";
