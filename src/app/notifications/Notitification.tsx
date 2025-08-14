@@ -42,7 +42,7 @@ export const Modelnotify = ({children}: {children: React.ReactNode}) => {
             <HeadBtn label="Activity" route="/notifications/activity" />
           </div>
         </header>
-        <div ref={divFocusRef} className="cstm-height pb-16 flex-col items-center w-full overflow-y-auto scrollbar">
+        <div ref={divFocusRef} className="cstm-height focus:outline-none focus:border-dashed focus:border-gray-600 pb-16 flex-col items-center w-full overflow-y-auto scrollbar">
         {children}
       </div>
       </div>

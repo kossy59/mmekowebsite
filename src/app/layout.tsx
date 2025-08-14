@@ -43,11 +43,11 @@ export default async function RootLayout({
             <Sidebar />
               <Navbar isAuthenticated={isAuthenticated} />
             <div className="w-full grid grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden">
-              <div className="scrollbar overflow-y-auto w-full pt-4 grid grid-cols-[60fr_40fr] max-[600px]:grid-cols-1 justify-between">
+              <div className="scrollbar overflow-y-auto w-full pt-4 grid grid-cols-[60fr_40fr] max-[1200px]:grid-cols-[75fr_25fr] max-[600px]:grid-cols-1 justify-between">
                 <div className="w-full max-[1000px]:max-w-[90%]  max-[800px]:max-w-[100%]">
                   {children}
                   </div>
-                  <div className="w-full h-full max-[600px]:w-0"></div>
+                  <div className="w-full h-full max-[1000px]:w-0"></div>
               </div>
               {isAuthenticated && <BottomNavBar />}
               {!isAuthenticated && <ShouldRenderPopUp />}
