@@ -2,8 +2,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {jwtVerify, SignJWT} from "jose"
 import axios from "axios";
-import { cookies } from "next/headers";
-import { expires } from "@/constants/expires";
 
 export type user = {email: string, password: string}
 export type payload = {user: user, expires: number}
@@ -38,6 +36,7 @@ export async function isRegistered(payload: {email: string, password: string, })
        
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API}/login`, payload, {withCredentials: true});
         const user = res.data.user;
+        console.log(user)
         if (!user.email) return undefined;
         return user;
     }catch(error){
@@ -49,11 +48,10 @@ export async function isRegistered(payload: {email: string, password: string, })
 
 export async function sessionMng(request: NextRequest) {
     const cookie = request.cookies.get("session")?.value
-    const getAllCookies = request.cookies.getAll()
-    console.log({cookieFrom_smng: cookie, cookies: getAllCookies})
+    // const getAllCookies = request.cookies.getAll()
+    // console.log({cookieFrom_smng: cookie, cookies: getAllCookies})
     if(!cookie?.length) return
     const decryptCookie = await decryptData(String(cookie))
-    console.log({status: decryptCookie?.status})
     if(decryptCookie?.status === "valid") return
     await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/session`, decryptCookie.body, {withCredentials: true})  
 }   
