@@ -37,7 +37,11 @@ export default function RequestCard({exp, img, name, titles=["fan"], status, typ
         : "Your fan meet request has been sent. The model has 24 hours to respond."
         }</p>
       <div className={`flex justify-between gap-6 ${type === "model" && "max-[490px]:flex-col"}`}>
-        { ["expired", "completed"].includes(status) ? <div className='border border-gray-600 text-gray-500 px-6 py-2 rounded-lg'>{status === "expired" ? "Booking has expired" : "Booking completed"}</div> 
+        { ["expired", "completed"].includes(status) ? 
+        <div className={`flex gap-4 ${type === "model" && "max-[490px]:w-full"}`}>
+        <div className='border border-gray-600 text-gray-500 px-6 py-2 rounded-lg'>{status === "expired" ? "Booking has expired" : "Booking completed"}</div> 
+        {type === "fan" && <button className='border border-gray-500 text-sm transition-all duration-500 hover:bg-slate-700 text-gray-300 px-6 py-2 rounded-lg'>Renew booking</button>}
+        </div>
           : <>
           <div className='flex flex-col min-w-28'>
           <p className='text-xl'>Expires in:</p>
