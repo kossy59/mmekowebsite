@@ -31,7 +31,7 @@ export const Loginview = () => {
       console.log(res)
       if(!res?.email?.length) throw Error("No user found")
       setUser(res)
-    setIsLoggedIn(true)   
+      setIsLoggedIn(true)   
   }catch(error){
       console.log(error)
       setUser({email: "", password:""})
