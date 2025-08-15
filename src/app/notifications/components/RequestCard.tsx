@@ -12,7 +12,6 @@ const cardStates = {
   completed: "Request completed",
 }
 const statusArr = ["request", "expired", "completed", "accepted", "declined", "canceled"] 
-type Status = typeof statusArr[number]
 interface CardProps {
     exp: string;
     children?: React.ReactNode;
@@ -82,7 +81,7 @@ function ModelActionBtn({type}: {type: "accept" | "decline"}){
   return <button className={`py-3 w-full px-6 rounded-lg transition-all duration-500 text-white ${type === "accept" ? "hover:bg-green-700  bg-green-600" : "hover:bg-red-700  bg-red-600"}`}>
     {type === "accept" ? "Accept" : "Decline"}
   </button>
-}
+};
 
 function FanActionBtn({label}: {label: string}){
   return <button className='border border-gray-500 max-[490px]:text-xs text-sm transition-all duration-500 hover:bg-slate-700 text-gray-300 px-6 py-2 rounded-lg'>{label}</button>
