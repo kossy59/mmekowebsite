@@ -23,11 +23,14 @@ interface CardProps {
 }
 
 export default function RequestCard({exp, img, name, titles=["fan"], status, type="fan"}: CardProps) {
-  return <div className={`max-w-[26rem] flex flex-col gap-8 rounded-lg border-2 ${type === "model" ? "border-blue-500" : "border-yellow-500"} p-4 mx-auto text-white bg-slate-800`}
+const cardBorderVariance = type === "model" ? "border-blue-500" : type === "fan" && status === "accepted" ? "border-green-500" : "border-yellow-500"
+const cardTextVariance = type === "model" ? "text-blue-500" : type === "fan" && status === "accepted" ? "text-green-500" : "text-yellow-500"
+
+  return <div className={`max-w-[26rem] flex flex-col gap-8 rounded-lg border-2 ${cardBorderVariance} p-4 mx-auto text-white bg-slate-800`}
   >
-      <div className={`flex justify-between text-5xl ${type === "model" ? "text-blue-500" : "text-yellow-500"}`}>
+      <div className={`flex justify-between text-5xl ${cardTextVariance}`}>
         <div>
-          <div className={`size-16 relative rounded-full border-4 overflow-hidden ${type === "model" ? "border-blue-500" : "border-yellow-500"} bg-gray-900`}>
+          <div className={`size-16 relative rounded-full border-4 overflow-hidden ${cardBorderVariance} bg-gray-900`}>
             <Image src={img} width={100} alt="picture" height={100} className='absolute top-0 left-0 size-full object-cover' />
           </div>
           <div className='text-sm'>
@@ -37,14 +40,16 @@ export default function RequestCard({exp, img, name, titles=["fan"], status, typ
         </div>
         <BiTimeFive />
       </div>
-      <h3 className={`text-4xl ${type === "model" ? "text-blue-500" : "text-yellow-500"}`}>{
+      <h3 className={`text-4xl ${cardTextVariance}`}>{
        type === "model" ?
         'New Fan Meet Request'
-       : 'Waiting For Model\'s Response' 
+       : status === "accepted" ? "Model accepted your request" :
+        'Waiting For Model\'s Response' 
       }</h3>
       <p>{ type === "model" ?
         "You've received a fan meet request. Please accept or decline within 24 hours."
-        : "Your fan meet request has been sent. The model has 24 hours to respond."
+        : status === "accepted" ? "By clicking 'confirm request' Mmeko assumes that you had a successful fan-meet with the model. Have a great experience!"
+         : "Your fan meet request has been sent. The model has 24 hours to respond."
         }</p>
       <div className={`flex justify-between gap-6 ${type === "model" && "max-[490px]:flex-col"} items-end`}>
         { statusArr.slice(1).includes(status) ? 
@@ -52,7 +57,9 @@ export default function RequestCard({exp, img, name, titles=["fan"], status, typ
           <div className='border border-gray-600 text-gray-500 px-6 py-2 rounded-lg'>
             {cardStates[status as keyof typeof cardStates]}
           </div> 
-          {type === "fan" && <FanActionBtn label='Renew request' />}
+          {type === "fan" && status === "accepted"  ?
+          <FanActionBtn label='Confirm request' />
+          : <FanActionBtn label='Renew request' />}
         </div>
           : <>
           <div className='flex flex-col min-w-28 '>
