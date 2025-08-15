@@ -207,7 +207,7 @@ import handleLogout from "@/lib/service/logout";
                   src="/icons/icons8-receipts.gif" 
                   name={"Transactions"} 
                   url="/earning" />
-              {!admin &&
+              {admin &&
                 <MenuIconImg 
                   src="/icons/icons8-admin.png" 
                   name={"Admin"} 
