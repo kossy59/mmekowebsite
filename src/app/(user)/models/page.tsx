@@ -238,8 +238,8 @@ export default function ModelPage() {
   };
 
   return (
-    <div className="px-4 mt-10 sm:mx-10">
-      <div className="text-slate-200 sm:w-1/2 sm:ml-16 md:w-full md:ml-0 md:mt-10 md:overflow-auto">
+    <div className="px-4 mt-10">
+      <div className="text-slate-200 sm:w-1/2 md:w-full md:mt-10 md:overflow-auto">
         <CategoryButtonComponent
           buttons={buttonData}
           selected={categoryButton}

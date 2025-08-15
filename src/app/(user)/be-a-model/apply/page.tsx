@@ -1,12 +1,8 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
-import TextInput from "../../../components/textinput";
-import FileInput from "../../../components/fileUpload";
 // import CheckboxWithLabel from "../../components/input/checkbox";
 import PacmanLoader from "react-spinners/ClockLoader";
-import Checklist from "../../../components/checklist";
-import Ruleslist from "../../../components/ruleslist";
 // import { useSelector, useDispatch } from "react-redux";
 // import { changemodelstatus, post_exclusive_ids, post_exclusive_docs } from "../../app/features/model/modelSlice";
 // import { useNavigate } from "react-router-dom";
@@ -15,6 +11,10 @@ import {formVerificationConstants} from "@/constants/formVerificationConstants";
 
 import HeaderBackNav from "@/navs/HeaderBackNav";
 import { useRouter } from "next/navigation";
+import TextInput from "@/components/textinput";
+import Ruleslist from "@/components/ruleslist";
+import FileInput from "@/components/fileUpload";
+import Checklist from "@/components/checklist";
 
 
 export default function VerifiedUserForm(){

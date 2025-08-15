@@ -8,7 +8,7 @@ import {
   FaShieldAlt,
   FaClock,
 } from "react-icons/fa";
-import HeaderBackNav from "../../navs/HeaderBackNav";
+import HeaderBackNav from "@/components/navs/HeaderBackNav";
 import { useRouter } from "next/navigation";
 // import { useNavigate } from "react-router-dom";
 
@@ -49,7 +49,7 @@ export default function VerificationPage(){
 
   return (
     <div className="w-full  text-white min-h-screen">
-      <HeaderBackNav title="Verification" />
+      <HeaderBackNav />
 
       <div className="w-full md:w-2/4 mx-auto flex flex-col mb-12 px-3">
         {/* Header Section */}

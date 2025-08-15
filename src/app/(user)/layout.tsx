@@ -27,8 +27,8 @@ export default async function RootLayout({
           <Sidebar />
           <Navbar isAuthenticated={isAuthenticated} />
           <div className="w-full grid grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden">
-            <div className="scrollbar overflow-y-auto w-full pb-16 pt-4 grid justify-between">
-              <div className="w-full">
+            <div className="scrollbar overflow-y-auto w-full pb-16 pt-4 grid grid-cols-1 justify-between">
+              <div className="w-full md:w-3/5 md:pl-20">
                 {children}
               </div>
               {/* <div className="w-full h-full max-[600px]:w-0"></div> */}

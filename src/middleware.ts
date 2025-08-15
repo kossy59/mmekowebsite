@@ -7,7 +7,7 @@ const publicRoutes = [
   '/auth/register',
   '/auth/verify-email',
   '/models',
-  '/models/create-models',
+  '/models/create-model',
   '/models/edit-model',
   '/guidelines',
   '/support',
