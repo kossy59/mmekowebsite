@@ -9,6 +9,7 @@ import { PopUp } from "@/components/popup";
 import Navapp from "@/navs/NavApp";
 import ShouldRenderPopUp from "@/components/ShouldRenderPopUp";
 import { cookies } from "next/headers";
+import 'react-loading-skeleton/dist/skeleton.css';
 import { ToastContainer } from "react-toastify";
 
 const inter = Inter({
