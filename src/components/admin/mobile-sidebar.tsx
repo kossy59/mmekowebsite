@@ -1,5 +1,5 @@
 import { useAuth } from "@/lib/context/auth-context";
-import "../styles/app.css"
+import "@/styles/app.css"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -19,50 +19,30 @@ import {
 export default function MobileSidebar() {
   const sideBarItems = [
     {
-      route: "/",
-      name: "For You",
+      route: "/mmeko/admin/",
+      name: "Overview",
       icon: <FaHeart size={25} />,
     },
     {
-      route: "/models",
-      name: "Models",
+      route: "/mmeko/admin/reports",
+      name: "ad_min",
       icon: <FaCamera size={25} />,
     },
     {
-      route: "/",
-      name: "Explorer",
+      route: "/mmeko/admin/model-verification",
+      name: "Model Verification",
       icon: <FaCompass size={25} />,
     },
     {
-      route: "/upload",
-      name: "Upload",
+      route: "/mmeko/admin/withdrawal",
+      name: "Withdrawal Requests",
       icon: <FaUpload size={25} />,
     },
     {
-      route: "/",
-      name: "Live",
+      route: "/mmeko/admin/users",
+      name: "Users",
       icon: <FaVideo size={25} />,
-    },
-    {
-      route: "/settings",
-      name: "Settings",
-      icon: <FaCog size={25} />,
-    },
-    {
-      route: "/feedback",
-      name: "Feedback",
-      icon: <FaComments size={25} />,
-    },
-    {
-      route: "/support",
-      name: "Support",
-      icon: <FaQuestionCircle size={25} />,
-    },
-    {
-      route: "/guidelines",
-      name: "Guidelines",
-      icon: <FaUsersCog size={25} />,
-    },
+    }
   ];
   const { isOpen, toggle } = useAuth();
   return (
