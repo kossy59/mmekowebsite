@@ -1,11 +1,11 @@
 "use client"
+import Head from '@/components/Head';
 import React, {useState, useEffect} from 'react'
 // import { FaAngleLeft } from "react-icons/fa";
 // import { Listofblockusers } from './components/Listofblockusers';
 // import { getblockedUsers, ProfilechangeStatus } from '../../app/features/profile/profile';
 import PacmanLoader from "react-spinners/RotateLoader";
 // import { useDispatch, useSelector } from 'react-redux';
-import Head from '../../../../components/Head';
 
  const Blockusers = () => {
     // let blockuserstats = useSelector((state) => state.profile.blockuserstats);

@@ -1,5 +1,4 @@
-import { Gennavigation } from '../../_components/Gennav'
-import HeaderBackNav from '../../_components/HeaderBackNav'
+
 
 // import TawkMessengerReact from "@tawk.to/tawk-messenger-react"
 // import { useLocation } from 'react-router-dom'
@@ -8,6 +7,9 @@ import HeaderBackNav from '../../_components/HeaderBackNav'
 // import { tawkapi_key } from '../../../../api/config'
 // import CryptoJS from "crypto-js"
 // import { useNavigate } from 'react-router-dom'
+
+import HeaderBackNav from "@/navs/HeaderBackNav"
+import { Gennavigation } from "../../_components/Gennav"
 
 const Speaktohelp = () => {
   // const tawkMessagerRef = useRef()

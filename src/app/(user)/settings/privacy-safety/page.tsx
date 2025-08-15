@@ -1,9 +1,9 @@
 "use client"
 import React from "react";
 import { LiaUserSlashSolid } from "react-icons/lia";
-import Head from "../../../components/Head";
 import { useRouter } from "next/navigation";
 import { FaAngleRight } from "react-icons/fa";
+import Head from "@/components/Head";
 
 
 const PrivacySafetyPage = () => {

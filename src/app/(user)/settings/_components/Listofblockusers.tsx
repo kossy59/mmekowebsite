@@ -3,14 +3,17 @@ import PacmanLoader from "react-spinners/RotateLoader";
 import person from "../../../icons/icons8-profile_Icon.png"
 import onlineIcon from "../../../icons/onlineIcon.svg"
 import offlineIcon from "../../../icons/offlineIcon.svg"
-import { getCountryData } from '../../../api/getCountries';
+// import { getCountryData } from '../../../api/getCountries';
 // import { downloadImage } from '../../../api/sendImage';
-import { deleteblockedUsers, getblockedUsers, ProfilechangeStatus } from '../../../app/features/profile/profile';
+// import { deleteblockedUsers, getblockedUsers, ProfilechangeStatus } from '../../../app/features/profile/profile';
 import { useDispatch, useSelector } from 'react-redux';
+import { getCountryData } from '@/api/getCountries';
+import { deleteblockedUsers, getblockedUsers, ProfilechangeStatus } from '@/store/profile';
+import Image from 'next/image';
 
 export const Listofblockusers = ({id,photolink,location,online,name}) => {
 
-let timeout
+let timeout: number = 0
 let removeblockstats = useSelector((state) => state.profile.removeblockstats);
 const token = useSelector((state) => state.register.refreshtoken);
 const userid = useSelector((state) => state.register.userID);
@@ -43,7 +46,7 @@ const [countryData, setCountryData] = useState({
     if(removeblockstats !== "loading"){
       setloading(true)
       setdisable(true)
-      dispatch(deleteblockedUsers({token,id}))
+      // dispatch(deleteblockedUsers({token,id}))
     }
   }
 
@@ -52,7 +55,7 @@ const [countryData, setCountryData] = useState({
       setloading(false)
       set_buttonpressed(false)
       dispatch(ProfilechangeStatus("idle"))
-      dispatch(getblockedUsers({token,userid}))
+      // dispatch(getblockedUsers({token,userid}))
       
     }
   },[removeblockstats])
@@ -98,7 +101,7 @@ const [countryData, setCountryData] = useState({
 
 <div className="relative">
         <div>
-          <img
+          <Image
             alt="verified"
             src={image}
             className="rounded h-80 w-full object-cover"
@@ -106,7 +109,7 @@ const [countryData, setCountryData] = useState({
         </div>
 
         <div className="absolute top-0 m-1 w-6 h-6 ">
-          <img
+          <Image
             alt={online ? "online" : "offline"}
             src={online ? onlineIcon : offlineIcon}
             className={`object-cover rounded-full w-5 h-5 ${
@@ -118,7 +121,7 @@ const [countryData, setCountryData] = useState({
         <div className="absolute bottom-1">
           <div className="flex flex-row gap-2 items-center px-1  ">
             <div className="flex items-center p-1 gap-1 bg-black bg-opacity-40 rounded-lg ">
-              <img
+              <Image
                 src={countryData.flag}
                 alt={`${countryData.abbreviation} flag`}
                 className="w-3 h-3 object-cover rounded-full"
