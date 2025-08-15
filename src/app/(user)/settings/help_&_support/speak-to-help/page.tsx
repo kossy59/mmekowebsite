@@ -1,3 +1,4 @@
+"use client";
 
 
 // import TawkMessengerReact from "@tawk.to/tawk-messenger-react"

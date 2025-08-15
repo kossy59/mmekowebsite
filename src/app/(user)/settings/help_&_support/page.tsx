@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { FaAngleRight } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";

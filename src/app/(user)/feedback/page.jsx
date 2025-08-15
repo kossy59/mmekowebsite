@@ -1,12 +1,11 @@
-import FeedBackForm from "../../components/feedback/FeedbackForm";
-
+import FeedbackForm from "../../../components/feedback/FeedbackForm";
 
 export const metadata = {
   title: "User Feedback",
 };
 
 const FeedbackPage = () => {
-  return <FeedBackForm />;
+  return <FeedbackForm />;
 };
 
 export default FeedbackPage;

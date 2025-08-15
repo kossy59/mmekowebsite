@@ -1,5 +1,6 @@
+import NavigateBack from '@/app/(user)/settings/_components/NavigateBtn'
 import React from 'react'
-import NavigateBack from '../app/settings/_components/NavigateBtn'
+
 
 export default function Head({heading}: {heading: string}) {
   return <header className="flex items-center gap-4">
