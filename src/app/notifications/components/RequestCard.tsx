@@ -11,6 +11,55 @@ const cardStates = {
   expired: "Request expired",
   completed: "Request completed",
 }
+const modelContent = {
+  accepted: {
+    head: "Fan Meet Accepted",
+    body: "Please kindly remind your fan to confirm the request after fan-meet. Be safe! and report if fan doesn't confirm after 24 hours of successful fan-meet.",
+  },
+  completed: {
+    head: "Fan Meet Completed",
+    body: "You have successfully completed the fan-meet with your fan. Thank you!"
+  },
+  declined: {
+    head: "Fan Meet Declined",
+    body: "You have declined the fan-meet request from your fan."
+  },
+  canceled: {
+    head: "Fan Meet Canceled",
+    body: "Your fan canceled the request. We hope it works out next time."},
+  expired: {
+    head: "Fan Meet Expired",
+    body: "The fan-meet request has expired. You can ask the fan to renew request."
+  },
+  request: {
+    head: "New Fan Meet Request",
+    body: "You've received a fan meet request. Please accept or decline within 24 hours."
+  }
+  
+}
+const fanContent = {
+  accepted: {
+    head: "Fan Meet Accepted",
+    body: "By clicking 'confirm request' Mmeko assumes that you had a successful fan-meet with the model. Have a great experience!"},
+  completed: {
+    head: "Fan Meet Completed",
+    body: "You have successfully completed the fan-meet with the model. Thank you!"},
+  declined: {
+    head: "Fan Meet Declined",
+    body: "Model has declined your request. We are sorry and we hope it works out next time."
+  },
+  canceled: {
+    head: "Fan Meet Canceled",
+    body: "You have canceled the fan-meet request. You can renew this request anytime."},
+  expired: {
+    head: "Fan Meet Expired",
+    body: "The fan-meet request has expired. You can renew this request anytime."
+  },
+  request: {
+    head: "Waiting For Model\'s Response",
+    body: "Your fan meet request has been sent. The model has 24 hours to respond."
+  }
+}
 const statusArr = ["request", "expired", "completed", "accepted", "declined", "canceled"] 
 interface CardProps {
     exp: string;
@@ -23,8 +72,8 @@ interface CardProps {
 }
 
 export default function RequestCard({exp, img, name, titles=["fan"], status, type="fan"}: CardProps) {
-const cardBorderVariance = type === "model" ? "border-blue-500" : type === "fan" && status === "accepted" ? "border-green-500" : "border-yellow-500"
-const cardTextVariance = type === "model" ? "text-blue-500" : type === "fan" && status === "accepted" ? "text-green-500" : "text-yellow-500"
+const cardBorderVariance = type === "model" ? "border-blue-500" : type === "fan" && ["accepted", "completed"].includes(status) ? "border-green-500" : "border-yellow-500"
+const cardTextVariance = type === "model" ? "text-blue-500" : type === "fan" && ["accepted", "completed"].includes(status) ? "text-green-500" : "text-yellow-500"
 
   return <div className={`max-w-[26rem] flex flex-col gap-8 rounded-lg border-2 ${cardBorderVariance} p-4 mx-auto text-white bg-slate-800`}
   >
@@ -42,22 +91,22 @@ const cardTextVariance = type === "model" ? "text-blue-500" : type === "fan" && 
       </div>
       <h3 className={`text-4xl ${cardTextVariance}`}>{
        type === "model" ?
-        'New Fan Meet Request'
-       : status === "accepted" ? "Model accepted your request" :
-        'Waiting For Model\'s Response' 
+        modelContent[status].head 
+       : fanContent[status].head 
       }</h3>
       <p>{ type === "model" ?
-        "You've received a fan meet request. Please accept or decline within 24 hours."
-        : status === "accepted" ? "By clicking 'confirm request' Mmeko assumes that you had a successful fan-meet with the model. Have a great experience!"
-         : "Your fan meet request has been sent. The model has 24 hours to respond."
+        modelContent[status].body
+        : fanContent[status].body
         }</p>
       <div className={`flex justify-between gap-6 ${type === "model" && "max-[490px]:flex-col"} items-end`}>
         { statusArr.slice(1).includes(status) ? 
         <div className={`flex gap-4 ${type === "model" && "max-[490px]:w-full"}`}>
-          <div className='border border-gray-600 text-gray-500 px-6 py-2 rounded-lg'>
+          <div className='border border-gray-600 text-gray-500 px-6 py-2 rounded-lg text-sm max-[490px]:text-xs'>
             {cardStates[status as keyof typeof cardStates]}
           </div> 
-          {type === "fan" && status === "accepted"  ?
+          { type === "model" && status !== "accepted" ? <FanActionBtn label="Ask renewal" /> :
+            type === "model" && status === "accepted" ? null :
+           type === "fan" && status === "accepted"  ?
           <FanActionBtn label='Confirm request' />
           : <FanActionBtn label='Renew request' />}
         </div>
