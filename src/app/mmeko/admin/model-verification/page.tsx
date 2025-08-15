@@ -83,8 +83,8 @@ export default function VerifyModels() {
   };
 
   return (
-    <div className="w-screen sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 mx-auto bg-black min-h-screen">
-      <div className="flex flex-col items-center w-11/12 sm:w-2/4 mt-12">
+    <div className="min-h-screen w-screen mx-auto sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-9/12 mt-14 md:mt-8">
+      <div className="flex flex-col items-center w-full mt-12">
         <p className="jost text-[1.3em] text-white py-4 font-[500]">Verify new models</p>
 
         {loading && (

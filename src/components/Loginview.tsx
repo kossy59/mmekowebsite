@@ -28,9 +28,10 @@ export const Loginview = () => {
       if(errors?.length) return toastError({message: "Please input your email and password!"})
       if(!acceptedTerms) return toastError({message: "Attempted Login: Accept the Terms and Conditions to proceed."}) 
       const res = await isRegistered({email,password})
-      if(!res?.email?.length && !res?.password?.length) throw Error("No user found")
+      console.log(res)
+      if(!res?.email?.length) throw Error("No user found")
       setUser(res)
-    setIsLoggedIn(true)   
+      setIsLoggedIn(true)   
   }catch(error){
       console.log(error)
       setUser({email: "", password:""})

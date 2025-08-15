@@ -40,6 +40,10 @@ body {
     overflow-y: scroll;
   }
 }
+/* .hide-scroll{
+  scrollbar-color: #192050 var(--secondary);
+  overflow-y: scroll;
+} */
 button{
     font-family: inherit;
     font-feature-settings: inherit;
@@ -51,4 +55,9 @@ button{
     color: inherit;
     margin: 0;
     padding: 0;
+}
+
+.cstm-height{
+  height: calc(100vh - 140px);
+  /* background: #000; */
 }

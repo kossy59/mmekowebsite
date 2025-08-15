@@ -112,13 +112,13 @@ const Hostlist: React.FC<HostProps> = ({ prob }) => {
 
         <div className="text-stone-200 flex gap-4 rounded-md">
           <div
-            className="w-[60px] rounded-full overflow-hidden cursor-pointer"
+            className="w-[60px] h-[60px] rounded-full overflow-hidden cursor-pointer"
             // onClick={() => navigate(`/profile/${userid}`)} // TODO: add navigation if needed
           >
             <Image
               src={userImage}
               alt="user"
-              className="w-full h-full"
+              className="w-full h-full rounded-full object-cover"
               width={60}
               height={60}
             />

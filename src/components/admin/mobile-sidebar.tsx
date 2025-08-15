@@ -3,18 +3,12 @@ import "@/styles/app.css"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { BiSolidReport } from "react-icons/bi";
 import {
-  FaCamera,
-  FaCog,
-  FaComments,
-  FaCompass,
   FaHeart,
-  FaQuestionCircle,
-  FaUpload,
-  FaUsersCog,
-  FaVideo,
-  FaStar,
 } from "react-icons/fa";
+import { IoPerson, IoShieldCheckmark } from "react-icons/io5";
+import { MdPayment } from "react-icons/md";
 
 export default function MobileSidebar() {
   const sideBarItems = [
@@ -25,23 +19,23 @@ export default function MobileSidebar() {
     },
     {
       route: "/mmeko/admin/reports",
-      name: "ad_min",
-      icon: <FaCamera size={25} />,
+      name: "Reports",
+      icon: <BiSolidReport size={25} />,
     },
     {
       route: "/mmeko/admin/model-verification",
-      name: "Model Verification",
-      icon: <FaCompass size={25} />,
+      name: "Model",
+      icon: <IoShieldCheckmark size={25} />,
     },
     {
       route: "/mmeko/admin/withdrawal",
-      name: "Withdrawal Requests",
-      icon: <FaUpload size={25} />,
+      name: "Withdrawal",
+      icon: <MdPayment size={25} />,
     },
     {
       route: "/mmeko/admin/users",
       name: "Users",
-      icon: <FaVideo size={25} />,
+      icon: <IoPerson size={25} />,
     }
   ];
   const { isOpen, toggle } = useAuth();

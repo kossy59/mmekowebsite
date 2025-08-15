@@ -319,7 +319,7 @@ export default function CreateModelview () {
                   setweight(e.currentTarget.value);
                 }}
               >
-                {Array.from({ length: 120 }, (_, i) => i + 40).map((value) => {
+                {Array.from({ length: 120 }, (_, i) => i + 40).map((value, i) => {
                   return (
                     <option
                       key={value}
