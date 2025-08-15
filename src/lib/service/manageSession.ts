@@ -35,7 +35,7 @@ export async function isRegistered(payload: {email: string, password: string, })
     try{
        
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API}/login`, payload, {withCredentials: true});
-        const user = res.data.user;
+        const user = await res.data.user;
         // console.log(user)
         // if (!user.email) return undefined;
         return user;
