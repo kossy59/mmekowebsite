@@ -22,9 +22,6 @@ export interface Session {
 
 // Define the AuthContext type
 interface AuthContextType {
-  session: Session | null;
-  login: (userData: Session) => void;
-  signOut: () => void;
   isOpen: boolean;
   toggle: () => void;
   isLoggedIn: boolean,
@@ -63,7 +60,6 @@ function reducer(state: ReducerState, action: ReducerAction){
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
   const [status, setStatus] = useState<status>("idle")
@@ -75,52 +71,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const router = useRouter();
   const pathName = usePathname();
 
-  // Load session from localStorage on initial render
-  useEffect(() => {
-    const storedSession = localStorage.getItem("session");
-    if (storedSession) {
-      setSession(JSON.parse(storedSession));
-    }
-    setLoading(false);
-  }, [router, pathName]);
-
-  useEffect(() => {
-    if (!loading && !session) {
-      if (pathName?.includes("/dashboard") || pathName?.includes("/admin"))
-        router.push("/");
-    }
-  }, [loading, session, router, pathName]);
-  //   }, [loading, session, router, pathName]);
-
-  //   useEffect(() => {
-  //     if (session && !session.isAdmin) {
-  //       if (pathName?.includes("/admin")) router.push("/dashboard");
-  //     }
-  //   }, [loading, session, router, pathName]);
-  
   const toggle = () => setIsOpen((prev) => !prev);
-  const login = (userData: Session) => {
-    setSession(userData);
-    localStorage.setItem("session", JSON.stringify(userData));
-    router.push(userData.isAdmin ? "/admin" : "/dashboard");
-  };
   
-
-  // Sign out function
-  const signOut = () => {
-    setSession(null);
-    localStorage.removeItem("session");
-    router.push("/login");
-  };
-
   useEffect(()=>{pathname.includes("register") ? setPopup("close") : setPopup("open")},[pathname])
   return (
     <AuthContext.Provider
       value={{
         toggle,
-        session,
-        login,
-        signOut,
         isOpen,
         isLoggedIn,
         setIsLoggedIn,
@@ -129,7 +86,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         popup,
       }}
     >
-      {/* {loading ? null : children} */}
       {children}
     </AuthContext.Provider>
   );
