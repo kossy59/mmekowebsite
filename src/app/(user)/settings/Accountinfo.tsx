@@ -1,6 +1,6 @@
+import Head from "@/components/Head";
 import React from "react";
 import { FaAngleLeft } from "react-icons/fa";
-import Head from "../../components/Head";
 
 
  const AccountinfoPage = () => {

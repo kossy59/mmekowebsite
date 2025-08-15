@@ -1,8 +1,8 @@
 import { set } from "date-fns";
 import React, { createContext, useContext, useState } from "react";
-import { set_calling } from "../../app/features/message/messageSlice";
+// import { set_calling } from "../../app/features/message/messageSlice";
 
-const CallContext = createContext();
+const CallContext = createContext<any | null>(null);
 
 export const CallProvider = ({ children }) => {
   const [isReceivingCall, setIsReceivingCall] = useState(false);

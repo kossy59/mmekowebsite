@@ -1,13 +1,13 @@
 "use client";
+import FollowerCard from "@/components/following/FollowerCard";
+import SearchBar from "@/components/following/SearchBar";
+import Tabs from "@/components/following/Tabs";
+import Spinner from "@/components/ui/Spinner";
+import { User } from "@/types/user";
+import { mockFollowData } from "@/utils/mockData";
 import React, { useState, useEffect } from "react";
 import { FaAngleLeft } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
-import Tabs from "../../components/following/Tabs";
-import SearchBar from "../../components/following/SearchBar";
-import FollowerCard from "../../components/following/FollowerCard";
-import Spinner from "../../components/ui/Spinner";
-import { mockFollowData } from "../../utils/mockData";
-import { User } from "../../types/user";
 
 const firstname = "Jane"; 
 const lastname = "Doe";
