@@ -1,6 +1,5 @@
 import { useAuth } from "@/lib/context/auth-context";
 import "@/styles/app.css"
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BiSolidReport } from "react-icons/bi";
@@ -10,10 +9,10 @@ import {
 import { IoPerson, IoShieldCheckmark } from "react-icons/io5";
 import { MdPayment } from "react-icons/md";
 
-export default function MobileSidebar() {
+export default function AdminMobileSidebar() {
   const sideBarItems = [
     {
-      route: "/mmeko/admin/",
+      route: "/mmeko/admin",
       name: "Overview",
       icon: <FaHeart size={25} />,
     },

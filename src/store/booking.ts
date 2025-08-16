@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { URL } from "../../../api/config";
+import { URL } from "@/api/config";
 import axios from "axios";
+import { BookingState } from "@/types/booking";
 
-const initialState = {
+const initialState: BookingState = {
   bookingmessage: "",
   bookingstats: "idle",
   requeststats: "idle",
@@ -36,7 +37,7 @@ export const bookmdel = createAsyncThunk("booking/bookmodel", async (data) => {
     //console.log('under get profile')
 
     return response.data;
-  } catch (err) {
+  } catch (err : any) {
     // console.log('erro get profile')
     throw err.response.data.message;
   }
@@ -48,7 +49,7 @@ export const getmyrequest = createAsyncThunk(
     try {
       let response = await axios.put(`${URL}/pendingrequest`, data);
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -67,7 +68,7 @@ export const Cancelrequest = createAsyncThunk(
       //console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -86,7 +87,7 @@ export const notifymodel = createAsyncThunk(
       //console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -105,7 +106,7 @@ export const accepthost = createAsyncThunk(
       console.log("under accept book " + response);
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -124,7 +125,7 @@ export const declinehost = createAsyncThunk(
       console.log("under accept book " + response);
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -143,7 +144,7 @@ export const acceptedr_req = createAsyncThunk(
       console.log(response.data);
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -162,7 +163,7 @@ export const completepayment = createAsyncThunk(
       console.log("under accept book " + response);
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -181,7 +182,7 @@ export const getall_request = createAsyncThunk(
       console.log("under all request book " + response.data);
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -192,7 +193,7 @@ const booking = createSlice({
   name: "booking",
   initialState,
   reducers: {
-    resetstat(state, action) {
+    resetstat(state, action: any) {
       state.bookingstats = "idle";
       state.requeststats = "idle";
       state.cancelstats = "idle";
@@ -285,7 +286,7 @@ const booking = createSlice({
         if (!action.error) {
           state.bookingmessage = "Check internet connection";
         } else {
-          state.bookingmessage = action.error.message;
+          state.bookingmessage = action.error.message as string;
         }
       })
       .addCase(getmyrequest.pending, (state, action) => {
@@ -302,7 +303,7 @@ const booking = createSlice({
         if (!action.error) {
           state.requestmessage = "Check internet connection";
         } else {
-          state.requestmessage = action.error.message;
+          state.requestmessage = action.error.message as string;
         }
       })
       .addCase(Cancelrequest.pending, (state, action) => {
@@ -318,7 +319,7 @@ const booking = createSlice({
         if (!action.error) {
           state.cancelmessage = "Check internet connection";
         } else {
-          state.cancelmessage = action.error.message;
+          state.cancelmessage = action.error.message as string;
         }
       })
       .addCase(notifymodel.pending, (state, action) => {
@@ -335,7 +336,7 @@ const booking = createSlice({
         if (!action.error) {
           state.notifymessage = "Check internet connection";
         } else {
-          state.notifymessage = action.error.message;
+          state.notifymessage = action.error.message as string;
         }
       })
       .addCase(accepthost.pending, (state, action) => {
@@ -351,7 +352,7 @@ const booking = createSlice({
         if (!action.error) {
           state.acceptmessage = "Check internet connection";
         } else {
-          state.acceptmessage = action.error.message;
+          state.acceptmessage = action.error.message as string;
         }
       })
       .addCase(declinehost.pending, (state, action) => {
@@ -367,7 +368,7 @@ const booking = createSlice({
         if (!action.error) {
           state.acceptmessage = "Check internet connection";
         } else {
-          state.acceptmessage = action.error.message;
+          state.acceptmessage = action.error.message as string;
         }
       })
       .addCase(acceptedr_req.pending, (state, action) => {
@@ -384,7 +385,7 @@ const booking = createSlice({
         if (!action.error) {
           state.acceptedReqMes = "Check internet connection";
         } else {
-          state.acceptedReqMes = action.error.message;
+          state.acceptedReqMes = action.error.message as string;
         }
       })
       .addCase(completepayment.pending, (state, action) => {
