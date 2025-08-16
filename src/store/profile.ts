@@ -1,10 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { URL } from "../../../api/config";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { URL } from "@/api/config";
 import axios from "axios";
+import { ProfileState } from "@/types/profile";
 // import { saveImage } from "../../../api/sendImage";
 // import { deleteImage } from "../../../api/sendImage";
 
-const initialState = {
+const initialState: ProfileState = {
   firstname: "",
   lastname: "",
   email: "",
@@ -70,7 +71,7 @@ export const getprofile = createAsyncThunk(
       // console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err: any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -84,7 +85,7 @@ export const getsearch = createAsyncThunk("profile/getsearch", async () => {
     // console.log('under get profile')
 
     return response.data;
-  } catch (err) {
+  } catch (err : any) {
     // console.log('erro get profile')
     throw err.response.data.message;
   }
@@ -99,7 +100,7 @@ export const updatesetting = createAsyncThunk(
       // console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -115,7 +116,7 @@ export const deleteblockedUsers = createAsyncThunk(
       // console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -131,7 +132,7 @@ export const deleteprofile = createAsyncThunk(
       // console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -147,7 +148,7 @@ export const getcollection = createAsyncThunk(
       // console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -163,7 +164,7 @@ export const getblockedUsers = createAsyncThunk(
       // console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -179,7 +180,7 @@ export const deletecollection = createAsyncThunk(
       // console.log('under get profile')
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -188,7 +189,7 @@ export const deletecollection = createAsyncThunk(
 
 export const post_exclusive_content = createAsyncThunk(
   "profile/post_exclusive_content",
-  async (data) => {
+  async (data : any) => {
     try {
       // Send data as a FormData
       let formData = new FormData();
@@ -223,7 +224,7 @@ export const post_exclusive_content = createAsyncThunk(
       }
 
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
       throw err.response.data.message;
     }
@@ -236,7 +237,7 @@ export const buy_exclusive_content = createAsyncThunk(
     try {
       let response = await axios.post(`${URL}/exclusive`, data);
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       throw err.response.data.message;
     }
   }
@@ -248,7 +249,7 @@ export const delete_exclusive_content = createAsyncThunk(
     try {
       let response = await axios.patch(`${URL}/exclusive`, data);
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       throw err.response.data.message;
     }
   }
@@ -264,7 +265,7 @@ export const get_my_history = createAsyncThunk(
 
       // return response.data;
           return response.data.history;
-    } catch (err) {
+    } catch (err : any) {
       // console.log('erro get profile')
 
       if (!err.response.data.message) {
@@ -281,7 +282,7 @@ export const get_monthly_history = createAsyncThunk(
     try {
       let response = await axios.post(`${URL}/getmonthlyhistory`, data);
       return response.data;
-    } catch (err) {
+    } catch (err : any) {
       if (!err.response.data.message) {
         throw "check internet connection";
       }
@@ -296,7 +297,7 @@ export const deposit = createAsyncThunk("profile/deposit", async (data) => {
     // console.log('under get profile')
 
     return response.data;
-  } catch (err) {
+  } catch (err : any) {
     // console.log('erro get profile')
 
     if (!err.response.data.message) {
@@ -311,7 +312,7 @@ export const follow = createAsyncThunk("profile/follow", async (data) => {
     let response = await axios.post(`${URL}/follow`, data);
 
     return response.data;
-  } catch (err) {
+  } catch (err : any) {
     // console.log('erro get profile')
     console.log(err);
 
@@ -327,7 +328,7 @@ export const unfollow = createAsyncThunk("profile/unfollow", async (data) => {
     let response = await axios.put(`${URL}/follow`, data);
 
     return response.data;
-  } catch (err) {
+  } catch (err : any) {
     console.log(err);
     // console.log('erro get profile')
 
@@ -343,7 +344,7 @@ export const getfollow = createAsyncThunk("profile/getfollow", async (data) => {
     let response = await axios.post(`${URL}/getfollowers`, data);
 
     return response.data;
-  } catch (err) {
+  } catch (err : any) {
     // console.log('erro get profile')
 
     if (!err.response.data.message) {
@@ -355,7 +356,7 @@ export const getfollow = createAsyncThunk("profile/getfollow", async (data) => {
 
 export const post_exclusive_img = createAsyncThunk(
   "profile/post_exclusive_img",
-  async (data) => {
+  async (data: any) => {
     try {
       let img;
       let thumb;
@@ -368,7 +369,7 @@ export const post_exclusive_img = createAsyncThunk(
         thumb = await data.thumbnaillink.name;
       }
       return { img, thumb };
-    } catch (err) {
+    } catch (err : any) {
       if (!err.response.data.message) {
         throw "check internet connection";
       }
@@ -379,12 +380,12 @@ export const post_exclusive_img = createAsyncThunk(
 
 export const delete_exclusive_thumb = createAsyncThunk(
   "profile/delete_exclusive_thumb",
-  async (data) => {
+  async (data: any) => {
     try {
       if (data) {
       }
       return "success";
-    } catch (err) {
+    } catch (err : any) {
       if (!err.response.data.message) {
         throw "check internet connection";
       }
@@ -397,7 +398,7 @@ const profile = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    ProfilechangeStatus(state, action) {
+    ProfilechangeStatus(state, action: PayloadAction<ProfileState["status"]>) {
       state.status = action.payload;
       state.history_stats = action.payload;
       state.monthly_history_stats = action.payload;
@@ -453,7 +454,7 @@ const profile = createSlice({
       })
       .addCase(getprofile.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.error.message as string;
       })
       .addCase(get_my_history.pending, (state, action) => {
         state.history_stats = "loading";
@@ -469,7 +470,7 @@ const profile = createSlice({
         if (!action.error) {
           state.history_message = "Check internet connection";
         } else {
-          state.history_message = action.error.message;
+          state.history_message = action.error.message as string;
         }
       })
       .addCase(get_monthly_history.pending, (state, action) => {
@@ -486,7 +487,7 @@ const profile = createSlice({
         if (!action.error) {
           state.monthly_history_messege = "Check internet connection";
         } else {
-          state.monthly_history_messege = action.error.message;
+          state.monthly_history_messege = action.error.message as string;
         }
       })
       .addCase(deposit.pending, (state, action) => {
@@ -503,7 +504,7 @@ const profile = createSlice({
         if (!action.error) {
           state.deposit_message = "Check internet connection";
         } else {
-          state.deposit_message = action.error.message;
+          state.deposit_message = action.error.message as string;
         }
       })
       .addCase(follow.pending, (state, action) => {
@@ -518,7 +519,7 @@ const profile = createSlice({
         if (!action.error) {
           state.deposit_message = "Check internet connection";
         } else {
-          state.deposit_message = action.error.message;
+          state.deposit_message = action.error.message as string;
         }
       })
       .addCase(unfollow.pending, (state, action) => {
@@ -533,7 +534,7 @@ const profile = createSlice({
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
 
@@ -550,7 +551,7 @@ const profile = createSlice({
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
       .addCase(post_exclusive_img.pending, (state, action) => {
@@ -568,7 +569,7 @@ const profile = createSlice({
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
       .addCase(post_exclusive_content.pending, (state, action) => {
@@ -583,7 +584,7 @@ const profile = createSlice({
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
       .addCase(buy_exclusive_content.pending, (state, action) => {
@@ -594,12 +595,12 @@ const profile = createSlice({
       })
       .addCase(buy_exclusive_content.rejected, (state, action) => {
         state.buyexstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
       .addCase(delete_exclusive_content.pending, (state, action) => {
@@ -610,12 +611,12 @@ const profile = createSlice({
       })
       .addCase(delete_exclusive_content.rejected, (state, action) => {
         state.deleteexstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
       .addCase(getcollection.pending, (state, action) => {
@@ -628,12 +629,12 @@ const profile = createSlice({
       })
       .addCase(getcollection.rejected, (state, action) => {
         state.collectionstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
       .addCase(deletecollection.pending, (state, action) => {
@@ -644,12 +645,12 @@ const profile = createSlice({
       })
       .addCase(deletecollection.rejected, (state, action) => {
         state.deletecolstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
       .addCase(delete_exclusive_thumb.pending, (state, action) => {
@@ -660,12 +661,12 @@ const profile = createSlice({
       })
       .addCase(delete_exclusive_thumb.rejected, (state, action) => {
         state.thumbdelstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.fllowmsg = "Check internet connection";
         } else {
-          state.fllowmsg = action.error.message;
+          state.fllowmsg = action.error.message as string;
         }
       })
       .addCase(deleteprofile.pending, (state, action) => {
@@ -676,12 +677,12 @@ const profile = createSlice({
       })
       .addCase(deleteprofile.rejected, (state, action) => {
         state.deleteaccstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.testmsg = "Check internet connection";
         } else {
-          state.testmsg = action.error.message;
+          state.testmsg = action.error.message as string;
         }
       })
       .addCase(getblockedUsers.pending, (state, action) => {
@@ -693,12 +694,12 @@ const profile = createSlice({
       })
       .addCase(getblockedUsers.rejected, (state, action) => {
         state.blockuserstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.testmsg = "Check internet connection";
         } else {
-          state.testmsg = action.error.message;
+          state.testmsg = action.error.message as string;
         }
       })
       .addCase(deleteblockedUsers.pending, (state, action) => {
@@ -709,12 +710,12 @@ const profile = createSlice({
       })
       .addCase(deleteblockedUsers.rejected, (state, action) => {
         state.removeblockstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.testmsg = "Check internet connection";
         } else {
-          state.testmsg = action.error.message;
+          state.testmsg = action.error.message as string;
         }
       })
       .addCase(updatesetting.pending, (state, action) => {
@@ -725,12 +726,12 @@ const profile = createSlice({
       })
       .addCase(updatesetting.rejected, (state, action) => {
         state.updatesettingstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.testmsg = "Check internet connection";
         } else {
-          state.testmsg = action.error.message;
+          state.testmsg = action.error.message as string;
         }
       })
       .addCase(getsearch.pending, (state, action) => {
@@ -742,12 +743,12 @@ const profile = createSlice({
       })
       .addCase(getsearch.rejected, (state, action) => {
         state.searchstats = "failed";
-        state.testmsg = action.error.message;
+        state.testmsg = action.error.message as string;
 
         if (!action.error) {
           state.testmsg = "Check internet connection";
         } else {
-          state.testmsg = action.error.message;
+          state.testmsg = action.error.message as string;
         }
       });
   },
