@@ -28,7 +28,7 @@ const prohibitedRoute = [
   '/auth/register',
   '/auth/verify-email',
   '/api/session'
-]
+];
 
 const PUBLIC_FILE = /\.(.*)$/
 
