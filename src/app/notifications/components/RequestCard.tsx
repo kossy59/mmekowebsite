@@ -1,7 +1,7 @@
-import { request } from 'http';
 import Image from 'next/image';
 import React from 'react'
 import { BiTimeFive } from 'react-icons/bi'
+import { FaCoins } from 'react-icons/fa';
 
 const cardStates = {
   request: "Request sent",
@@ -11,14 +11,21 @@ const cardStates = {
   expired: "Request expired",
   completed: "Request completed",
 }
+const ratings = [
+  "😞 Poor",
+  "😐 Not bad",
+  "😊 Good!",
+  "😃 Great!",
+  "😍 Extremely great!"
+]
 const modelContent = {
   accepted: {
     head: "Fan Meet Accepted",
-    body: "Please kindly remind your fan to confirm the request after fan-meet. Be safe! and report if fan doesn't confirm after 24 hours of successful fan-meet.",
+    body: "Please kindly remind your fan to mark as complete during or after the date — it only takes a second. If they don't contact support within 24 hours.",
   },
   completed: {
     head: "Fan Meet Completed",
-    body: "You have successfully completed the fan-meet with your fan. Thank you!"
+    body: "You have successfully completed the fan meet with your fan. How do you rate your experience?"
   },
   declined: {
     head: "Fan Meet Declined",
@@ -26,7 +33,7 @@ const modelContent = {
   },
   canceled: {
     head: "Fan Meet Canceled",
-    body: "Your fan canceled the request. We hope it works out next time."},
+    body: "Your fan canceled the request."},
   expired: {
     head: "Fan Meet Expired",
     body: "The fan-meet request has expired. You can ask the fan to renew request."
@@ -40,10 +47,10 @@ const modelContent = {
 const fanContent = {
   accepted: {
     head: "Fan Meet Accepted",
-    body: "By clicking 'confirm request' Mmeko assumes that you had a successful fan-meet with the model. Have a great experience!"},
+    body: "By clicking 'Mark as complete' you confirm that your pending gold of 💰20 will be sent to the model."},
   completed: {
     head: "Fan Meet Completed",
-    body: "You have successfully completed the fan-meet with the model. Thank you!"},
+    body: "You have successfully completed the fan meet with the model. How do you rate your experience?"},
   declined: {
     head: "Fan Meet Declined",
     body: "Model has declined your request. We are sorry and we hope it works out next time."
@@ -75,7 +82,7 @@ export default function RequestCard({exp, img, name, titles=["fan"], status, typ
 const cardBorderVariance = type === "model" ? "border-blue-500" : type === "fan" && ["accepted", "completed"].includes(status) ? "border-green-500" : "border-yellow-500"
 const cardTextVariance = type === "model" ? "text-blue-500" : type === "fan" && ["accepted", "completed"].includes(status) ? "text-green-500" : "text-yellow-500"
 
-  return <div className={`max-w-[26rem] flex flex-col gap-8 rounded-lg border-2 ${cardBorderVariance} p-4 mx-auto text-white bg-slate-800`}
+  return <div className={`w-full flex flex-col gap-8 rounded-lg border-2 ${cardBorderVariance} p-4 mx-auto text-white bg-slate-800`}
   >
       <div className={`flex justify-between text-5xl ${cardTextVariance}`}>
         <div>
@@ -87,7 +94,7 @@ const cardTextVariance = type === "model" ? "text-blue-500" : type === "fan" && 
             <div className='flex gap-1'>{titles?.map((title, i)=> i === titles.length -1 ? <p key={title}>{title}</p> : <p key={title}>{title} &#x2022; </p>)}</div>
           </div>
         </div>
-        <BiTimeFive />
+        {status === "accepted" ? <p><FaCoins /> 20</p> : <BiTimeFive />}
       </div>
       <h3 className={`text-4xl ${cardTextVariance}`}>{
        type === "model" ?
@@ -98,16 +105,19 @@ const cardTextVariance = type === "model" ? "text-blue-500" : type === "fan" && 
         modelContent[status].body
         : fanContent[status].body
         }</p>
-      <div className={`flex justify-between gap-6 ${type === "model" && "max-[490px]:flex-col"} items-end`}>
+        {/* RATINGS */}
+        <div className='flex gap-4 flex-wrap justify-center'>
+          {status === "completed" && ratings.map((v,i) => <Rating key={i} label={v} />)}
+        </div>
+        <div className={`flex justify-between gap-6 ${type === "model" && "max-[490px]:flex-col"} items-end`}>
         { statusArr.slice(1).includes(status) ? 
         <div className={`flex gap-4 ${type === "model" && "max-[490px]:w-full"}`}>
           <div className='border border-gray-600 text-gray-500 px-6 py-2 rounded-lg text-sm max-[490px]:text-xs'>
             {cardStates[status as keyof typeof cardStates]}
           </div> 
-          { type === "model" && status !== "accepted" ? <FanActionBtn label="Ask renewal" /> :
-            type === "model" && status === "accepted" ? null :
+          { type === "model" ? <FanActionBtn label='Chat now' /> :
            type === "fan" && status === "accepted"  ?
-          <FanActionBtn label='Confirm request' />
+          <FanActionBtn label='Mark as complete' />
           : <FanActionBtn label='Renew request' />}
         </div>
           : <>
@@ -141,4 +151,8 @@ function ModelActionBtn({type}: {type: "accept" | "decline"}){
 
 function FanActionBtn({label}: {label: string}){
   return <button className='border border-gray-500 max-[490px]:text-xs text-sm transition-all duration-500 hover:bg-slate-700 text-gray-300 px-6 py-2 rounded-lg'>{label}</button>
+}
+
+function Rating({label}: {label: string}){
+  return <div className='py-1 text-sm px-4 rounded-lg border border-gray-500 cursor-pointer bg-gray-800 transition-all duration-500 hover:bg-slate-700'>{label}</div>
 }
