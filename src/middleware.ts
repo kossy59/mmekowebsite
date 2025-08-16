@@ -7,12 +7,21 @@ const publicRoutes = [
   '/auth/register',
   '/auth/verify-email',
   '/models',
-  '/models/create-models',
+  '/models/create-model',
+  '/models/edit-model',
   '/guidelines',
+  '/support',
   '/privacy-policy',
   '/T_&_C',
   '/login',
-  '/api/session'
+  '/api/session',
+
+  // change later for admin 
+  "/mmeko/admin/",
+  "/mmeko/admin/reports",
+  "/mmeko/admin/model-verification",
+  "/mmeko/admin/withdrawal",
+  "/mmeko/admin/users",
 ];
 
 const prohibitedRoute = [
